@@ -5,7 +5,7 @@ const fallback = require('express-history-api-fallback');
 const path = require('path');
 
 module.exports = (app) => {
-  const PORT = process.env.PORT || 8080;
+  const PORT = process.env.PORT || 8080; 
 
   /**
    *  @TODO: Configuration Variables
@@ -45,6 +45,17 @@ module.exports = (app) => {
    *  For example: app.set('PG_HOST', process.env.PG_HOST || 'localhost')
    */
 
+app.set('PORT', PORT);
+app.set('JWT_SECRET', process.env.JWT_SECRET || 'keyboardcat');
+app.set('JWT_COOKIE_NAME', 'bt-token');
+
+
+  app.set('PORT', process.env.PORT || 'PORT');
+  app.set('PG_USER', process.env.PG_USER || 'boomtown');
+  app.set('PG_PASSWORD', process.env.PG_PASSWORD || 'boomtown');
+  app.set('PG_DB', process.env.PG_DB || 'boomtown')
+  app.set('PG_HOST', process.env.PG_HOST || 'localhost');
+
   app.use(cookieParser());
 
   if (process.env.NODE_ENV === 'production') {
@@ -61,7 +72,7 @@ module.exports = (app) => {
       origin: 'http://localhost:3000',
       credentials: true
     };
-    app.set('CORS_CONFIG', corsConfig);
+    app.set('CORS_CONFIG', corsConfig); 
 
     // Allow requests from dev server address
     app.use(cors(corsConfig));
