@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-express'); 
 
 /**
  *  @TODO: Boomtown Schema
@@ -47,7 +47,7 @@ module.exports = gql`
     itemid: ID!
   }
 
-  type AssignedTag {
+  input AssignedTag {
     id: ID!
     title: String!
   }
@@ -70,6 +70,6 @@ module.exports = gql`
   }
 
   type Mutation {
-    addItem(item: NewItemInput!, image: Upload!): Item
+    addItem(item: NewItemInput!): Item
   }
 `;

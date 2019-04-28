@@ -5,7 +5,7 @@ const chalk = require('chalk');
 
 const config = require('./config/application');
 
-const app = express();
+const app = express(); // invokes the express function 
 const PORT = config(app);
 
 const initDB = require('./config/postgres');
@@ -34,7 +34,7 @@ postgres.on('error', (err, client) => {
 
 const server = app.listen(PORT, () => {
   console.log(`>> ${chalk.blue('Express running:')} http://localhost:${PORT}`);
-  
+
   console.log(
          `>> ${chalk.magenta('GraphQL playground:')} http://localhost:${PORT}/graphql`
        );

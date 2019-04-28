@@ -1,5 +1,5 @@
-const { ApolloServer } = require('apollo-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
+const { ApolloServer } = require('apollo-server-express'); // connect to server
+const { makeExecutableSchema } = require('graphql-tools'); // A set of utilities to build your JavaScript GraphQL schema,  // to write the schema and resolver code
 
 const typeDefs = require('../api/schema');
 let resolvers = require('../api/resolvers');
@@ -18,6 +18,9 @@ module.exports = ({ app, pgResource }) => {
    */
 
   // @TODO: Refactor to use 'makeExecutableSchema' to wire up your schema to your resolvers:
+
+  // The type definitions are compiled to an executable GraphQL schema by the makeExecutableSchema function from graphql-tools
+
   const schema = makeExecutableSchema({ 
     typeDefs,
     resolvers
