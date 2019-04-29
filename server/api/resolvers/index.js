@@ -51,24 +51,25 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async items(parent, {filter}, {pgResource}) {
-  try { 
-    const items = await pgResource.getItems(filter);
-    return items; 
-  }
-  catch(e) { 
-    throw new ApolloError(e); 
-  }
+      async items(parent, { filter }, { pgResource }) {
+        try {
+          const items = await pgResource.getItems(filter);
+          return items;
+        }
+        catch (e) {
+          throw new ApolloError(e);
+        }
       },
-      async tags(parent, {tag}, {pgResource}) {
-      try{
-        const tags = await pgResource.getTags(tag);
-        return tags;
-      }
-      catch(e){ 
-        throw new ApolloError(e);
-      }
-      }
+      async tags(parent, { tag }, { pgResource }) {
+
+        try {
+          const tags = await pgResource.getTags(tag);
+          return tags;
+        }
+        catch (e) {
+          throw new ApolloError(e);
+        }
+      },
     },
 
     User: {
@@ -83,17 +84,24 @@ module.exports = app => {
        *
        */
       // @TODO: Uncomment these lines after you define the User type with these fields
-      items() {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        return []
-        // -------------------------------
+      items({ id }, { pgResource }) {
+        try {
+          const getItem = pgResource.getItemsForUser(id);
+          return getItem;
+        }
+        catch (e) {
+          throw new ApolloError(e);
+        }
       },
-      borrowed() {
+      borrowed({ id }, { pgResource }) {
         // @TODO: Replace this mock return statement with the correct items from Postgres
-        return []
-        // -------------------------------
-      }
-      // -------------------------------
+        try {
+          const getBorrowed = pgResource.getBorrowedItemsForUser(id);
+          return getBorrowed;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
+      },
     },
 
     Item: {
@@ -108,35 +116,35 @@ module.exports = app => {
        *
        */
       //@TODO: Uncomment these lines after you define the Item type with these fields
-      async itemowner({id}, args, {pgResource}) {
-        try{
+      async itemowner({ id }, args, { pgResource }) {
+        try {
           const getItemOwner = await pgResource.getUserById(id);
           return getItemOwner;
         }
-        catch(e){ 
+        catch (e) {
           throw new ApolloError(e);
         }
-       
+
       },
-      async tags({tag}, args, {pgResource}) {
-        try{
+      async tags({ tag }, args, { pgResource }) {
+        try {
           const getTag = await pgResource.getTags(tag);
           return getTag;
         }
-        catch(e){ 
+        catch (e) {
           throw new ApolloError(e);
         }
       },
-      async borrower({id}, args, {pgResource}) { // user is the borrower
-       try{
-         const getBorrower = await pgResource.getUserById(id);
-         return getBorrower
-       } 
-       catch(e) { 
-        throw new ApolloError(e);
-       }
+      async borrower({ id }, args, { pgResource }) { // user is the borrower
+        try {
+          const getBorrower = await pgResource.getUserById(id);
+          return getBorrower
+        }
+        catch (e) {
+          throw new ApolloError(e);
+        }
 
-      
+
       }
 
     },
