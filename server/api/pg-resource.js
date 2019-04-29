@@ -91,13 +91,16 @@ module.exports = postgres => {
       if(!retrieveItemsForUser) throw 'Items For User Not Found.';
       return items.rows;
       } catch(e) { 
-      throw 'Items For User Not Found.'}
+      throw 'Items For User Not Found.'
+    }
     },
    
     async getBorrowedItemsForUser(id) { // change to  id 
       const items = {
-           text:`SELECT * FROM items WHERE borrowerid = $1`,
+        
+        text:`SELECT * FROM items WHERE borrowerid = $1`,
         values: [id]
+        
       };
       try{ 
       const retrieveBorrowedItemsForUser = await postgres.query(items);

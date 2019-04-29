@@ -17,6 +17,8 @@ The following technologies were applied in building and delivering Boomtown's ba
 
 1.	GraphQL requires a Schema which consists of TypeDefs & Resolvers
 
+1. Resolvers are a method or a function that resolves a value for a field or type in a schema.
+
 1.  Efficient Query Language that mitigates over-fetching and under fetching data
 
 # Instructions to run the project
