@@ -59,8 +59,8 @@ module.exports = postgres => {
       try {
         const user = await postgres.query(findUserQuery);
         return user.rows[0];
-      } catch (err) {
-        throw err;
+      } catch (e) {
+        throw  'User ID not found';
       }
     },
     

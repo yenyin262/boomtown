@@ -1,6 +1,10 @@
 # Boomtown 🏙
+An application that uses PostgreSQL to store shareable items and user info. 
 
-#Technologies: 
+It uses Node.js/Express as its web server, and GraphQL for its client-facing API.
+
+# Technologies: 
+
 The following technologies were applied in building and delivering Boomtown's backend application:- 
 
 1.	JavaScript  
