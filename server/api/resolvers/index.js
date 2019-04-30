@@ -19,11 +19,11 @@ const { ApolloError } = require('apollo-server-express');
 // const jwt = require("jsonwebtoken")
 // const authMutations = require("./auth")
 // -------------------------------
-const { DateScalar } = require('../custom-types');
+// const { DateScalar } = require('../custom-types');
 
 module.exports = app => {
   return {
-    Date: DateScalar,
+    // Date: DateScalar,
 
     Query: {
       viewer() {
@@ -46,15 +46,19 @@ module.exports = app => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
+          if(user === null) { 
+            throw " No user found"
+          }
+          else {
           return user;
+          }
         } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async items(parent, { idToOmit }, { pgResource }) {
-        console.log(pgResource);
+      async items(parent, { filter }, { pgResource }) {
         try {
-          const items = await pgResource.getItems(idToOmit);
+          const items = await pgResource.getItems(filter);
           return items;
         }
         catch (e) {
@@ -84,7 +88,7 @@ module.exports = app => {
        *
        */
       // @TODO: Uncomment these lines after you define the User type with these fields
-      async items( parent,{ id }, { pgResource }) {
+      async items( { id }, args, { pgResource }) {
         try {
           const getLentItems = await pgResource.getItemsForUser(id);
           return getLentItems;
@@ -93,7 +97,7 @@ module.exports = app => {
           throw new ApolloError(e);
         }
       },
-      async borrowed( parent, { id }, { pgResource }) {
+      async borrowed(  { id }, args, { pgResource }) {
         // @TODO: Replace this mock return statement with the correct items from Postgres
         try {
           const getBorrowed =  await pgResource.getBorrowedItemsForUser(id);
@@ -116,18 +120,18 @@ module.exports = app => {
        *
        */
       //@TODO: Uncomment these lines after you define the Item type with these fields
-      async itemowner( { id }, args, { pgResource }) {
+      async itemowner( { itemowner }, args, { pgResource }) { // first parameter is the root of data object - itemowner refers to USER - need to deconstruct
         try {
-          const getItemOwner = await pgResource.getUserById(id);
+          const getItemOwner = await pgResource.getUserById(itemowner);
           return getItemOwner;
         }
         catch (e) {
           throw new ApolloError(e);
         }
       },
-      async tags( { tag }, args, { pgResource }) {
+      async tags( { id }, args, { pgResource }) {
         try {
-          const getTag = await pgResource.getTags(tag);
+          const getTag = await pgResource.getTags(id);
           return getTag;
         }
         catch (e) {

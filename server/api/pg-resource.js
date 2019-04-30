@@ -20,7 +20,7 @@ module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
       const newUserInsert = { // inserting user into our database
-        text: 'INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING *',
+        text: 'INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING *', // returns data object refers to data object ID 
          // @TODO: Authentication - Server
         values: [fullname, email, password]
       };
@@ -53,64 +53,49 @@ module.exports = postgres => {
     },
     async getUserById(id) { // this is the borrower & itemowner in the user / associating borrower with id of user
       const findUserQuery = {
-        text: 'SELECT id, email, fullname, bio FROM users WHERE id = $1', // @TODO: Basic queries
-        values: [id] // id array so must destructure it 
+        text: 'SELECT * FROM users WHERE id = $1', // @TODO: Basic queries
+        values: id ? [id]:[] // id array so must destructure it 
       };
       try {
         const user = await postgres.query(findUserQuery);
-        if (!user) throw 'User was not found.';
         return user.rows[0];
-      } catch (e) {
-        throw 'User was not found.';
+      } catch (err) {
+        throw err;
       }
     },
     
 
-    async getItems(idToOmit) {
-      const items = {
-        text: `SELECT * FROM items ${idToOmit ? `WHERE ownerid != $1` : ``}`,
-        values: idToOmit ? [idToOmit] : []
-      };
-      try {
-        const retrieveItems = await postgres.query(items);
-        if (!retrieveItems) throw 'Item was not found.';
-        return items.rows;
-      } catch (e) {
-        throw 'Item was not found.';
-      }
-    },
 
-    
-    async getItemsForUser(id) {
-      const items = {
-        text: `SELECT * FROM items LEFT JOIN users ON items.id = users.id`,
-        values: [id]
-      };
-      try{
-      const retrieveItemsForUser = await postgres.query(items);
-      if(!retrieveItemsForUser) throw 'Items For User Not Found.';
-      return items.rows;
-      } catch(e) { 
-      throw 'Items For User Not Found.'
-    }
-    },
-   
-    async getBorrowedItemsForUser(id) { // change to  id 
-      const items = {
-        
-        text:`SELECT * FROM items WHERE borrowerid = $1`,
-        values: [id]
-        
-      };
-      try{ 
-      const retrieveBorrowedItemsForUser = await postgres.query(items);
-      if(!retrieveBorrowedItemsForUser) throw 'Borrowed Items For User Not Found.';
-      return items.rows;
-      } catch (e) { 
-      throw 'Borrowed Items For User Not Found.'
-      }
-    },
-  
+
+async getItems(idToOmit) {
+  const items = await postgres.query({
+  // text: `SELECT * FROM items ${idToOmit ? `WHERE itemowner != $1` : ``}`,\
+    text: `SELECT * FROM items WHERE items.itemowner != $1`,
+    values: idToOmit ? [idToOmit] : []
+  });
+  return items.rows;
+},
+
+// get items for users 
+
+async getItemsForUser(id) {
+  const items = await postgres.query({
+    text: `SELECT * FROM items WHERE itemowner = $1`,
+    values: [id]
+  });
+  return items.rows;
+},
+
+
+
+async getBorrowedItemsForUser(id) { // change to  id 
+    const items = await postgres.query({
+         text:`SELECT * FROM items WHERE borrower = $1`,
+      values: [id]
+    });
+    return items.rows;
+  },
+
 
     
    async getTags() {
@@ -123,21 +108,17 @@ module.exports = postgres => {
     }
     },
 
- 
-
-    async getTagsForItem(id) { // to join on the corresponding tags.id with itemtags.tagid and then get the corresponding item for tags  
+ async getTagsForItem(id) { // to join on the corresponding tags.id with itemtags.tagid and then get the corresponding item for tags  
       const tagsQuery = {
         text: `SELECT * FROM tags INNER JOIN itemtags ON tags.id = itemtags.tagid WHERE itemtags.items.id = $1`, // @TODO: Advanced queries
         values: [id]
       };
-      try { 
-      const retrieveTagsForItem = await postgres.query(tagsQuery);
-      if(!retrieveTagsForItem) throw 'Tags for Item Not Found.'; 
+      const tags = await postgres.query(tagsQuery);
       return tags.rows;
-      }
-      catch (e) { 
-      throw 'Tags for Item Not Found.'}
     },
+  
+
+
     async saveNewItem({ item, user }) {
       /**
        *  @TODO: Adding a New Item
