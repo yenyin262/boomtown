@@ -19,11 +19,11 @@ const { ApolloError } = require('apollo-server-express');
 // const jwt = require("jsonwebtoken")
 // const authMutations = require("./auth")
 // -------------------------------
-// const { DateScalar } = require('../custom-types');
+const { DateScalar } = require('../custom-types');
 
 module.exports = app => {
   return {
-    // Date: DateScalar,
+    Date: DateScalar,
 
     Query: {
       viewer() {

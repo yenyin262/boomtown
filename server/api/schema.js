@@ -11,10 +11,10 @@ const { gql } = require('apollo-server-express');
  * We will create the custom Date scalar together.
  */
 
-  // scalar Date
+
   
 module.exports = gql`
-
+ scalar Date
 
   type Item {
     id: ID!
