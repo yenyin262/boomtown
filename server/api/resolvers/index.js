@@ -46,11 +46,10 @@ module.exports = app => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
-          if(user === null) { 
-            throw "No user found"
-          }
-          else {
-          return user;
+          if (user === null) {
+            throw 'No user found';
+          } else {
+            return user;
           }
         } catch (e) {
           throw new ApolloError(e);
@@ -60,8 +59,7 @@ module.exports = app => {
         try {
           const items = await pgResource.getItems(filter);
           return items;
-        }
-        catch (e) {
+        } catch (e) {
           throw new ApolloError(e);
         }
       },
@@ -69,90 +67,57 @@ module.exports = app => {
         try {
           const tags = await pgResource.getTags(tag);
           return tags;
-        }
-        catch (e) {
+        } catch (e) {
           throw new ApolloError(e);
         }
-      },
+      }
     },
 
     User: {
-      /**
-       *  @TODO: Advanced resolvers
-       *
-       *  The User GraphQL type has two fields that are not present in the
-       *  user table in Postgres: items and borrowed.
-       *
-       *  According to our GraphQL schema, these fields should return a list of
-       *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
-       *
-       */
-      // @TODO: Uncomment these lines after you define the User type with these fields
-      async items( { id }, args, { pgResource }) {
+      async items({ id }, args, { pgResource }) {
         try {
           const getLentItems = await pgResource.getItemsForUser(id);
           return getLentItems;
-        }
-        catch (e) {
-          throw new ApolloError(e);
-        }
-      },
-      async borrowed(  { id }, args, { pgResource }) {
-        // @TODO: Replace this mock return statement with the correct items from Postgres
-        try {
-          const getBorrowed =  await pgResource.getBorrowedItemsForUser(id);
-         
-            return getBorrowed;
-            
-         
         } catch (e) {
           throw new ApolloError(e);
         }
       },
+      async borrowed({ id }, args, { pgResource }) {
+        try {
+          const getBorrowed = await pgResource.getBorrowedItemsForUser(id);
+
+          return getBorrowed;
+        } catch (e) {
+          throw new ApolloError(e);
+        }
+      }
     },
 
     Item: {
-      /**
-       *  @TODO: Advanced resolvers
-       *
-       *  The Item GraphQL type has two fields that are not present in the
-       *  Items table in Postgres: itemowner, tags and borrower.
-       *
-       * According to our GraphQL schema, the itemowner and borrower should return
-       * a User (GraphQL type) and tags should return a list of Tags (GraphQL type)
-       *
-       */
-      //@TODO: Uncomment these lines after you define the Item type with these fields
-      async itemowner( { itemowner }, args, { pgResource }) { // first parameter is the root of data object - itemowner refers to USER - need to deconstruct
+      async itemowner({ itemowner }, args, { pgResource }) {
         try {
           const getItemOwner = await pgResource.getUserById(itemowner);
           return getItemOwner;
-        }
-        catch (e) {
+        } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async tags( { id }, args, { pgResource }) {
+      async tags({ id }, args, { pgResource }) {
         try {
           const getTag = await pgResource.getTags(id);
           return getTag;
-        }
-        catch (e) {
+        } catch (e) {
           throw new ApolloError(e);
         }
       },
-      async borrower( { borrower }, args, { pgResource }) { // user is the borrower
+      async borrower({ borrower }, args, { pgResource }) {
         try {
           const getBorrower = await pgResource.getUserById(borrower);
           return getBorrower;
-        }
-        catch (e) {
+        } catch (e) {
           throw new ApolloError(e);
         }
-
-
       }
-
     },
 
     Mutation: {

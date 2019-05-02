@@ -19,9 +19,10 @@ function tagsQueryString(tags, itemid, result) {
 module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
-      const newUserInsert = { // inserting user into our database
-        text: 'INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING *', // returns data object refers to data object ID 
-         // @TODO: Authentication - Server
+      const newUserInsert = {
+        text:
+          'INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING *',
+        // @TODO: Authentication - Server
         values: [fullname, email, password]
       };
       try {
@@ -51,73 +52,60 @@ module.exports = postgres => {
         throw 'User was not found.';
       }
     },
-    async getUserById(id) { // this is the borrower & itemowner in the user / associating borrower with id of user
+    async getUserById(id) {
       const findUserQuery = {
-        text: 'SELECT * FROM users WHERE id = $1', // @TODO: Basic queries
-        values: id ? [id]:[] // id array so must destructure it 
+        text: 'SELECT * FROM users WHERE id = $1',
+        values: id ? [id] : []
       };
       try {
         const user = await postgres.query(findUserQuery);
         return user.rows[0];
       } catch (e) {
-        throw  'User ID not found';
+        throw 'User ID not found';
       }
     },
-    
 
-
-
-async getItems(idToOmit) {
-  const items = await postgres.query({
-  text: `SELECT * FROM items ${idToOmit ? `WHERE itemowner != $1` : ``}`,
-    // text: `SELECT * FROM items WHERE items.itemowner != $1`,
-    values: idToOmit ? [idToOmit] : []
-  });
-  return items.rows;
-},
-
-// get items for users 
-
-async getItemsForUser(id) {
-  const items = await postgres.query({
-    text: `SELECT * FROM items WHERE itemowner = $1`,
-    values: [id]
-  });
-  return items.rows;
-},
-
-
-
-async getBorrowedItemsForUser(id) { // change to  id 
-    const items = await postgres.query({
-         text:`SELECT * FROM items WHERE borrower = $1`,
-      values: [id]
-    });
-    return items.rows;
-  },
-
-
-    
-   async getTags() {
-      try {
-      const tags = await postgres.query('SELECT * FROM tags');
-      return tags.rows;
-    }
-    catch(e){ 
-      throw 'Tags Not Found.'
-    }
+    async getItems(idToOmit) {
+      const items = await postgres.query({
+        text: `SELECT * FROM items ${idToOmit ? `WHERE itemowner != $1` : ``}`,
+        values: idToOmit ? [idToOmit] : []
+      });
+      return items.rows;
     },
 
- async getTagsForItem(id) { // to join on the corresponding tags.id with itemtags.tagid and then get the corresponding item for tags  
+    async getItemsForUser(id) {
+      const items = await postgres.query({
+        text: `SELECT * FROM items WHERE itemowner = $1`,
+        values: [id]
+      });
+      return items.rows;
+    },
+
+    async getBorrowedItemsForUser(id) {
+      const items = await postgres.query({
+        text: `SELECT * FROM items WHERE borrower = $1`,
+        values: [id]
+      });
+      return items.rows;
+    },
+
+    async getTags() {
+      try {
+        const tags = await postgres.query('SELECT * FROM tags');
+        return tags.rows;
+      } catch (e) {
+        throw 'Tags Not Found.';
+      }
+    },
+
+    async getTagsForItem(id) {
       const tagsQuery = {
-        text: `SELECT * FROM tags INNER JOIN itemtags ON tags.id = itemtags.tagid WHERE itemtags.items.id = $1`, // @TODO: Advanced queries
+        text: `SELECT * FROM tags INNER JOIN itemtags ON tags.id = itemtags.tagid WHERE itemtags.items.id = $1`,
         values: [id]
       };
       const tags = await postgres.query(tagsQuery);
       return tags.rows;
     },
-  
-
 
     async saveNewItem({ item, user }) {
       /**
