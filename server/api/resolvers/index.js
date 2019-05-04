@@ -46,8 +46,8 @@ module.exports = app => {
       async user(parent, { id }, { pgResource }, info) {
         try {
           const user = await pgResource.getUserById(id);
-          if (user === null) {
-            throw 'No user found';
+          if (id === null) {
+           return null;
           } else {
             return user;
           }
@@ -112,8 +112,11 @@ module.exports = app => {
       },
       async borrower({ borrower }, args, { pgResource }) {
         try {
-          const getBorrower = await pgResource.getUserById(borrower);
-          return getBorrower;
+          if (borrower) {
+            const getBorrower = await pgResource.getUserById(borrower);
+            return getBorrower;
+          }
+          return null;
         } catch (e) {
           throw new ApolloError(e);
         }
@@ -124,6 +127,7 @@ module.exports = app => {
       // @TODO: Uncomment this later when we add auth
       // ...authMutations(app),
       // -------------------------------
+
 
       async addItem(parent, args, context, info) {
         /**

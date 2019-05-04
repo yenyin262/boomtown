@@ -9,10 +9,10 @@ The following technologies were applied in building and delivering Boomtown's ba
 
 1.	JavaScript  
 1.	GraphQL
-1.	Git/Github
-1.	Command Line
+1.  Express
+1.  Node
 1.  POSTGRESQL
-
+1.  Apollo 
 
 
 #  Personal Learning Developments: 
