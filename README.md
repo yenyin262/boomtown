@@ -27,7 +27,7 @@ The following technologies were applied in building and delivering Boomtown's ba
 
 # Instructions to run the project
 
-## Server
+## Server Set-Up
 
 Commands must be run from the `server` directory:
 

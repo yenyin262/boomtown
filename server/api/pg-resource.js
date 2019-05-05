@@ -119,6 +119,8 @@ module.exports = postgres => {
        *  2) Succeed for the new Item to be considered added
        *  3) If any of the INSERT queries fail, any successful INSERT
        *     queries should be 'rolled back' to avoid 'orphan' data in the database.
+       * 
+       * t
        *
        *  To achieve #3 we'll ue something called a Postgres Transaction!
        *  The code for the transaction has been provided for you, along with
