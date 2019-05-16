@@ -1,3 +1,6 @@
+// const { Pool } = require('client')
+// const pool = new Pool()
+
 function tagsQueryString(tags, itemid, result) {
   /**
    * Challenge:
@@ -100,7 +103,7 @@ module.exports = postgres => {
 
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: `SELECT * FROM tags INNER JOIN itemtags ON tags.id = itemtags.tagid WHERE itemtags.items.id = $1`,
+        text: `SELECT * FROM tags INNER JOIN itemtags ON tags.id = itemtags.tagid WHERE itemtags.itemid = $1`,
         values: [id]
       };
       const tags = await postgres.query(tagsQuery);
@@ -119,7 +122,7 @@ module.exports = postgres => {
        *  2) Succeed for the new Item to be considered added
        *  3) If any of the INSERT queries fail, any successful INSERT
        *     queries should be 'rolled back' to avoid 'orphan' data in the database.
-       * 
+       *
        * t
        *
        *  To achieve #3 we'll ue something called a Postgres Transaction!
@@ -141,6 +144,7 @@ module.exports = postgres => {
             client.query('BEGIN', async err => {
               const { title, description, tags } = item;
 
+              client.query('SELECT * From items RETURNING *');
               // Generate new Item query
               // @TODO
               // -------------------------------

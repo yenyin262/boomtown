@@ -47,7 +47,7 @@ module.exports = app => {
         try {
           const user = await pgResource.getUserById(id);
           if (id === null) {
-           return null;
+            return null;
           } else {
             return user;
           }
@@ -104,7 +104,7 @@ module.exports = app => {
       },
       async tags({ id }, args, { pgResource }) {
         try {
-          const getTag = await pgResource.getTags(id);
+          const getTag = await pgResource.getTagsForItem(id);
           return getTag;
         } catch (e) {
           throw new ApolloError(e);
@@ -127,7 +127,6 @@ module.exports = app => {
       // @TODO: Uncomment this later when we add auth
       // ...authMutations(app),
       // -------------------------------
-
 
       async addItem(parent, args, context, info) {
         /**
