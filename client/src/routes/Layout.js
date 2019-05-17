@@ -5,15 +5,6 @@ import Profile from '../pages/Profile';
 import Items from '../pages/Items';
 import Share from '../pages/Share';
 
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
 export default () => (
   <Fragment>
     {/* @TODO: Add your menu component here */

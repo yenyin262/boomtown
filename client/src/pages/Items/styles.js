@@ -1,12 +1,4 @@
 const styles = theme => ({
-  card: {
-    maxWidth: 400
-  },
-  media: {
-    height: 300
-    // paddingTop: '56.25%' // 16:9
-  },
-
   button: {
     margin: theme.spacing.unit
   },
@@ -16,6 +8,17 @@ const styles = theme => ({
   },
   margin: {
     margin: theme.spacing.unit
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60
   }
 });
 

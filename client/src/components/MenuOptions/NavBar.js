@@ -76,4 +76,4 @@ class NavMenu extends Component {
   }
 }
 
-export default NavMenu;
+export default MenuOptions;
