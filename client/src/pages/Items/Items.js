@@ -14,6 +14,10 @@ import CardItem from '../../components/CardItem/CardItem';
 // import NavBar from '../../components/NavigationBar/NavBar';
 
 const Items = ({ classes, dataItems }) => {
+  const showAllItems = dataItems.map((value, index) => {
+    return <CardItem item={value} key={index} />;
+  });
+
   return (
     <div>
       <p>
@@ -52,8 +56,9 @@ const Items = ({ classes, dataItems }) => {
             </Link>
           </Toolbar>
         </AppBar>
+        });
       </p>
-      <CardItem items={dataItems} />
+      <div>{showAllItems}</div>
     </div>
   );
 };
