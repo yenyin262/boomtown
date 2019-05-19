@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 // import { Field } from 'react-final-form';
@@ -8,26 +7,11 @@ import styles from './styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 
-// const skillOptions = [
-//   {
-//     value: 'Tools',
-//     label: 'Tools'
-//   },
-//   {
-//     value: 'householditems',
-//     label: 'householditems'
-//   },
-//   {
-//     value: 'electronics',
-//     label: 'electronics'
-//   }
-// ];
-
-// const Select = props => {
+// const textField = props => {
 //   return (
-//     // <div className="form-group">
-//     //   <label for={props.name}> {props.title} </label>
-//       // <select
+//     <div className="form-group">
+//       <label for={props.name}> {props.title} </label>
+//       <TextField
 //         id={props.name}
 //         name={props.name}
 //         value={props.value}
@@ -44,11 +28,22 @@ import FormControl from '@material-ui/core/FormControl';
 //             </option>
 //           );
 //         })}
-//       {/* </select>
-//     </div> */}
+//       </TextField>
+//     </div>
 //   );
 // };
 
+// const newShareItems = props => {
+//   {
+//     props.options.map(option => {
+//       return (
+//         <option key={option} value={option} label={option}>
+//           {option}
+//         </option>
+//       );
+//     });
+//   }
+// };
 class ShareForm extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +52,6 @@ class ShareForm extends Component {
         name: '',
         item: '',
         tags: 'Add Some Tags'
-        // skills: '',
         // multiline: 'Controlled'
       },
       newItemTags: [
@@ -79,24 +73,22 @@ class ShareForm extends Component {
     let name = e.target.name;
     this.setState(
       prevState => ({
-        newUser: {
-          ...prevState.newUser,
+        newItem: {
+          ...prevState.newItem,
           [name]: value
         }
       }),
-      () => console.log(this.state.newUser)
+      () => console.log(this.state.newItem)
     );
   }
 
   render() {
-    // const { dataItems } = this.props;
     return (
       <div>
         <h1>Share. Borrow. Prosper </h1>
 
         <FormControl>
           <TextField
-            id="standard-name"
             // className={classes.textField}
             value={this.state.name}
             onChange={this.handleChange('name')}
@@ -104,7 +96,6 @@ class ShareForm extends Component {
             label="Name Your Item"
           />
           <TextField
-            // id="standard-full-width"
             // label="Label"
             style={{ margin: 3 }}
             placeholder="Describe Your Item"
@@ -124,8 +115,10 @@ class ShareForm extends Component {
             // className={classes.textField}
             // value={this.state.name}
             name={'tags'}
-            options={this.state.newItemTags}
-            value={this.state.newItem.tags}
+            // options={item.tags[0].title}
+            // value={item.tags[0].title}
+            options={this.setState.newItemTags}
+            value={this.setState.newItemTags}
             onChange={this.handleInput}
             placeholder={''}
             margin="normal"

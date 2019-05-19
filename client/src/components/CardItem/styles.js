@@ -28,6 +28,11 @@ const styles = {
   button: {
     fontSize: '16px',
     padding: '8px 24px'
+  },
+
+  avatarPic: {
+    width: '20px',
+    height: '20px'
   }
 };
 

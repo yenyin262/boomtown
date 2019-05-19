@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import React from 'react';
+import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
 {
   /* <Icon class="material-icons" id="fingerprintIcon">
@@ -14,12 +17,9 @@ power_settings_new
 </Icon> */
 }
 
-// class MenuAppBar extends React.Component {
-//return ()
-//}
-
 // this is the menu button
-const options = ['Your Profile', 'Sign Out'];
+const profilePage = ['Your Profile'];
+const signOutPage = ['Sign Out'];
 
 const ITEM_HEIGHT = 48;
 
@@ -38,7 +38,7 @@ class MenuOptions extends Component {
 
   render() {
     const { anchorEl } = this.state;
-
+    const { classes } = this.props;
     return (
       <div>
         <IconButton
@@ -61,19 +61,24 @@ class MenuOptions extends Component {
             }
           }}
         >
-          {options.map(option => (
-            <MenuItem
-              key={option}
-              selected={option === 'Your Profile'}
-              onClick={this.handleClose}
-            >
-              {option}
-            </MenuItem>
-          ))}
+          <Link to="/profile">
+            {profilePage.map(option => (
+              <MenuItem key={option} onClick={this.handleClose}>
+                <Icon className={classes.menuIcon}>fingerprint </Icon> {option}
+              </MenuItem>
+            ))}
+          </Link>
+          <Link to="/welcome">
+            {signOutPage.map(option => (
+              <MenuItem key={option} onClick={this.handleClose}>
+                <Icon className={classes.menuIcon}>power_settings_new </Icon>{' '}
+                {option}
+              </MenuItem>
+            ))}
+          </Link>
         </Menu>
       </div>
     );
   }
 }
-
-export default MenuOptions;
+export default withStyles(styles)(MenuOptions);

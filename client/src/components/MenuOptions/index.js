@@ -1,2 +1,2 @@
-import NavigationBar from './NavBar.js';
-export default NavigationBar;
+import MenuOptions from './MenuOptions';
+export default MenuOptions;

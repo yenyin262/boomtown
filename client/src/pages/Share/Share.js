@@ -1,6 +1,5 @@
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
-import CardItem from '../../components/CardItem/CardItem';
 
 /* 
   TODO: Create ShareItemFrom and ShareItemPreview in the components dir

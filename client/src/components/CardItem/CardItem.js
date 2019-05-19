@@ -9,10 +9,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import moment from 'moment';
-import AvatarImg from '../../images/avatar.png';
+// import AvatarImg from '../../images/avatar.png';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import styles from './styles';
+import Gravatar from 'react-gravatar';
 
 import CardHeader from '@material-ui/core/CardHeader';
 
@@ -31,7 +32,8 @@ class CardItem extends Component {
             <CardMedia className={classes.media} image={item.imageurl} />
             <div className={classes.containerProfile}>
               <Link to="/profile">
-                <Avatar alt="User's Avatar" src={AvatarImg} />
+                <Gravatar className={classes.avatarPic} />
+                {/* <Avatar alt="User's Avatar" src={AvatarImg} /> */}
               </Link>
               <Typography component="p" color="textSecondary" gutterBottom>
                 {moment(item.created)
