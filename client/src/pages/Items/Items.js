@@ -11,8 +11,6 @@ import bmtwnLogo from '../../images/boomtown.svg';
 import styles from './styles';
 import CardItem from '../../components/CardItem/CardItem';
 
-// import NavBar from '../../components/NavigationBar/NavBar';
-
 const Items = ({ classes, dataItems }) => {
   const showAllItems = dataItems.map((value, index) => {
     return <CardItem item={value} key={index} />;
@@ -21,8 +19,8 @@ const Items = ({ classes, dataItems }) => {
   return (
     <div>
       <p>
-        <AppBar position="static">
-          <Toolbar>
+        <AppBar position="static" className="navContainer">
+          <Toolbar className="subContainer">
             <Link to="/items">
               <IconButton>
                 <img
@@ -37,22 +35,16 @@ const Items = ({ classes, dataItems }) => {
             <Link to="/share">
               <Button
                 variant="extended"
-                color="primary"
-                aria-label="Add"
-                className={classes.margin}
+                className={classes.shareBtn}
+                // className={classes.margin}
               >
                 <Icon className={classes.icon}>add_circle</Icon> Share Something
               </Button>
             </Link>
             <Link to="/profile">
-              <Button
-                variant="extended"
-                color="primary"
-                aria-label="Add"
-                className={classes.margin}
-              >
+              <IconButton>
                 <MoreVertIcon />
-              </Button>
+              </IconButton>
             </Link>
           </Toolbar>
         </AppBar>

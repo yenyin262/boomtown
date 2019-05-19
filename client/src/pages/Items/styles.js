@@ -9,16 +9,28 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit
   },
-  row: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
+  // row: {
+  //   display: 'flex',
+  //   justifyContent: 'center'
+  // },
   avatar: {
     margin: 10
   },
   bigAvatar: {
     width: 60,
     height: 60
+  },
+
+  shareBtn: {
+    // marginRight: theme.spacing.unit,
+    margin: theme.spacing.unit
+  },
+  navContainer: {
+    display: 'flex'
+  },
+  subContainer: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 

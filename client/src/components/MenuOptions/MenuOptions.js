@@ -23,7 +23,7 @@ const options = ['Your Profile', 'Sign Out'];
 
 const ITEM_HEIGHT = 48;
 
-class NavMenu extends Component {
+class MenuOptions extends Component {
   state = {
     anchorEl: null
   };

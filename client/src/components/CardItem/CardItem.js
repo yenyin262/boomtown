@@ -16,8 +16,6 @@ import styles from './styles';
 
 import CardHeader from '@material-ui/core/CardHeader';
 
-// import styles from './styles';
-
 class CardItem extends Component {
   constructor(props) {
     super(props);
@@ -31,23 +29,43 @@ class CardItem extends Component {
         <Grid item xs={12} key={item.id}>
           <Card className={classes.card} key={item.id}>
             <CardMedia className={classes.media} image={item.imageurl} />
-            <div>
+            <div className={classes.containerProfile}>
               <Link to="/profile">
                 <Avatar alt="User's Avatar" src={AvatarImg} />
               </Link>
-              <Typography component="p">
+              <Typography component="p" color="textSecondary" gutterBottom>
                 {moment(item.created)
                   .startOf('day')
                   .fromNow()}
               </Typography>
             </div>
-            <CardHeader title={item.title} subheader={item.tags.join(', ')} />
+            {/* <CardHeader title= /> */}
             <CardContent>
-              <Typography component="p">{item.description}</Typography>
+              <Typography
+                component="h2"
+                variant="h2"
+                gutterBottom
+                className={classes.titleName}
+              >
+                {item.title}
+              </Typography>
+              <Typography
+                component="p"
+                color="textSecondary"
+                gutterBottom
+                className={classes.tagName}
+              >
+                {item.tags[0].title}
+              </Typography>
+              <Typography component="h3" className={classes.descriptionName}>
+                {item.description}
+              </Typography>
             </CardContent>
             <CardActions>
               <Button variant="outlined" className={classes.button}>
-                Borrow
+                <Typography component="h3" className={classes.descriptionName}>
+                  Borrow
+                </Typography>
               </Button>
             </CardActions>
           </Card>
@@ -57,3 +75,4 @@ class CardItem extends Component {
   }
 }
 export default withStyles(styles)(CardItem);
+// item.tags[0].title - need to concat if more than one tags
