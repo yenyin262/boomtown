@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+
 import moment from 'moment';
 // import AvatarImg from '../../images/avatar.png';
 import Grid from '@material-ui/core/Grid';
@@ -16,6 +16,7 @@ import styles from './styles';
 import Gravatar from 'react-gravatar';
 
 import CardHeader from '@material-ui/core/CardHeader';
+import UserProfile from '../UserProfile/UserProfile';
 
 class CardItem extends Component {
   constructor(props) {
@@ -32,14 +33,18 @@ class CardItem extends Component {
             <CardMedia className={classes.media} image={item.imageurl} />
             <div className={classes.containerProfile}>
               <Link to="/profile">
-                <Gravatar className={classes.avatarPic} />
-                {/* <Avatar alt="User's Avatar" src={AvatarImg} /> */}
+                <Gravatar className={classes.avatarPic} email="user.email" />
+                <Typography
+                  component="p"
+                  color="textSecondary"
+                  gutterBottom
+                  className={classes.itemCreated}
+                >
+                  {moment(item.created)
+                    .startOf('day')
+                    .fromNow()}
+                </Typography>
               </Link>
-              <Typography component="p" color="textSecondary" gutterBottom>
-                {moment(item.created)
-                  .startOf('day')
-                  .fromNow()}
-              </Typography>
             </div>
             {/* <CardHeader title= /> */}
             <CardContent>

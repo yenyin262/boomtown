@@ -6,33 +6,13 @@ import styles from './styles';
 // import { Form } from 'react-final-form';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-
-// const textField = props => {
-//   return (
-//     <div className="form-group">
-//       <label for={props.name}> {props.title} </label>
-//       <TextField
-//         id={props.name}
-//         name={props.name}
-//         value={props.value}
-//         onChange={props.handleChange}
-//         className="form-control"
-//       >
-//         <option value="" disabled>
-//           {props.placeholder}
-//         </option>
-//         {props.options.map(option => {
-//           return (
-//             <option key={option} value={option} label={option}>
-//               {option}
-//             </option>
-//           );
-//         })}
-//       </TextField>
-//     </div>
-//   );
-// };
-
+// import MenuItem from '@material-ui/core/MenuItem';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import Select from '@material-ui/core/Select';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import Input from '@material-ui/core/Input';
+// import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 // const newShareItems = props => {
 //   {
 //     props.options.map(option => {
@@ -44,6 +24,7 @@ import FormControl from '@material-ui/core/FormControl';
 //     });
 //   }
 // };
+
 class ShareForm extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +32,7 @@ class ShareForm extends Component {
       newItem: {
         name: '',
         item: '',
-        tags: 'Add Some Tags'
+        tags: []
         // multiline: 'Controlled'
       },
       newItemTags: [
@@ -66,6 +47,10 @@ class ShareForm extends Component {
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
+  };
+
+  handleTag = event => {
+    this.setState({ name: event.target.value });
   };
 
   handleInput(e) {
@@ -83,9 +68,29 @@ class ShareForm extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
-        <h1>Share. Borrow. Prosper </h1>
+        <h1>Share. Borrow. </h1>
+        <h1> Prosper </h1>
+        <div>
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="outlined-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="outlined-button-file">
+            <Button
+              variant="outlined"
+              component="span"
+              className={classes.selectImgBtn}
+            >
+              SELECT AN IMAGE
+            </Button>
+          </label>
+        </div>
 
         <FormControl>
           <TextField

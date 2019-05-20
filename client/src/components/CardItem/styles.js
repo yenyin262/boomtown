@@ -31,9 +31,16 @@ const styles = {
   },
 
   avatarPic: {
-    width: '20px',
-    height: '20px'
+    width: '50px',
+    height: '50px',
+    borderRadius: 29,
+    marginLeft: '40px',
+    marginTop: '20px'
   }
+
+  // itemCreated: {
+  //   alignSelf: 'center'
+  // }
 };
 
 export default styles;

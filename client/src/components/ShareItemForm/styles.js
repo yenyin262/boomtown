@@ -13,6 +13,17 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  input: {
+    display: 'none'
+  },
+  selectImgBtn: {
+    margin: theme.spacing.unit,
+    backgroundColor: '#f9a825',
+    width: '30%',
+    '&:hover': {
+      backgroundColor: '#f9a825'
+    }
   }
 });
 
