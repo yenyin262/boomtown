@@ -18,13 +18,26 @@ const styles = theme => ({
     display: 'none'
   },
   selectImgBtn: {
-    margin: theme.spacing.unit,
+    margin: '0',
     backgroundColor: '#f9a825',
-    width: '30%',
+    width: '100%',
     '&:hover': {
       backgroundColor: '#f9a825'
     }
+  },
+
+  bmtwnHeader: {
+    fontSize: '20px',
+    color: '#000',
+    fontWeight: '700',
+    marginBottom: '80px',
+    width: '69%'
   }
+
+  // bmtwnHeaderWrapper: {
+  //   width: '69%'
+  // }
+  //}
 });
 
 export default styles;

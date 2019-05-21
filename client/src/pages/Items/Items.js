@@ -20,8 +20,8 @@ const Items = ({ classes, dataItems }) => {
   return (
     <div>
       <AppBar position="static" className="navContainer">
-        <Toolbar className="subContainer">
-          <Link to="/items">
+        <Toolbar>
+          <Link to="/items" className={classes.itemLink}>
             <IconButton>
               <img
                 margin-top="20px"

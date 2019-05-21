@@ -29,19 +29,23 @@ class ShareForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
+      item: '',
       newItem: {
-        name: '',
-        item: '',
         tags: []
         // multiline: 'Controlled'
       },
+
       newItemTags: [
         'Sporting Goods',
         'Household Items',
         'Musical Instruments',
         'Tools',
         'Headphones'
-      ]
+      ],
+
+      submitting: false,
+      onCancel: () => {}
     };
     this.handleInput = this.handleInput.bind(this);
   }
@@ -66,72 +70,87 @@ class ShareForm extends Component {
       () => console.log(this.state.newItem)
     );
   }
+  handleCancel = e => {
+    e.preventDefault();
+    this.props.onCancel();
+  };
 
   render() {
     const { classes } = this.props;
+    const { submitting } = this.props;
     return (
-      <div>
-        <h1>Share. Borrow. </h1>
-        <h1> Prosper </h1>
-        <div>
-          <input
-            accept="image/*"
-            className={classes.input}
-            id="outlined-button-file"
-            multiple
-            type="file"
-          />
-          <label htmlFor="outlined-button-file">
-            <Button
-              variant="outlined"
-              component="span"
-              className={classes.selectImgBtn}
-            >
-              SELECT AN IMAGE
-            </Button>
-          </label>
+      <FormControl>
+        <div className={classes.bmtwnHeader}>
+          <h1>Share. Borrow. Prosper </h1>
         </div>
+        <input
+          accept="image/*"
+          className={classes.input}
+          // id="outlined-button-file"
+          multiple
+          type="file"
+        />
 
-        <FormControl>
-          <TextField
-            // className={classes.textField}
-            value={this.state.name}
-            onChange={this.handleChange('name')}
-            margin="normal"
-            label="Name Your Item"
-          />
-          <TextField
-            // label="Label"
-            style={{ margin: 3 }}
-            placeholder="Describe Your Item"
-            // helperText="Full width!"
-            fullWidth
-            margin="normal"
-            multiline
-            rows="4"
-            value={this.state.item}
-            onChange={this.handleChange('item')}
-            // InputLabelProps={{
-            //   shrink: true,
-            // }}
-          />
-          <TextField
-            id="standard-name"
-            // className={classes.textField}
-            // value={this.state.name}
-            name={'tags'}
-            // options={item.tags[0].title}
-            // value={item.tags[0].title}
-            options={this.setState.newItemTags}
-            value={this.setState.newItemTags}
-            onChange={this.handleInput}
-            placeholder={''}
-            margin="normal"
-            label="Add some tags"
-            select
-          />
-        </FormControl>
-      </div>
+        {/* <Button
+          variant="outlined"
+          component="span"
+          className={classes.selectImgBtn}
+        >
+          SELECT AN IMAGE
+        </Button> */}
+        {/*  BELOW IS CONIDITIONAL STATEMENT TO RESET IMAGE AFT IMAGE CLICKED */}
+
+        {submitting ? (
+          <Button
+            // className={classes.selectImgBtn}
+            onClick={e => {
+              // props.form.reset();
+              this.handleCancel(e);
+            }}
+          >
+            RESET IMAGE
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            component="span"
+            className={classes.selectImgBtn}
+          >
+            SELECT AN IMAGE
+          </Button>
+        )}
+
+        <TextField
+          value={this.state.name}
+          onChange={this.handleChange('name')}
+          margin="normal"
+          label="Name Your Item"
+        />
+        <TextField
+          style={{ margin: 3 }}
+          placeholder="Describe Your Item"
+          fullWidth
+          margin="normal"
+          multiline
+          rows="4"
+          value={this.state.item}
+          onChange={this.handleChange('item')}
+        />
+        <TextField
+          id="standard-name"
+          // value={this.state.name}
+          name={'tags'}
+          // options={item.tags[0].title}
+          // value={item.tags[0].title}
+          options={this.setState.newItemTags}
+          value={this.setState.newItemTags}
+          onChange={this.handleInput}
+          placeholder={''}
+          margin="normal"
+          label="Add some tags"
+          select
+        />
+      </FormControl>
     );
   }
 }

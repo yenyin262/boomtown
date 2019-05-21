@@ -1,17 +1,18 @@
-import { grey } from '@material-ui/core/colors';
-import { FormHelperText } from '@material-ui/core';
-
 const styles = {
   card: {
     maxWidth: 400
   },
   media: {
     height: 300
-    // paddingTop: '56.25%' // 16:9
   },
 
   containerProfile: {
-    display: 'flex'
+    display: 'flex',
+    width: '52%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    // marginLeft: '5px',
+    marginTop: '10px'
   },
   titleName: {
     fontSize: '30px',
@@ -33,9 +34,9 @@ const styles = {
   avatarPic: {
     width: '50px',
     height: '50px',
-    borderRadius: 29,
-    marginLeft: '40px',
-    marginTop: '20px'
+    borderRadius: 29
+    // marginLeft: '40px',
+    // marginTop: '20px'
   }
 
   // itemCreated: {

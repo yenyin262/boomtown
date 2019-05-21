@@ -28,9 +28,9 @@ const styles = theme => ({
   navContainer: {
     display: 'flex'
   },
-  subContainer: {
-    display: 'flex',
-    justifyContent: 'center'
+
+  itemLink: {
+    flexBasis: '69%'
   }
 });
 

@@ -15,8 +15,8 @@ import { Link } from 'react-router-dom';
 import styles from './styles';
 import Gravatar from 'react-gravatar';
 
-import CardHeader from '@material-ui/core/CardHeader';
-import UserProfile from '../UserProfile/UserProfile';
+// import CardHeader from '@material-ui/core/CardHeader';
+// import UserProfile from '../UserProfile/UserProfile';
 
 class CardItem extends Component {
   constructor(props) {
@@ -31,19 +31,21 @@ class CardItem extends Component {
         <Grid item xs={12} key={item.id}>
           <Card className={classes.card} key={item.id}>
             <CardMedia className={classes.media} image={item.imageurl} />
-            <div className={classes.containerProfile}>
+            <div>
               <Link to="/profile">
-                <Gravatar className={classes.avatarPic} email="user.email" />
-                <Typography
-                  component="p"
-                  color="textSecondary"
-                  gutterBottom
-                  className={classes.itemCreated}
-                >
-                  {moment(item.created)
-                    .startOf('day')
-                    .fromNow()}
-                </Typography>
+                <div className={classes.containerProfile}>
+                  <Gravatar className={classes.avatarPic} email="user.email" />
+                  <Typography
+                    component="p"
+                    color="textSecondary"
+                    gutterBottom
+                    className={classes.itemCreated}
+                  >
+                    {moment(item.created)
+                      .startOf('day')
+                      .fromNow()}
+                  </Typography>
+                </div>
               </Link>
             </div>
             {/* <CardHeader title= /> */}

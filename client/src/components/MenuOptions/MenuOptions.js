@@ -61,7 +61,7 @@ class MenuOptions extends Component {
             }
           }}
         >
-          <Link to="/profile">
+          <Link to="/profile" className={classes.profileIcon}>
             {profilePage.map(option => (
               <MenuItem key={option} onClick={this.handleClose}>
                 <Icon className={classes.menuIcon}>fingerprint </Icon> {option}

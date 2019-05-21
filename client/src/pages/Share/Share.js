@@ -1,5 +1,6 @@
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
+// import ShareItemPreview from '../../components/ShareItemPreview';
 
 /* 
   TODO: Create ShareItemFrom and ShareItemPreview in the components dir
@@ -17,7 +18,8 @@ const Share = ({ classes }) => {
   return (
     <div>
       <p>
-        This is the share page located at <code>/share</code>.
+        {/* This is the share page located at <code>/share</code>. */}
+        {/* <ShareItemPreview /> */}
         <ShareItemForm />
         {/* <CardItem= /> */}
       </p>
