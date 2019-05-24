@@ -48,7 +48,7 @@ const Items = ({ classes, dataItems }) => {
             </IconButton> */}
         </Toolbar>
       </AppBar>
-      });
+
       <div>{showAllItems}</div>
     </div>
   );
