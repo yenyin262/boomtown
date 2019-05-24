@@ -9,10 +9,7 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit
   },
-  // row: {
-  //   display: 'flex',
-  //   justifyContent: 'center'
-  // },
+
   avatar: {
     margin: 10
   },
