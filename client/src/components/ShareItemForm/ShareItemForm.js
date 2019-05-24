@@ -1,106 +1,191 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-// import { Field } from 'react-final-form';
-// import { TextField } from 'final-form-material-ui';
-// import { Form } from 'react-final-form';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-// import MenuItem from '@material-ui/core/MenuItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import Select from '@material-ui/core/Select';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-// const newShareItems = props => {
-//   {
-//     props.options.map(option => {
-//       return (
-//         <option key={option} value={option} label={option}>
-//           {option}
-//         </option>
-//       );
-//     });
-//   }
-// };
+import { Form, Field } from 'react-final-form';
+import PropTypes from 'prop-types';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from '@material-ui/core/ListItemText';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import { updateNewItem } from '../../redux/ShareItemPreview/reducer';
+import { connect } from 'react-redux';
 
-class ShareForm extends Component {
+const addTags = [
+  'Sporting Goods',
+  'Household Items',
+  'Musical Instruments',
+  'Tools',
+  'Headphones'
+];
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
+class ShareItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      item: '',
+      name: [],
       newItem: {
-        tags: []
+        name: '',
+        item: '',
+        tags: [],
         // multiline: 'Controlled'
-      },
 
-      newItemTags: [
-        'Sporting Goods',
-        'Household Items',
-        'Musical Instruments',
-        'Tools',
-        'Headphones'
-      ],
-
-      submitting: false,
-      onCancel: () => {}
+        submitting: false,
+        onCancel: () => {}
+      }
     };
-    this.handleInput = this.handleInput.bind(this);
+    // this.handleInput = this.handleInput.bind(this);
   }
+
+  componentDidMount() {
+    let randomItem = {
+      title: 'banana',
+      description: 'babe'
+    };
+    this.props.updateBanana(randomItem);
+  }
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  handleTag = event => {
+  handleChangeTag = event => {
     this.setState({ name: event.target.value });
   };
 
-  handleInput(e) {
-    let value = e.target.value;
-    let name = e.target.name;
-    this.setState(
-      prevState => ({
-        newItem: {
-          ...prevState.newItem,
-          [name]: value
-        }
-      }),
-      () => console.log(this.state.newItem)
-    );
-  }
-  handleCancel = e => {
-    e.preventDefault();
-    this.props.onCancel();
-  };
+  // handleInput(e) {
+  //   let value = e.target.value;
+  //   let name = e.target.name;
+  //   this.setState(
+  //     prevState => ({
+  //       newItem: {
+  //         ...prevState.newItem,
+  //         [name]: value
+  //       }
+  //     }),
+  //     () => console.log(this.state.newItem)
+  //   );
+  // }
+  // handleCancel = e => {
+  //   e.preventDefault();
+  //   this.props.onCancel();
+  // };
+
+  // share() {
+  //   let completed = this.state.newItem.filter((item, index) => item.complete);
+  //   return completed.length > 0;
+  // }
+
+  // onSubmit() {
+  //   console.log('on submit');
+  // }
 
   render() {
     const { classes } = this.props;
     const { submitting } = this.props;
     return (
       <FormControl>
-        <div className={classes.bmtwnHeader}>
-          <h1>Share. Borrow. Prosper </h1>
-        </div>
-        <input
-          accept="image/*"
-          className={classes.input}
-          // id="outlined-button-file"
-          multiple
-          type="file"
+        <Form
+          onSubmit={this.onSubmit}
+          render={({ handleSubmit, pristine, invalid }) => (
+            <form onSubmit={handleSubmit}>
+              <div className={classes.bmtwnHeader}>
+                <h1>Share. Borrow. Prosper </h1>
+              </div>
+
+              <Field
+                accept="image/*"
+                className={classes.input}
+                multiple
+                type="file"
+                render={({ input, meta }) => (
+                  <Button
+                    variant="outlined"
+                    component="span"
+                    className={classes.selectImgBtn}
+                    value={submitting ? '' : 'RESET IMAGE'}
+                    disabled={submitting}
+                    // onClick={() => {
+                    //   selectNewImg(Img);
+                    // }}
+                  >
+                    SELECT AN IMAGE
+                  </Button>
+                )}
+              />
+              <Field
+                render={({ input, meta }) => (
+                  <TextField
+                    value={this.state.name}
+                    onChange={this.handleChange('name')}
+                    margin="normal"
+                    label="Name Your Item"
+                    fullWidth
+                  />
+                )}
+              />
+              <Field
+                render={({ input, meta }) => (
+                  <TextField
+                    style={{ margin: 3 }}
+                    placeholder="Describe Your Item"
+                    fullWidth
+                    margin="normal"
+                    multiline
+                    rows="4"
+                    value={this.state.item}
+                    onChange={this.handleChange('item')}
+                  />
+                )}
+              />
+              <div>
+                <Field
+                  render={({ input, meta }) => (
+                    <Select
+                      multiple
+                      placeholder="Add some tags"
+                      id="standard-name"
+                      margin="normal"
+                      fullWidth
+                      value={this.state.name}
+                      onChange={this.handleChangeTag}
+                      renderValue={selected => selected.join(', ')}
+                      MenuProps={MenuProps}
+                      input={<Input id="select-multiple-checkbox" />}
+                    >
+                      {addTags.map(name => (
+                        <MenuItem key={name} value={name}>
+                          <Checkbox
+                            checked={this.state.name.indexOf(name) > -1}
+                          />
+                          <ListItemText primary={name} />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                />
+              </div>
+            </form>
+          )}
         />
 
-        {/* <Button
-          variant="outlined"
-          component="span"
-          className={classes.selectImgBtn}
-        >
-          SELECT AN IMAGE
-        </Button> */}
         {/*  BELOW IS CONIDITIONAL STATEMENT TO RESET IMAGE AFT IMAGE CLICKED */}
 
-        {submitting ? (
+        {/* {submitting ? (
           <Button
             // className={classes.selectImgBtn}
             onClick={e => {
@@ -118,44 +203,42 @@ class ShareForm extends Component {
           >
             SELECT AN IMAGE
           </Button>
-        )}
+        )} */}
 
-        <TextField
-          value={this.state.name}
-          onChange={this.handleChange('name')}
-          margin="normal"
-          label="Name Your Item"
-        />
-        <TextField
-          style={{ margin: 3 }}
-          placeholder="Describe Your Item"
-          fullWidth
-          margin="normal"
-          multiline
-          rows="4"
-          value={this.state.item}
-          onChange={this.handleChange('item')}
-        />
-        <TextField
-          id="standard-name"
-          // value={this.state.name}
-          name={'tags'}
-          // options={item.tags[0].title}
-          // value={item.tags[0].title}
-          options={this.setState.newItemTags}
-          value={this.setState.newItemTags}
-          onChange={this.handleInput}
-          placeholder={''}
-          margin="normal"
-          label="Add some tags"
-          select
+        <Field
+          render={({ input, meta }) => (
+            <Button
+              variant="outlined"
+              className={classes.button}
+              disabled={submitting}
+            >
+              <Typography component="h3" className={classes.descriptionName}>
+                SHARE
+              </Typography>
+            </Button>
+          )}
         />
       </FormControl>
     );
   }
 }
+// similar getState
+const mapStatetoProps = reduxState => {
+  return reduxState;
+};
+// similar to Dispatch
+const mapDispatchToProps = dispatch => ({
+  updateBanana(item) {
+    dispatch(updateNewItem(item));
+  }
+});
 
-export default withStyles(styles)(ShareForm);
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(withStyles(styles)(ShareItemForm));
+
+// export default withStyles(styles);
 {
   /* {items.map(item => {
         let tags = item.tags.map(tag => tag.title);}} */
@@ -166,9 +249,9 @@ export default withStyles(styles)(ShareForm);
 }
 {
   /* 
-            // {dataItems.tags.map(option => (
-            //   <option key={option.value} value={option.value}>
-
-            //   </option>
-            // ))} */
+     {/* {dataItems.tags.map(option => ( */
 }
+//   <option key={option.value} value={option.value}>
+
+//   </option>
+// ))} */
