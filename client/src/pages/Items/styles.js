@@ -1,4 +1,14 @@
+import createPalette from '@material-ui/core/styles/createPalette';
+
 const styles = theme => ({
+  ItemContainer: {
+    // display: 'grid',
+    // gridTemplateColumns: '1fr 1fr 1fr',
+    // gridGap: '30px'
+    // width: '95%',
+    // margin: '20px auto'
+    backgroundColor: 'black'
+  },
   button: {
     margin: theme.spacing.unit
   },

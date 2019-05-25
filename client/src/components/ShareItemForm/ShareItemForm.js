@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FormSpy } from 'react-final-form';
 import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -36,19 +36,24 @@ const MenuProps = {
 class ShareItemForm extends Component {
   constructor(props) {
     super(props);
+    this.fileInput = React.createRef();
+
     this.state = {
+      fileSelected: null,
+      selectedTags: [],
       name: [],
       newItem: {
         name: '',
         item: '',
-        tags: [],
-        // multiline: 'Controlled'
 
-        submitting: false,
-        onCancel: () => {}
+        // multiline: 'Controlled'
+        submitting: false
+        // onCancel: () => {}
       }
     };
     // this.handleInput = this.handleInput.bind(this);
+    // selectedTags: [],
+    // selectedFile: null
   }
 
   componentDidMount() {
@@ -67,158 +72,182 @@ class ShareItemForm extends Component {
     this.setState({ name: event.target.value });
   };
 
-  // handleInput(e) {
-  //   let value = e.target.value;
-  //   let name = e.target.name;
-  //   this.setState(
-  //     prevState => ({
-  //       newItem: {
-  //         ...prevState.newItem,
-  //         [name]: value
-  //       }
-  //     }),
-  //     () => console.log(this.state.newItem)
-  //   );
-  // }
-  // handleCancel = e => {
-  //   e.preventDefault();
-  //   this.props.onCancel();
-  // };
+  handleSelectedFile() {
+    const theFile = this.fileInput.current.files[0];
+    this.setState({ fileSelected: theFile });
+  }
 
-  // share() {
-  //   let completed = this.state.newItem.filter((item, index) => item.complete);
-  //   return completed.length > 0;
+  // handleSelectedTag() {
+  //   this.setState({ selectedTags: event.target.value });
   // }
 
-  // onSubmit() {
-  //   console.log('on submit');
-  // }
+  //  if image has been selected
+  dispatchUpdate(values, tags, updateNewItem) {
+    // const {updateNewItem} = this.props;
+    if (!values.imageurl && this.state.fileSelected) {
+      this.getBase64Url().then(imageurl => {
+        updateNewItem({
+          imageurl
+        });
+      });
+    }
+    updateNewItem({
+      ...values,
+      tags: this.applyTags(tags)
+    });
+  }
+  //
+  getBase64Url() {
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      // a way to get notified when file ereader is done reading a file
+      reader.onload = e => {
+        resolve(
+          `data:${this.state.fileSelected.type};base64, ${btoa(
+            e.target.result
+          )}`
+        );
+      };
+      reader.readAsBinaryString(this.state.fileSelected);
+    });
+  }
+  applyTags(tags) {
+    return (
+      tags &&
+      tags
+        .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
+        .map(t => ({ title: t.title, id: t.id }))
+    );
+  }
 
   render() {
     const { classes } = this.props;
     const { submitting } = this.props;
+    const { tags, updateNewItem } = this.props;
+    const noop = () => {};
     return (
-      <FormControl>
-        <Form
-          onSubmit={this.onSubmit}
-          render={({ handleSubmit, pristine, invalid }) => (
-            <form onSubmit={handleSubmit}>
-              <div className={classes.bmtwnHeader}>
-                <h1>Share. Borrow. Prosper </h1>
-              </div>
+      <Form
+        onSubmit={noop()}
+        render={({ handleSubmit, pristine, invalid, form }) => (
+          <form onSubmit={handleSubmit}>
+            <FormSpy
+              subscription={{ values: true }}
+              component={({ values }) => {
+                console.log('THING HAPPENED');
+                if (values) {
+                  this.dispatchUpdate(values, tags, updateNewItem);
+                }
+                return '';
+              }}
+            />
+            <div className={classes.bmtwnHeader}>
+              <h1>Share. Borrow. Prosper </h1>
+            </div>
 
-              <Field
-                accept="image/*"
-                className={classes.input}
-                multiple
-                type="file"
-                render={({ input, meta }) => (
-                  <Button
-                    variant="outlined"
-                    component="span"
-                    className={classes.selectImgBtn}
-                    value={submitting ? '' : 'RESET IMAGE'}
-                    disabled={submitting}
-                    // onClick={() => {
-                    //   selectNewImg(Img);
-                    // }}
-                  >
-                    SELECT AN IMAGE
-                  </Button>
-                )}
-              />
-              <Field
-                render={({ input, meta }) => (
-                  <TextField
-                    value={this.state.name}
-                    onChange={this.handleChange('name')}
-                    margin="normal"
-                    label="Name Your Item"
-                    fullWidth
-                  />
-                )}
-              />
-              <Field
-                render={({ input, meta }) => (
-                  <TextField
-                    style={{ margin: 3 }}
-                    placeholder="Describe Your Item"
-                    fullWidth
-                    margin="normal"
-                    multiline
-                    rows="4"
-                    value={this.state.item}
-                    onChange={this.handleChange('item')}
-                  />
-                )}
-              />
-              <div>
-                <Field
-                  render={({ input, meta }) => (
-                    <Select
-                      multiple
-                      placeholder="Add some tags"
-                      id="standard-name"
-                      margin="normal"
-                      fullWidth
-                      value={this.state.name}
-                      onChange={this.handleChangeTag}
-                      renderValue={selected => selected.join(', ')}
-                      MenuProps={MenuProps}
-                      input={<Input id="select-multiple-checkbox" />}
+            <Field
+              name="imageurl"
+              render={({ input, meta }) => {
+                return (
+                  <div>
+                    <input
+                      ref={this.fileInput}
+                      hidden
+                      type="file"
+                      accept="image/*"
+                      onChange={e => this.handleSelectedFile(e)}
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                      className={classes.selectImgBtn}
+                      onClick={() => {
+                        this.fileInput.current.click();
+                      }}
                     >
-                      {addTags.map(name => (
-                        <MenuItem key={name} value={name}>
-                          <Checkbox
-                            checked={this.state.name.indexOf(name) > -1}
-                          />
-                          <ListItemText primary={name} />
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
+                      SELECT AN IMAGE
+                    </Button>
+                  </div>
+                );
+              }}
+            />
+            <Field
+              render={({ input, meta }) => (
+                <TextField
+                  value={this.state.newItem.name}
+                  onChange={this.handleChange('name')}
+                  margin="normal"
+                  label="Name Your Item"
+                  fullWidth
+                  inputProps={{ ...input, autocomplete: 'off' }}
                 />
-              </div>
-            </form>
-          )}
-        />
+              )}
+            />
+            <Field
+              render={({ input, meta }) => (
+                <TextField
+                  style={{ margin: 3 }}
+                  placeholder="Describe Your Item"
+                  fullWidth
+                  // margin="normal"
+                  multiline
+                  rows="4"
+                  value={this.state.item}
+                  onChange={this.handleChange('item')}
+                  inputProps={{ ...input, autoComplete: 'off' }}
+                />
+              )}
+            />
 
-        {/*  BELOW IS CONIDITIONAL STATEMENT TO RESET IMAGE AFT IMAGE CLICKED */}
-
-        {/* {submitting ? (
-          <Button
-            // className={classes.selectImgBtn}
-            onClick={e => {
-              // props.form.reset();
-              this.handleCancel(e);
-            }}
-          >
-            RESET IMAGE
-          </Button>
-        ) : (
-          <Button
-            variant="outlined"
-            component="span"
-            className={classes.selectImgBtn}
-          >
-            SELECT AN IMAGE
-          </Button>
-        )} */}
-
-        <Field
-          render={({ input, meta }) => (
-            <Button
-              variant="outlined"
-              className={classes.button}
-              disabled={submitting}
-            >
-              <Typography component="h3" className={classes.descriptionName}>
-                SHARE
-              </Typography>
-            </Button>
-          )}
-        />
-      </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="select-multiple-chip">
+                Add some tags
+              </InputLabel>
+              <Field
+                render={({ input, meta }) => (
+                  <Select
+                    onChange={e => this.state.selectedTags(e)}
+                    multiple
+                    placeholder="Add some tags"
+                    id="standard-name"
+                    // margin="normal"
+                    fullWidth
+                    value={this.state.name}
+                    onChange={this.handleChangeTag}
+                    renderValue={selected => selected.join(', ')}
+                    MenuProps={MenuProps}
+                    input={<Input id="select-multiple-checkbox" />}
+                  >
+                    {addTags.map(name => (
+                      <MenuItem key={name} value={name}>
+                        <Checkbox
+                          checked={this.state.name.indexOf(name) > -1}
+                        />
+                        <ListItemText primary={name} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+            <Field
+              render={({ input, meta }) => (
+                <Button
+                  variant="outlined"
+                  className={classes.button}
+                  disabled={submitting}
+                >
+                  <Typography
+                    component="h3"
+                    className={classes.descriptionName}
+                  >
+                    SHARE
+                  </Typography>
+                </Button>
+              )}
+            />
+          </form>
+        )}
+      />
     );
   }
 }
@@ -237,21 +266,3 @@ export default connect(
   mapStatetoProps,
   mapDispatchToProps
 )(withStyles(styles)(ShareItemForm));
-
-// export default withStyles(styles);
-{
-  /* {items.map(item => {
-        let tags = item.tags.map(tag => tag.title);}} */
-}
-
-{
-  /* {option.label} */
-}
-{
-  /* 
-     {/* {dataItems.tags.map(option => ( */
-}
-//   <option key={option.value} value={option.value}>
-
-//   </option>
-// ))} */

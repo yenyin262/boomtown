@@ -17,12 +17,10 @@ import ShareItemForm from '../../components/ShareItemForm';
 const Share = ({ classes }) => {
   return (
     <div>
-      <p>
-        {/* This is the share page located at <code>/share</code>. */}
-        {/* <ShareItemPreview /> */}
-        <ShareItemForm />
-        {/* <CardItem= /> */}
-      </p>
+      {/* This is the share page located at <code>/share</code>. */}
+      {/* <ShareItemPreview /> */}
+      <ShareItemForm />
+      {/* <CardItem= /> */}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import bmtwnLogo from '../../images/boomtown.svg';
 import styles from './styles';
 import CardItem from '../../components/CardItem/CardItem';
 import MenuOptions from '../../components/MenuOptions/MenuOptions';
+import ItemsContainer from './ItemsContainer';
 
 const Items = ({ classes, dataItems }) => {
   const showAllItems = dataItems.map((value, index) => {
@@ -18,8 +19,8 @@ const Items = ({ classes, dataItems }) => {
   });
 
   return (
-    <div>
-      <AppBar position="static" className="navContainer">
+    <div className={classes.ItemContainer}>
+      <AppBar position="static" className={classes.navContainer}>
         <Toolbar>
           <Link to="/items" className={classes.itemLink}>
             <IconButton>

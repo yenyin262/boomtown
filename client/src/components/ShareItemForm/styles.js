@@ -6,7 +6,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 500
   },
   dense: {
     marginTop: 19
@@ -43,11 +43,6 @@ const styles = theme => ({
     width: '30%',
     marginTop: '30px'
   }
-
-  // bmtwnHeaderWrapper: {
-  //   width: '69%'
-  // }
-  //}
 });
 
 export default styles;
