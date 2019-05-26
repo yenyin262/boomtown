@@ -61,7 +61,7 @@ class ShareItemForm extends Component {
       title: 'banana',
       description: 'babe'
     };
-    this.props.updateBanana(randomItem);
+    this.props.updateNewItem(randomItem);
   }
 
   handleChange = name => event => {
@@ -82,8 +82,8 @@ class ShareItemForm extends Component {
   // }
 
   //  if image has been selected
-  dispatchUpdate(values, tags, updateNewItem) {
-    // const {updateNewItem} = this.props;
+  dispatchUpdate(values, tags) {
+    const { updateNewItem } = this.props;
     if (!values.imageurl && this.state.fileSelected) {
       this.getBase64Url().then(imageurl => {
         updateNewItem({
@@ -127,15 +127,16 @@ class ShareItemForm extends Component {
     const noop = () => {};
     return (
       <Form
-        onSubmit={noop()}
+        onSubmit={noop}
         render={({ handleSubmit, pristine, invalid, form }) => (
           <form onSubmit={handleSubmit}>
             <FormSpy
               subscription={{ values: true }}
               component={({ values }) => {
-                console.log('THING HAPPENED');
-                if (values) {
-                  this.dispatchUpdate(values, tags, updateNewItem);
+                console.log(values);
+                if (Object.keys(values).length > 0) {
+                  console.log(1234);
+                  this.dispatchUpdate(values, tags);
                 }
                 return '';
               }}
@@ -143,7 +144,6 @@ class ShareItemForm extends Component {
             <div className={classes.bmtwnHeader}>
               <h1>Share. Borrow. Prosper </h1>
             </div>
-
             <Field
               name="imageurl"
               render={({ input, meta }) => {
@@ -178,26 +178,22 @@ class ShareItemForm extends Component {
                   margin="normal"
                   label="Name Your Item"
                   fullWidth
-                  inputProps={{ ...input, autocomplete: 'off' }}
                 />
               )}
             />
-            <Field
-              render={({ input, meta }) => (
+            <Field name="description">
+              {({ input, meta }) => (
                 <TextField
                   style={{ margin: 3 }}
                   placeholder="Describe Your Item"
                   fullWidth
                   // margin="normal"
                   multiline
-                  rows="4"
                   value={this.state.item}
-                  onChange={this.handleChange('item')}
-                  inputProps={{ ...input, autoComplete: 'off' }}
+                  inputProps={{ ...input }}
                 />
               )}
-            />
-
+            </Field>
             <FormControl>
               <InputLabel htmlFor="select-multiple-chip">
                 Add some tags
@@ -205,7 +201,6 @@ class ShareItemForm extends Component {
               <Field
                 render={({ input, meta }) => (
                   <Select
-                    onChange={e => this.state.selectedTags(e)}
                     multiple
                     placeholder="Add some tags"
                     id="standard-name"
@@ -257,7 +252,7 @@ const mapStatetoProps = reduxState => {
 };
 // similar to Dispatch
 const mapDispatchToProps = dispatch => ({
-  updateBanana(item) {
+  updateNewItem(item) {
     dispatch(updateNewItem(item));
   }
 });
