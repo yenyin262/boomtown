@@ -43,7 +43,7 @@ class ShareItemForm extends Component {
       selectedTags: [],
       name: [],
       newItem: {
-        name: '',
+        title: '',
         item: '',
 
         // multiline: 'Controlled'
@@ -111,6 +111,11 @@ class ShareItemForm extends Component {
       reader.readAsBinaryString(this.state.fileSelected);
     });
   }
+  handlechangeTitle = event => {
+    this.setState({
+      newItem: { ...this.state.newItem, title: event.target.value }
+    });
+  };
   applyTags(tags) {
     return (
       tags &&
@@ -171,12 +176,13 @@ class ShareItemForm extends Component {
               }}
             />
             <Field
+              name="title"
               render={({ input, meta }) => (
                 <TextField
-                  value={this.state.newItem.name}
-                  onChange={this.handleChange('name')}
+                  inputProps={{ ...input }}
+                  onChange={event => this.handlechangeTitle(event)}
                   margin="normal"
-                  label="Name Your Item"
+                  placeholder="Name Your Item"
                   fullWidth
                 />
               )}
