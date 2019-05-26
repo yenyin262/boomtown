@@ -12,6 +12,7 @@ import styles from './styles';
 import CardItem from '../../components/CardItem/CardItem';
 import MenuOptions from '../../components/MenuOptions/MenuOptions';
 import ItemsContainer from './ItemsContainer';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
 const Items = ({ classes, dataItems }) => {
   const showAllItems = dataItems.map((value, index) => {
@@ -20,35 +21,7 @@ const Items = ({ classes, dataItems }) => {
 
   return (
     <div className={classes.ItemContainer}>
-      <AppBar position="static" className={classes.navContainer}>
-        <Toolbar>
-          <Link to="/items" className={classes.itemLink}>
-            <IconButton>
-              <img
-                margin-top="20px"
-                margin-left="20px"
-                width="40px"
-                src={bmtwnLogo}
-                alt="boomtown_logo"
-              />
-            </IconButton>
-          </Link>
-          <Link to="/share">
-            <Button
-              variant="extended"
-              className={classes.shareBtn}
-              // className={classes.margin}
-            >
-              <Icon className={classes.icon}>add_circle</Icon> Share Something
-            </Button>
-          </Link>
-
-          <MenuOptions />
-          {/* <IconButton>
-              <MoreVertIcon />
-            </IconButton> */}
-        </Toolbar>
-      </AppBar>
+      <NavigationBar />
 
       <div>{showAllItems}</div>
     </div>
