@@ -247,9 +247,8 @@ class ShareItemForm extends Component {
   }
 }
 // similar getState
-const mapStatetoProps = reduxState => {
-  return reduxState;
-};
+const mapStatetoProps = null;
+
 // similar to Dispatch
 const mapDispatchToProps = dispatch => ({
   updateNewItem(item) {
