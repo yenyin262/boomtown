@@ -1,2 +1,2 @@
-import NavigationBar from './NavigationBar.js/index.js';
+import NavigationBar from './NavigationBar';
 export default NavigationBar;
