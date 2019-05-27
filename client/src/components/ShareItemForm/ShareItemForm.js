@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
-import Input from '@material-ui/core/Input';
+// import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { updateNewItem } from '../../redux/ShareItemPreview/reducer';
@@ -41,8 +41,9 @@ class ShareItemForm extends Component {
     this.state = {
       fileSelected: null,
       selectedTags: [],
-      name: [],
       submitting: false,
+      title: '',
+      item: '',
       newItem: {
         title: '',
         item: ''
@@ -142,7 +143,7 @@ class ShareItemForm extends Component {
               }}
             />
             <div className={classes.bmtwnHeader}>
-              <h1>Share. Borrow. Prosper </h1>
+              <h1>Share. Borrow. Prosper. </h1>
             </div>
             <Field
               name="imageurl"
@@ -181,83 +182,83 @@ class ShareItemForm extends Component {
                 );
               }}
             />
-
-            <Field
-              name="title"
-              render={({ input, meta }) => (
-                <TextField
-                  inputProps={{ ...input }}
-                  // onChange={event => this.handlechangeTitle(event)}
-                  margin="normal"
-                  placeholder="Name Your Item"
-                  fullWidth
-                  className={classes.TextField}
+            <div className={classes.Container}>
+              <FormControl>
+                <Field
+                  name="title"
+                  render={({ input, meta }) => (
+                    <TextField
+                      inputProps={{ ...input }}
+                      // onChange={event => this.handlechangeTitle(event)}
+                      margin="normal"
+                      placeholder="Name Your Item"
+                      className={classes.NameTextField}
+                    />
+                  )}
                 />
-              )}
-            />
+              </FormControl>
 
-            <Field name="description">
-              {({ input, meta }) => (
-                <TextField
-                  style={{ margin: 3 }}
-                  placeholder="Describe Your Item"
-                  fullWidth
-                  multiline
-                  className={classes.TextField}
-                  value={this.state.item}
-                  inputProps={{ ...input }}
+              <FormControl>
+                <Field name="description">
+                  {({ input, meta }) => (
+                    <TextField
+                      className={classes.DescribeItemTextField}
+                      placeholder="Describe Your Item"
+                      multiline
+                      rows="4"
+                      value={this.state.item}
+                      inputProps={{ ...input }}
+                    />
+                  )}
+                </Field>
+              </FormControl>
+
+              <FormControl className={classes.SelectTags}>
+                <InputLabel>Add some tags</InputLabel>
+                <Field
+                  render={({ input, meta }) => (
+                    <Select
+                      multiple
+                      placeholder="Add some tags"
+                      value={this.state.selectedTags}
+                      onChange={this.handleChangeTag}
+                      renderValue={selected => selected.join(', ')}
+                      MenuProps={MenuProps}
+                      // input={<Input id="select-multiple-checkbox" />}
+                    >
+                      {addTags.map(selectedTags => (
+                        <MenuItem key={selectedTags} value={selectedTags}>
+                          <Checkbox
+                            checked={
+                              this.state.selectedTags.indexOf(selectedTags) > -1
+                            }
+                          />
+                          <ListItemText primary={selectedTags} />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
                 />
-              )}
-            </Field>
-
-            <FormControl>
-              <InputLabel htmlFor="select-multiple-chip">
-                Add some tags
-              </InputLabel>
-              <Field
-                render={({ input, meta }) => (
-                  <Select
-                    multiple
-                    placeholder="Add some tags"
-                    id="standard-name"
-                    fullWidth
-                    value={this.state.selectedTags}
-                    className={classes.TextField}
-                    onChange={this.handleChangeTag}
-                    renderValue={selected => selected.join(', ')}
-                    MenuProps={MenuProps}
-                    input={<Input id="select-multiple-checkbox" />}
-                  >
-                    {addTags.map(selectedTags => (
-                      <MenuItem key={selectedTags} value={selectedTags}>
-                        <Checkbox
-                          checked={
-                            this.state.selectedTags.indexOf(selectedTags) > -1
-                          }
-                        />
-                        <ListItemText primary={selectedTags} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-            </FormControl>
-            <Field
-              render={({ input, meta }) => (
-                <Button
-                  variant="outlined"
-                  className={classes.button}
-                  disabled={submitting}
-                >
-                  <Typography
-                    component="h3"
-                    className={classes.descriptionName}
-                  >
-                    SHARE
-                  </Typography>
-                </Button>
-              )}
-            />
+              </FormControl>
+              <FormControl>
+                <Field
+                  render={({ input, meta }) => (
+                    <Button
+                      variant="outlined"
+                      className={classes.button}
+                      disabled={submitting}
+                    >
+                      <Typography
+                        component="h3"
+                        className={classes.descriptionName}
+                      >
+                        SHARE
+                      </Typography>
+                    </Button>
+                  )}
+                />
+              </FormControl>
+            </div>
           </form>
         )}
       />
