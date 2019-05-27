@@ -9,13 +9,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import moment from 'moment';
-// import AvatarImg from '../../images/avatar.png';
+
 import { Link } from 'react-router-dom';
 import styles from './styles';
 import Gravatar from 'react-gravatar';
-
-// import CardHeader from '@material-ui/core/CardHeader';
-// import UserProfile from '../UserProfile/UserProfile';
 
 class CardItem extends Component {
   // constructor(props) {
