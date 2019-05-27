@@ -1,12 +1,17 @@
 const styles = theme => ({
-  container: {
+  Container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexDirection: 'column',
+    width: '418px'
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 500
+  NameTextField: {
+    marginTop: '45px'
+  },
+  DescribeItemTextField: {
+    mariginTop: '19px'
+  },
+  SelectTextField: {
+    marginTop: '100px'
   },
   dense: {
     marginTop: 19
@@ -20,7 +25,7 @@ const styles = theme => ({
   selectImgBtn: {
     margin: '0',
     backgroundColor: '#f9a825',
-    width: '100%',
+    width: '29%',
     '&:hover': {
       backgroundColor: '#f9a825'
     }
@@ -31,7 +36,7 @@ const styles = theme => ({
     color: '#000',
     fontWeight: '700',
     marginBottom: '80px',
-    width: '69%'
+    width: '23%'
   },
   descriptionName: {
     fontSize: '16px',
@@ -40,7 +45,7 @@ const styles = theme => ({
   button: {
     fontSize: '16px',
     padding: '8px 24px',
-    width: '30%',
+    width: '200px',
     marginTop: '30px'
   }
 });
