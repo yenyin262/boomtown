@@ -1,6 +1,7 @@
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
 // import ShareItemPreview from '../../components/ShareItemPreview';
+import NavigationBar from '../../components/NavigationBar';
 
 /* 
   TODO: Create ShareItemFrom and ShareItemPreview in the components dir
@@ -17,6 +18,7 @@ import ShareItemForm from '../../components/ShareItemForm';
 const Share = ({ classes }) => {
   return (
     <div>
+      <NavigationBar />
       {/* This is the share page located at <code>/share</code>. */}
       {/* <ShareItemPreview /> */}
       <ShareItemForm />
