@@ -7,25 +7,30 @@ import Gravatar from 'react-gravatar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
+// import { renderToStringWithData } from 'react-apollo';
 
-function UserProfile({ user, classes, items }) {
+function UserProfile({ classes, item }) {
   return (
     <Card className={classes.card}>
       <CardContent>
         <div className={classes.userProfileContainer}>
-          <Gravatar email="user.email" className={classes.userPic} />
+          <Gravatar
+            className={classes.avatarPic}
+            // email={item.itemowner.email}
+          />
           <Typography
             className={classes.title}
             component="h1"
             variant="display3"
             gutterBottom
           >
-            {/* {user.email} || {user.fullname} */}yenyin262
+            yenyin262
+            {/* {item.itemowner.fullname} */}
           </Typography>
         </div>
         <Typography variant="h3" component="h2">
-          {/* {items.itemowner.length} Items Shared
-          {items.borrower.length}Items Borrowed */}
+          {/* {item.itemowner.length} Items Shared
+          {item.borrower.length}Items Borrowed */}
         </Typography>
         <Typography component="p">
           {/* {user.bio ? 'No bio provided' : user.bio} */}
@@ -34,6 +39,5 @@ function UserProfile({ user, classes, items }) {
     </Card>
   );
 }
-
 // export default UserProfile;
 export default withStyles(styles)(UserProfile);
