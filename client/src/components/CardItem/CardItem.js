@@ -10,7 +10,6 @@ import Typography from '@material-ui/core/Typography';
 
 import moment from 'moment';
 // import AvatarImg from '../../images/avatar.png';
-import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import styles from './styles';
 import Gravatar from 'react-gravatar';
@@ -19,67 +18,66 @@ import Gravatar from 'react-gravatar';
 // import UserProfile from '../UserProfile/UserProfile';
 
 class CardItem extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     const { classes } = this.props;
     const { item } = this.props;
-
+    console.log('This is the second one', item);
     return (
-      <Grid container spacing={24} item xs={12}>
-        <Grid item xs={12} key={item.id}>
-          <Card className={classes.card} key={item.id}>
-            <CardMedia className={classes.media} image={item.imageurl} />
-            <div>
-              <Link to="/profile">
-                <div className={classes.containerProfile}>
-                  <Gravatar className={classes.avatarPic} email="user.email" />
-                  <Typography
-                    component="p"
-                    color="textSecondary"
-                    gutterBottom
-                    className={classes.itemCreated}
-                  >
-                    {moment(item.created)
-                      .startOf('day')
-                      .fromNow()}
-                  </Typography>
-                </div>
-              </Link>
-            </div>
-            {/* <CardHeader title= /> */}
-            <CardContent>
-              <Typography
-                component="h2"
-                variant="h2"
-                gutterBottom
-                className={classes.titleName}
-              >
-                {item.title}
-              </Typography>
+      <Link className={classes.card} to="/profile">
+        <Card>
+          <CardMedia className={classes.media} image={item.imageurl} />
+          <div>
+            <div className={classes.containerProfile}>
+              <Gravatar
+                className={classes.avatarPic}
+                email={item.itemowner.email}
+              />
+              <Typography component="p">{item.itemowner.fullname}</Typography>
               <Typography
                 component="p"
                 color="textSecondary"
                 gutterBottom
-                className={classes.tagName}
+                className={classes.itemCreated}
               >
-                {item.tags[0].title}
+                {moment(item.created)
+                  .startOf('day')
+                  .fromNow()}
               </Typography>
+            </div>
+          </div>
+          {/* <CardHeader title= /> */}
+          <CardContent>
+            <Typography
+              component="h2"
+              gutterBottom
+              className={classes.titleName}
+            >
+              {item.title}
+            </Typography>
+            <Typography
+              component="p"
+              color="textSecondary"
+              gutterBottom
+              className={classes.tagName}
+            >
+              {item.tags[0].title}
+            </Typography>
+            <Typography component="h3" className={classes.descriptionName}>
+              {item.description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button variant="outlined" className={classes.button}>
               <Typography component="h3" className={classes.descriptionName}>
-                {item.description}
+                Borrow
               </Typography>
-            </CardContent>
-            <CardActions>
-              <Button variant="outlined" className={classes.button}>
-                <Typography component="h3" className={classes.descriptionName}>
-                  Borrow
-                </Typography>
-              </Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      </Grid>
+            </Button>
+          </CardActions>
+        </Card>
+      </Link>
     );
   }
 }
