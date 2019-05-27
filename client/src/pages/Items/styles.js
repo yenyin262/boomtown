@@ -1,10 +1,10 @@
 const styles = theme => ({
   ItemContainer: {
-    // display: 'grid',
+    display: 'grid',
     // gridTemplateColumns: '1fr 1fr 1fr',
-    // gridGap: '30px'
+    // gridGap: '30px',
     // width: '95%',
-    // margin: '20px auto'
+    // margin: '20px auto',
     backgroundColor: 'black'
   },
   button: {
