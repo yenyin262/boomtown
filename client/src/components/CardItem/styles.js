@@ -13,7 +13,6 @@ const styles = {
     width: '52%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    // marginLeft: '5px',
     marginTop: '10px'
   },
   titleName: {
@@ -40,10 +39,6 @@ const styles = {
     // marginLeft: '40px',
     // marginTop: '20px'
   }
-
-  // itemCreated: {
-  //   alignSelf: 'center'
-  // }
 };
 
 export default styles;
