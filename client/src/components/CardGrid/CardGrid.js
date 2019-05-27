@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import CardItem from '../CardItem';
+import styles from './styles';
 
-class GuttersGrid extends React.Component {
+class CardGrid extends Component {
   state = {
     spacing: '16'
   };
@@ -15,39 +17,23 @@ class GuttersGrid extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { spacing } = this.state;
-
+    const { items } = this.props;
+    // const { spacing } = this.state;
+    console.log('This is the first one', items);
     return (
-      <Grid container className={classes.root} spacing={16}>
+      <Grid container alignContent="center" spacing={16}>
         <Grid item xs={12}>
-          <Grid
-            container
-            className={classes.demo}
-            justify="center"
-            spacing={Number(spacing)}
-          >
-            {[0, 1, 2].map(value => (
-              <Grid key={value} item>
-                <Paper className={classes.paper} />
-              </Grid>
-            ))}
+          <Grid container>
+            {items.map(item => <CardItem item={item} key={item.index} />)}
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.control}>
-            <Grid container>
-              <Grid item>{/* <LoadingGif styles={}/> */}</Grid>
-            </Grid>
-          </Paper>
         </Grid>
       </Grid>
     );
   }
 }
 
-GuttersGrid.propTypes = {
+CardGrid.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(GuttersGrid);
+export default withStyles(styles)(CardGrid);
