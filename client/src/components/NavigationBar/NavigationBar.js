@@ -10,13 +10,13 @@ import Icon from '@material-ui/core/Icon';
 import { Link } from 'react-router-dom';
 import bmtwnLogo from '../../images/boomtown.svg';
 import styles from './styles';
-import CardItem from '../CardItem/CardItem';
+// import CardItem from '../CardItem/CardItem';
 import MenuOptions from '../MenuOptions/MenuOptions';
 
 class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     const { classes } = this.props;
     return (
@@ -34,19 +34,12 @@ class NavigationBar extends Component {
             </IconButton>
           </Link>
           <Link to="/share">
-            <Button
-              variant="extended"
-              className={classes.shareBtn}
-              // className={classes.margin}
-            >
+            <Button className={classes.shareBtn}>
               <Icon className={classes.icon}>add_circle</Icon> Share Something
             </Button>
           </Link>
 
           <MenuOptions />
-          {/* <IconButton>
-      <MoreVertIcon />
-    </IconButton> */}
         </Toolbar>
       </AppBar>
     );
