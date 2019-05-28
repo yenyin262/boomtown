@@ -19,6 +19,18 @@ class NavigationBar extends Component {
   // }
   render() {
     const { classes } = this.props;
+    let shareLink;
+    if (this.props.pageType != null) {
+      shareLink = (
+        <Link to="/share">
+          <Button className={classes.shareBtn}>
+            <Icon className={classes.icon}>add_circle</Icon> Share Something
+          </Button>
+        </Link>
+      );
+    } else {
+      shareLink = <div />;
+    }
     return (
       <AppBar position="static" className={classes.navContainer}>
         <Toolbar>
@@ -32,14 +44,11 @@ class NavigationBar extends Component {
                 alt="boomtown_logo"
               />
             </IconButton>
-          </Link>
-          <Link to="/share">
-            <Button className={classes.shareBtn}>
-              <Icon className={classes.icon}>add_circle</Icon> Share Something
-            </Button>
-          </Link>
-
-          <MenuOptions />
+          </Link>{' '}
+          <div className={classes.childContainer}>
+            {shareLink}
+            <MenuOptions />
+          </div>
         </Toolbar>
       </AppBar>
     );
