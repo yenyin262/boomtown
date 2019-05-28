@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express'); 
+const { gql } = require('apollo-server-express');
 
 /**
  *  @TODO: Boomtown Schema
@@ -11,10 +11,8 @@ const { gql } = require('apollo-server-express');
  * We will create the custom Date scalar together.
  */
 
-
-  
 module.exports = gql`
- scalar Date
+  scalar Date
 
   type Item {
     id: ID!
@@ -61,7 +59,18 @@ module.exports = gql`
   input NewItemInput {
     title: String!
     description: String
-    tags:[AssignedTag]!
+    tags: [AssignedTag]!
+  }
+
+  input SignupInput {
+    fullname: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
   }
 
   type Query {
@@ -72,6 +81,9 @@ module.exports = gql`
   }
 
   type Mutation {
+    signup(user: SignupInput!): User!
     addItem(item: NewItemInput!): Item
+    login(user: LoginInput): User!
+    logout: Boolean!
   }
 `;
