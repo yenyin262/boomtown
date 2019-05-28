@@ -18,7 +18,7 @@ import NavigationBar from '../../components/NavigationBar';
 const Share = ({ classes }) => {
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar pageType={null} />
       {/* This is the share page located at <code>/share</code>. */}
       {/* <ShareItemPreview /> */}
       <ShareItemForm />
