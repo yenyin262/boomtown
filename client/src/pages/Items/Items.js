@@ -5,9 +5,10 @@ import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import CardGrid from '../../components/CardGrid';
 
 const Items = ({ classes, items }) => {
+  console.log('card_grid_stuff', items);
   return (
     <div className={classes.ItemContainer}>
-      <NavigationBar />
+      <NavigationBar pageType={true} />
       <CardGrid items={items} />
       {/* <div>{showAllItems}</div> */}
     </div>
