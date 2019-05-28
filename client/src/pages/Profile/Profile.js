@@ -7,7 +7,7 @@ import NavigationBar from '../../components/NavigationBar';
 const Profile = ({ classes }) => {
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar pageType={true} />
       <div className={classes.profileContainer}>
         {/* <p>
         This is the profile page located at <code>/profile/:userId</code>.
