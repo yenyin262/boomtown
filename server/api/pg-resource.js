@@ -25,13 +25,15 @@ module.exports = postgres => {
       const newUserInsert = {
         text:
           'INSERT INTO users (fullname, email, password) VALUES ($1, $2, $3) RETURNING *',
-        // @TODO: Authentication - Server
+
         values: [fullname, email, password]
       };
+      console.log('test!!!');
       try {
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
       } catch (e) {
+        console.log(e.message);
         switch (true) {
           case /users_fullname_key/.test(e.message):
             throw 'An account with this username already exists.';
@@ -44,7 +46,7 @@ module.exports = postgres => {
     },
     async getUserAndPasswordForVerification(email) {
       const findUserQuery = {
-        text: 'SELECT * FROM users WHERE email = $1', // @TODO: Authentication - Server
+        text: 'SELECT * FROM users WHERE email = $1',
         values: [email]
       };
       try {
