@@ -116,6 +116,7 @@ class ShareItemForm extends Component {
 
   handleChangeTag = event => {
     this.setState({ selectedTags: event.target.value });
+    console.log(event.target.value);
   };
 
   resetFileInput() {
@@ -123,10 +124,8 @@ class ShareItemForm extends Component {
     this.props.resetNewItemImage();
     this.setState({ fileSelected: false });
   }
-
   render() {
-    const { submitting, classes, tags } = this.props;
-    console.log(tags);
+    const { submitting, classes } = this.props;
 
     return (
       <Form
@@ -137,7 +136,7 @@ class ShareItemForm extends Component {
               subscription={{ values: true }}
               component={({ values }) => {
                 if (Object.keys(values).length > 0) {
-                  this.dispatchUpdate(values, tags);
+                  this.dispatchUpdate(values, this.state.selectedTags);
                 }
                 return '';
               }}
@@ -157,27 +156,29 @@ class ShareItemForm extends Component {
                       accept="image/*"
                       onChange={e => this.handleSelectedFile(e)}
                     />
-                    <Button
-                      variant="contained"
-                      component="span"
-                      className={classes.selectImgBtn}
-                      onClick={() => {
-                        this.fileInput.current.click();
-                      }}
-                    >
-                      SELECT AN IMAGE
-                    </Button>
-
-                    {/* <Button
-                      variant="contained"
-                      component="span"
-                      className={classes.selectImgBtn}
-                      onClick={() => {
-                        this.resetFileInput();
-                      }}
-                    >
-                      RESET IMAGE
-                    </Button> */}
+                    {submitting ? (
+                      <Button
+                        variant="contained"
+                        component="span"
+                        className={classes.selectImgBtn}
+                        onClick={() => {
+                          this.resetFileInput();
+                        }}
+                      >
+                        RESET IMAGE
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        component="span"
+                        className={classes.selectImgBtn}
+                        onClick={() => {
+                          this.fileInput.current.click();
+                        }}
+                      >
+                        SELECT AN IMAGE
+                      </Button>
+                    )}
                   </div>
                 );
               }}
