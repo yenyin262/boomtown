@@ -19,6 +19,7 @@ class CardItem extends Component {
   render() {
     const { classes } = this.props;
     const { item } = this.props;
+    console.log('This is the props', this.props);
     console.log('This is the second one', item);
     return (
       <Link className={classes.card} to="/profile">
@@ -30,17 +31,19 @@ class CardItem extends Component {
                 className={classes.avatarPic}
                 email={item.itemowner.email}
               />
-              <Typography component="p">{item.itemowner.fullname}</Typography>
-              <Typography
-                component="p"
-                color="textSecondary"
-                gutterBottom
-                className={classes.itemCreated}
-              >
-                {moment(item.created)
-                  .startOf('day')
-                  .fromNow()}
-              </Typography>
+              <div>
+                <Typography component="p">{item.itemowner.fullname}</Typography>
+                <Typography
+                  component="p"
+                  color="textSecondary"
+                  gutterBottom
+                  className={classes.itemCreated}
+                >
+                  {moment(item.created)
+                    .startOf('day')
+                    .fromNow()}
+                </Typography>
+              </div>
             </div>
           </div>
           {/* <CardHeader title= /> */}
