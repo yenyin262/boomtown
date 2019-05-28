@@ -26,8 +26,13 @@ const styles = theme => ({
     display: 'flex'
   },
 
-  itemLink: {
-    flexBasis: '83%'
+  // itemLink: {
+  //   flexBasis: '83%'
+  // },
+  childContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 });
 
