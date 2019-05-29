@@ -10,14 +10,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
 
-  avatar: {
-    margin: 10
-  },
-  bigAvatar: {
-    width: 60,
-    height: 60
-  },
-
   shareBtn: {
     borderRadius: '32px',
     padding: 0
@@ -26,13 +18,10 @@ const styles = theme => ({
     display: 'flex'
   },
 
-  // itemLink: {
-  //   flexBasis: '83%'
-  // },
   childContainer: {
+    justifyContent: 'flex-end',
     flex: 1,
-    display: 'flex',
-    justifyContent: 'flex-end'
+    display: 'flex'
   }
 });
 
