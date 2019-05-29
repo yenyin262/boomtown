@@ -13,9 +13,6 @@ import styles from './styles';
 import Gravatar from 'react-gravatar';
 
 class CardItem extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   render() {
     const { classes } = this.props;
     const { item } = this.props;
@@ -24,7 +21,14 @@ class CardItem extends Component {
     return (
       <Link className={classes.card} to="/profile">
         <Card>
-          <CardMedia className={classes.media} image={item.imageurl} />
+          <CardMedia
+            className={classes.media}
+            image={
+              item.imageurl
+                ? item.imageurl
+                : 'http://via.placeholder.com/350x250?text=Please+select+an+image'
+            }
+          />
           <div>
             <div className={classes.containerProfile}>
               <Gravatar
@@ -46,7 +50,7 @@ class CardItem extends Component {
               </div>
             </div>
           </div>
-          {/* <CardHeader title= /> */}
+
           <CardContent>
             <Typography
               component="h2"
