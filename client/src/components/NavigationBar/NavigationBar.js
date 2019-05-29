@@ -34,7 +34,7 @@ class NavigationBar extends Component {
     return (
       <AppBar position="static" className={classes.navContainer}>
         <Toolbar>
-          <Link to="/items" className={classes.itemLink}>
+          <Link to="/items">
             <IconButton>
               <img
                 margin-top="20px"
