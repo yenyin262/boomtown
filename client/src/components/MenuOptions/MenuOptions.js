@@ -8,15 +8,6 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-// {
-/* <Icon class="material-icons" id="fingerprintIcon">
-fingerprint
-</Icon>
-<Icon class="material-icons" id="signOutIcon">
-power_settings_new
-</Icon> */
-// }
-
 // this is the menu button
 const profilePage = ['Your Profile'];
 const signOutPage = ['Sign Out'];
