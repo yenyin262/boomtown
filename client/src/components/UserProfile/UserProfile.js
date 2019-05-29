@@ -18,17 +18,12 @@ function UserProfile({ classes, item }) {
             className={classes.avatarPic}
             // email={item.itemowner.email}
           />
-          <Typography
-            className={classes.title}
-            component="h1"
-            variant="display3"
-            gutterBottom
-          >
+          <Typography className={classes.title} component="h1" gutterBottom>
             yenyin262
             {/* {item.itemowner.fullname} */}
           </Typography>
         </div>
-        <Typography variant="h3" component="h2">
+        <Typography component="h2">
           {/* {item.itemowner.length} Items Shared
           {item.borrower.length}Items Borrowed */}
         </Typography>
