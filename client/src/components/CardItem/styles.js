@@ -36,8 +36,6 @@ const styles = {
     width: '50px',
     height: '50px',
     borderRadius: 29
-    // marginLeft: '40px',
-    // marginTop: '20px'
   }
 };
 
