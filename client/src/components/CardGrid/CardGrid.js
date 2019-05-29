@@ -16,15 +16,25 @@ class CardGrid extends Component {
     });
   };
 
+  // handleChange = event => {
+  //   const { value, name } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
+
   render() {
     const { items } = this.props;
-    // const { spacing } = this.state;
+
     console.log('This is the first one', items);
     return (
       <Grid container alignContent="center" spacing={16}>
         <Grid item xs={12}>
           <Grid container>
-            {items.map(item => <CardItem item={item} key={item.index} />)}
+            {items.map(item => <CardItem item={item} key={item.id} />)}
+            {/* {items.map(item => (
+              <CardItem item={item} key={item.index * Math.random()} />
+            ))} */}
           </Grid>
         </Grid>
       </Grid>
