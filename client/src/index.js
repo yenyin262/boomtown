@@ -5,7 +5,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider as ReduxProvider } from 'react-redux';
-// -------------------------------
 
 import registerServiceWorker from './registerServiceWorker';
 import theme from './theme';
@@ -25,11 +24,12 @@ import Layout from './routes/Layout';
  */
 
 import store from './redux';
+import { ViewerProvider } from './context/ViewerProvider';
 
 /**
  * @TODO: Add the Viewer Context
  *
- * import { ViewerProvider } from './context/ViewerProvider'
+ *
  *
  * Below in your <App />, wrap the <ViewerProvider /> component around
  * the <BrowserRouter /> component so the router is aware of whether a
@@ -48,9 +48,11 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <ApolloProvider client={client}>
           <CssBaseline />
-          <BrowserRouter>
-            <Layout />
-          </BrowserRouter>
+          <ViewerProvider>
+            <BrowserRouter>
+              <Layout />
+            </BrowserRouter>
+          </ViewerProvider>
         </ApolloProvider>
       </MuiThemeProvider>
     </ReduxProvider>
