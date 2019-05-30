@@ -27,8 +27,7 @@ class AuthDirective extends SchemaDirectiveVisitor {
         if (
           !context.token &&
           context.req.body.operationName !== 'login' &&
-          context.req.body.operationName !== 'signup' &&
-          false
+          context.req.body.operationName !== 'signup'
         ) {
           throw new ForbiddenError('Forbidden: No Access');
         }
