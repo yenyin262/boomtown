@@ -8,6 +8,10 @@ const styles = {
     height: 300
   },
 
+  mainCard: {
+    height: '560px'
+  },
+
   containerProfile: {
     display: 'flex',
     width: '52%',
@@ -16,7 +20,7 @@ const styles = {
     marginTop: '10px'
   },
   titleName: {
-    fontSize: '30px',
+    fontSize: '24px',
     fontWeight: '400'
   },
   tagName: {
