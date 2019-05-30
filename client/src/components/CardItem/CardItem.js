@@ -20,7 +20,7 @@ class CardItem extends Component {
     console.log('This is the second one', item);
     return (
       <Link className={classes.card} to="/profile">
-        <Card>
+        <Card className={classes.mainCard}>
           <CardMedia
             className={classes.media}
             image={
