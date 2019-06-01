@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import NavigationBar from '../../components/NavigationBar';
 
-const Profile = ({ classes }) => {
+const Profile = ({ classes, user }) => {
   return (
     <div>
       <NavigationBar pageType={true} />
@@ -13,7 +13,7 @@ const Profile = ({ classes }) => {
         This is the profile page located at <code>/profile/:userId</code>.
       </p> */}
 
-        <UserProfile />
+        <UserProfile user={user} />
       </div>
     </div>
   );
