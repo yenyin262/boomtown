@@ -1,11 +1,15 @@
 export default function validate(values) {
   const errors = {};
 
-  /**
-   * @TODO: Write the validation rules for the share form.
-   *
-   * An item title, description, and at least one tag is required for all items.
-   */
+  if (!values.email) {
+    errors.imageurl = 'Required';
+  }
+  if (!values.password) {
+    errors.title = 'Required';
+  }
+  if (values.fullname && !values.fullname) {
+    errors.description = 'Required';
+  }
 
   return errors;
 }
