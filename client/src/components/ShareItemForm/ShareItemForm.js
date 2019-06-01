@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
-// import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import { updateNewItem } from '../../redux/ShareItemPreview/reducer';
@@ -53,8 +52,9 @@ class ShareItemForm extends Component {
 
   componentDidMount() {
     let randomItem = {
-      title: 'banana',
-      description: 'babe'
+      title: 'Name Your Item',
+      description: 'Describe Your Item',
+      tags: ''
     };
     this.props.updateNewItem(randomItem);
   }
@@ -69,6 +69,7 @@ class ShareItemForm extends Component {
   }
 
   dispatchUpdate(values, tags) {
+    console.log('boo', tags);
     const { updateNewItem } = this.props;
     if (!values.imageurl && this.state.fileSelected) {
       this.getBase64Url().then(imageurl => {
@@ -96,6 +97,7 @@ class ShareItemForm extends Component {
       reader.readAsBinaryString(this.state.fileSelected);
     });
   }
+
   // handlechangeTitle = event => {
   //   this.setState({
   //     newItem: { ...this.state.newItem, title: event.target.value }
@@ -103,6 +105,7 @@ class ShareItemForm extends Component {
   // };
 
   applyTags(tags) {
+    console.log('st', tags);
     return (
       tags &&
       tags
@@ -127,6 +130,7 @@ class ShareItemForm extends Component {
   render() {
     const { submitting, classes } = this.props;
 
+    console.log('dfdfd', this.props);
     return (
       <Form
         onSubmit={() => console.log('Share form was submitted')}
@@ -141,6 +145,7 @@ class ShareItemForm extends Component {
                 return '';
               }}
             />
+
             <div className={classes.bmtwnHeader}>
               <h1>Share. Borrow. Prosper. </h1>
             </div>
@@ -190,7 +195,6 @@ class ShareItemForm extends Component {
                   render={({ input, meta }) => (
                     <TextField
                       inputProps={{ ...input }}
-                      // onChange={event => this.handlechangeTitle(event)}
                       margin="normal"
                       placeholder="Name Your Item"
                       className={classes.NameTextField}
@@ -198,7 +202,6 @@ class ShareItemForm extends Component {
                   )}
                 />
               </FormControl>
-
               <FormControl>
                 <Field name="description">
                   {({ input, meta }) => (
@@ -213,10 +216,10 @@ class ShareItemForm extends Component {
                   )}
                 </Field>
               </FormControl>
-
               <FormControl className={classes.SelectTags}>
                 <InputLabel>Add some tags</InputLabel>
                 <Field
+                  name="tags"
                   render={({ input, meta }) => (
                     <Select
                       multiple
@@ -234,6 +237,7 @@ class ShareItemForm extends Component {
                               this.state.selectedTags.indexOf(selectedTags) > -1
                             }
                           />
+
                           <ListItemText primary={selectedTags} />
                         </MenuItem>
                       ))}
@@ -241,6 +245,7 @@ class ShareItemForm extends Component {
                   )}
                 />
               </FormControl>
+
               <FormControl>
                 <Field
                   render={({ input, meta }) => (
