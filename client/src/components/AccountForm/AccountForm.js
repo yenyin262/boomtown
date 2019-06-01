@@ -35,10 +35,22 @@ class AccountForm extends Component {
           if (this.state.formToggle) {
             loginMutation(user).catch(error => this.setState({ error }));
           } else {
-            signupMutation(user).catch(error => this.setState({ error }));
+            signupMutation(user).catch(error => this.setState({ error })); // NEED TO PRINT MSG
           }
         }}
-        render={({ handleSubmit, pristine, invalid }) => (
+        validate={values => {
+          return validate(values);
+        }}
+        render={({
+          handleSubmit,
+          pristine,
+          invalid,
+          form,
+          hasSubmitErrors,
+          submitError,
+          submitting
+          // values
+        }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>
@@ -108,9 +120,7 @@ class AccountForm extends Component {
                   variant="contained"
                   size="large"
                   color="secondary"
-                  disabled={
-                    false // @TODO: This prop should depend on pristine or valid state of form
-                  }
+                  disabled={submitting || pristine || invalid}
                 >
                   {this.state.formToggle ? 'Enter' : 'Create Account'}
                 </Button>
@@ -119,7 +129,8 @@ class AccountForm extends Component {
                     className={classes.formToggle}
                     type="button"
                     onClick={() => {
-                      // @TODO: Reset the form on submit
+                      form.reset();
+
                       this.setState({
                         formToggle: !this.state.formToggle
                       });
@@ -129,13 +140,14 @@ class AccountForm extends Component {
                       ? 'Create an account.'
                       : 'Login to existing account.'}
                   </button>
-                  {/* //true login //false sign out */}
                 </Typography>
               </Grid>
             </FormControl>
-            <Typography className={classes.errorMessage}>
-              {/* @TODO: Display sign-up and login errors */}
-            </Typography>
+            {hasSubmitErrors && (
+              <Typography className={classes.errorMessage}>
+                {submitError}
+              </Typography>
+            )}
           </form>
         )}
       />
@@ -143,13 +155,21 @@ class AccountForm extends Component {
   }
 }
 
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+
 export default compose(
   graphql(SIGNUP_MUTATION, {
+    options: { refetchQueries },
     name: 'signupMutation'
   }),
   graphql(LOGIN_MUTATION, {
+    options: { refetchQueries },
     name: 'loginMutation'
   }),
+
   withStyles(styles)
 )(AccountForm);
