@@ -9,7 +9,8 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 // import { renderToStringWithData } from 'react-apollo';
 
-function UserProfile({ classes, item }) {
+function UserProfile({ classes, item, user }) {
+  console.log('dfdf', user);
   return (
     <Card className={classes.card}>
       <CardContent>
