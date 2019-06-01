@@ -22,8 +22,8 @@ export const updateNewItem = item => {
 
 export const resetItem = () => {
   return {
-    type: RESET_ITEM,
-    payload: {}
+    type: RESET_ITEM
+    // payload: {}
   };
 };
 
@@ -34,7 +34,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, ...newItem };
     }
     case RESET_ITEM: {
-      return INITIAL_STATE;
+      return { ...INITIAL_STATE };
     }
 
     default:
