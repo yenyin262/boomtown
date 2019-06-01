@@ -7,6 +7,9 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
+import { Mutation } from 'react-apollo';
+import { LOGOUT_MUTATION } from '../../apollo/queries';
+import client from '../../apollo';
 
 // this is the menu button
 const profilePage = ['Your Profile'];
@@ -59,14 +62,17 @@ class MenuOptions extends Component {
               </MenuItem>
             ))}
           </Link>
-          <Link to="/welcome">
-            {signOutPage.map(option => (
-              <MenuItem key={option} onClick={this.handleClose}>
+          <Mutation
+            mutation={LOGOUT_MUTATION}
+            onCompleted={() => client.resetStore()}
+          >
+            {(logoutMutation, { data }) => (
+              <MenuItem onClick={logoutMutation}>
                 <Icon className={classes.menuIcon}>power_settings_new </Icon>{' '}
-                {option}
+                Sign Out
               </MenuItem>
-            ))}
-          </Link>
+            )}
+          </Mutation>
         </Menu>
       </div>
     );
