@@ -28,7 +28,6 @@ module.exports = postgres => {
 
         values: [fullname, email, password]
       };
-      console.log('test!!!');
       try {
         const user = await postgres.query(newUserInsert);
         return user.rows[0];
@@ -147,6 +146,12 @@ module.exports = postgres => {
               const { title, description, tags } = item;
 
               client.query('SELECT * From items RETURNING *');
+              const newItemQuery = {
+                text:
+                  'INSERT INTO items (title, imageurl, description, itemowner ) VALUES ($1, $2, $3, $4) RETURNING *',
+                values: [title, description, user.id]
+              };
+
               // Generate new Item query
               // @TODO
               // -------------------------------
@@ -154,6 +159,12 @@ module.exports = postgres => {
               // Insert new Item
               // @TODO
               // -------------------------------
+
+              const insertNewItem = {
+                text:
+                  'INSERT INTO items (title, imageurl, description, itemowner ) VALUES ($1, $2, $3, $4) RETURNING *',
+                values: [title, description, user.id]
+              };
 
               // Generate tag relationships query (use the'tagsQueryString' helper function provided)
               // @TODO
