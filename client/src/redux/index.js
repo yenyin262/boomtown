@@ -14,4 +14,3 @@ const store = createStore(
 );
 
 export default store;
-// (/* @TODO: Combine your reducers */),
