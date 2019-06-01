@@ -9,8 +9,9 @@ module.exports = app => {
 
     Query: {
       viewer(parent, args, context, info) {
-        console.log('Context', context);
         if (context.token) {
+          console.log('Token:');
+          console.log(jwt.decode(context.token, app.get('JWT_SECRET')));
           return jwt.decode(context.token, app.get('JWT_SECRET'));
         } else {
           return null;
