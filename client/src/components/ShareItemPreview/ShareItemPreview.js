@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 
 const ShareItemPreview = ({ shareItemPreview }) => {
   console.log(shareItemPreview);
-  return <p>hi</p>;
-  //return <CardItem item={shareItemPreview} />;
+  return <CardItem item={shareItemPreview} />;
 };
-const mapStatetoProps = ({ shareItemPreview }) => {
-  return shareItemPreview;
+// const mapStatetoProps = ({ shareItemPreview }) => {
+//   return shareItemPreview;
+// };
+const mapStatetoProps = state => {
+  return { ...state };
 };
-
 export default connect(mapStatetoProps)(ShareItemPreview);
