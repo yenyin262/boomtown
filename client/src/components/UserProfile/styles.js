@@ -11,7 +11,7 @@ const styles = {
     paddingTop: '40px',
     paddingLeft: '20px'
   },
-  userPic: {
+  avatarPic: {
     width: '55px',
     height: '55px',
     borderRadius: 29,
@@ -23,6 +23,11 @@ const styles = {
     justify: 'center',
     alignItems: 'center'
   }
+  // avatarPic: {
+  //   width: '50px',
+  //   height: '50px',
+  //   borderRadius: 29
+  // }
 };
 
 export default styles;
