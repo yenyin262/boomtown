@@ -1,5 +1,5 @@
-const { ApolloServer } = require('apollo-server-express'); // connect to server
-const { makeExecutableSchema } = require('graphql-tools'); // A set of utilities to build your JavaScript GraphQL schema,  // to write the schema and resolver code
+const { ApolloServer } = require('apollo-server-express');
+const { makeExecutableSchema } = require('graphql-tools');
 
 const typeDefs = require('../api/schema');
 let resolvers = require('../api/resolvers');
@@ -16,19 +16,17 @@ module.exports = ({ app, pgResource }) => {
   });
 
   const apolloServer = new ApolloServer({
-    // create function - using req // context is property of apolloserver
     context: ({ req }) => {
-      // request object through express & has metadata from the client to the server // ie bunch of cookies
       const tokenName = app.get('JWT_COOKIE_NAME');
       const token = req ? req.cookies[tokenName] : undefined;
 
       return {
         req,
         token,
-        pgResource // returning in apolo context server
+        pgResource
       };
     },
-    schema // use schema
+    schema
   });
 
   apolloServer.applyMiddleware({
