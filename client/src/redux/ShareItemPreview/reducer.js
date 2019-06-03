@@ -4,7 +4,7 @@ const UPDATE_ITEM = 'UPDATE_ITEM';
 const RESET_ITEM = 'RESET_ITEM';
 
 const INITIAL_STATE = {
-  imageUrl: '',
+  imageUrl: 'http://via.placeholder.com/350x250?text=Please+select+an+image',
   name: '',
   description: '',
   tags: [],
