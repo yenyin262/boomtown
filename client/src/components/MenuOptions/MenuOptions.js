@@ -10,6 +10,7 @@ import styles from './styles';
 import { Mutation } from 'react-apollo';
 import { LOGOUT_MUTATION } from '../../apollo/queries';
 import client from '../../apollo';
+import PropTypes from 'prop-types';
 
 const ITEM_HEIGHT = 48;
 
@@ -73,4 +74,8 @@ class MenuOptions extends Component {
     );
   }
 }
+
+MenuOptions.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 export default withStyles(styles)(MenuOptions);
