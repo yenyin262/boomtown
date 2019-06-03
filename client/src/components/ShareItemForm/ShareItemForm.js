@@ -42,11 +42,11 @@ class ShareItemForm extends Component {
       selectedTags: [],
       submitting: false,
       title: '',
-      item: '',
-      newItem: {
-        title: '',
-        item: ''
-      }
+      item: ''
+      // newItem: {
+      //   title: '',
+      //   item: ''
+      // }
     };
   }
 
