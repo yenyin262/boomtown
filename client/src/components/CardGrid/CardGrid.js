@@ -10,11 +10,11 @@ class CardGrid extends Component {
     spacing: '16'
   };
 
-  handleChange = key => (event, value) => {
-    this.setState({
-      [key]: value
-    });
-  };
+  // handleChange = key => (event, value) => {
+  //   this.setState({
+  //     [key]: value
+  //   });
+  // };
 
   // handleChange = event => {
   //   const { value, name } = event.target;
