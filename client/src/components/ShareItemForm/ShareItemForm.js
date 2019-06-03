@@ -12,7 +12,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import { updateNewItem } from '../../redux/ShareItemPreview/reducer';
+import { updateNewItem, resetItem } from '../../redux/ShareItemPreview/reducer';
 import { connect } from 'react-redux';
 
 const addTags = [
@@ -40,7 +40,6 @@ class ShareItemForm extends Component {
     this.state = {
       fileSelected: null,
       selectedTags: [],
-      submitting: false,
       title: '',
       item: ''
       // newItem: {
@@ -127,8 +126,20 @@ class ShareItemForm extends Component {
     this.props.resetNewItemImage();
     this.setState({ fileSelected: false });
   }
+  // insertTags(tags, selected) {
+  //   return tags.map(t =>
+  //     (selected.indexOf(t.id) > -1 ? t.title : false).filter(e => e).join(',')
+  //   );
+  // }
+  insertTags(tags) {
+    return tags.map(t =>
+      (this.state.selectedTags.indexOf(t.id) > -1 ? t.title : false)
+        .filter(e => e)
+        .join(',')
+    );
+  }
   render() {
-    const { submitting, classes } = this.props;
+    const { submitting, classes, updateNewItem } = this.props;
 
     console.log('dfdfd', this.props);
     return (
@@ -140,7 +151,11 @@ class ShareItemForm extends Component {
               subscription={{ values: true }}
               component={({ values }) => {
                 if (Object.keys(values).length > 0) {
-                  this.dispatchUpdate(values, this.state.selectedTags);
+                  this.dispatchUpdate(
+                    values,
+                    this.state.selectedTags,
+                    updateNewItem
+                  );
                 }
                 return '';
               }}
@@ -161,7 +176,7 @@ class ShareItemForm extends Component {
                       accept="image/*"
                       onChange={e => this.handleSelectedFile(e)}
                     />
-                    {submitting ? (
+                    {this.state.fileSelected ? (
                       <Button
                         variant="contained"
                         component="span"
@@ -226,9 +241,11 @@ class ShareItemForm extends Component {
                       placeholder="Add some tags"
                       value={this.state.selectedTags}
                       onChange={this.handleChangeTag}
+                      // renderValue={selected => {
+                      //   return this.state.insertTags(selected);
+                      // }}
                       renderValue={selected => selected.join(', ')}
                       MenuProps={MenuProps}
-                      // input={<Input id="select-multiple-checkbox" />}
                     >
                       {addTags.map(selectedTags => (
                         <MenuItem key={selectedTags} value={selectedTags}>
@@ -278,13 +295,17 @@ const mapStatetoProps = null;
 const mapDispatchToProps = dispatch => ({
   updateNewItem(item) {
     dispatch(updateNewItem(item));
+  },
+  resetItem() {
+    dispatch(resetItem());
   }
 });
 
 ShareItemForm.propTypes = {
   classes: PropTypes.object.isRequired,
   submitting: PropTypes.bool,
-  tags: PropTypes.func
+  tags: PropTypes.array,
+  handleSubmit: PropTypes.func
 };
 
 export default connect(
