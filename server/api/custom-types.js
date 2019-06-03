@@ -3,22 +3,21 @@ const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 
 const DateScalar = new GraphQLScalarType({
-  name: 'Date', // Date is the name of the GRAPHQLSCALARTYPE
+  name: 'Date',
   description: 'Date custom scalar type',
   parseValue(value) {
-    return new Date(value); // new instance of DATE OBJECT // value sent from the client to the server
+    return new Date(value);
   },
   serialize(value) {
-    return value.getTime(); // value sent from server to the client
+    return value.getTime();
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.INT) {
-      return new Date(ast.value) // ast value is always in string format
+      return new Date(ast.value);
     }
     return null;
-  },
+  }
 });
-
 
 module.exports = {
   DateScalar
