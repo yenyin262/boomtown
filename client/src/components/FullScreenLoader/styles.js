@@ -1,5 +1,3 @@
-// import { isWidthDown } from '@material-ui/core/withWidth';
-
 const styles = theme => ({
   progressCircle: {
     color: '#f9a825',
