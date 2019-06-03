@@ -1,6 +1,8 @@
 const styles = theme => ({
   profileContainer: {
-    marginTop: '120px'
+    padding: '80px',
+    backgroundColor: 'black',
+    height: '100vh'
   }
 });
 
