@@ -11,10 +11,6 @@ import { Mutation } from 'react-apollo';
 import { LOGOUT_MUTATION } from '../../apollo/queries';
 import client from '../../apollo';
 
-// this is the menu button
-const profilePage = ['Your Profile'];
-const signOutPage = ['Sign Out'];
-
 const ITEM_HEIGHT = 48;
 
 class MenuOptions extends Component {
@@ -41,7 +37,7 @@ class MenuOptions extends Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          <MoreVertIcon />
+          <MoreVertIcon className={classes.menuContainer} />
         </IconButton>
         <Menu
           id="nav-menu"
@@ -56,11 +52,10 @@ class MenuOptions extends Component {
           }}
         >
           <Link to="/profile" className={classes.profileIcon}>
-            {profilePage.map(option => (
-              <MenuItem key={option} onClick={this.handleClose}>
-                <Icon className={classes.menuIcon}>fingerprint </Icon> {option}
-              </MenuItem>
-            ))}
+            <MenuItem onClick={this.handleClose}>
+              <Icon className={classes.menuIcon}>fingerprint </Icon>
+              Your Profile
+            </MenuItem>
           </Link>
           <Mutation
             mutation={LOGOUT_MUTATION}
