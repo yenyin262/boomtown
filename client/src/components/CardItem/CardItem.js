@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -15,12 +15,12 @@ import Gravatar from 'react-gravatar';
 class CardItem extends Component {
   render() {
     const { classes } = this.props;
+
     const { item } = this.props;
     console.log('This is the props', this.props);
     console.log('This is the second one', item);
-
     return (
-      <Link className={classes.card} to="/profile">
+      <Link className={classes.card} to="/profile/">
         <Card className={classes.mainCard}>
           <CardMedia
             className={classes.media}
@@ -83,4 +83,8 @@ class CardItem extends Component {
     );
   }
 }
+CardItem.propTypes = {
+  classes: PropTypes.object.isRequired,
+  item: PropTypes.object
+};
 export default withStyles(styles)(CardItem);
