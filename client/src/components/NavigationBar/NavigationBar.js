@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-// import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import bmtwnLogo from '../../images/boomtown.svg';
 import styles from './styles';
-// import CardItem from '../CardItem/CardItem';
 import MenuOptions from '../MenuOptions/MenuOptions';
+import { Typography } from '@material-ui/core';
 
 class NavigationBar extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   render() {
     const { classes } = this.props;
     let shareLink;
@@ -24,7 +19,8 @@ class NavigationBar extends Component {
       shareLink = (
         <Link to="/share">
           <Button className={classes.shareBtn}>
-            <Icon className={classes.icon}>add_circle</Icon> Share Something
+            <Icon className={classes.icon}>add_circle</Icon>
+            <Typography>Share Something</Typography>
           </Button>
         </Link>
       );
@@ -37,9 +33,7 @@ class NavigationBar extends Component {
           <Link to="/items">
             <IconButton>
               <img
-                margin-top="20px"
-                margin-left="20px"
-                width="40px"
+                className={classes.bmtownImg}
                 src={bmtwnLogo}
                 alt="boomtown_logo"
               />
