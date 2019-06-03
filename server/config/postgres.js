@@ -1,4 +1,4 @@
-const { Pool } = require('pg'); // bunch of tunnels to databse  - connection pool /
+const { Pool } = require('pg');
 
 module.exports = app => {
   return new Pool({
@@ -6,7 +6,7 @@ module.exports = app => {
     user: app.get('PG_USER'),
     password: app.get('PG_PASSWORD'),
     database: app.get('PG_DB'),
-    idleTimeoutMillis: 30000, // 30secs
-    connectionTimeoutMillis: 2000 // setting bounds
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000
   });
 };
