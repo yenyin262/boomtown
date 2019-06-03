@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 const config = require('./config/application');
 
-const app = express(); // invokes the express function
+const app = express();
 const PORT = config(app);
 
 const initDB = require('./config/postgres');
