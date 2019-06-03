@@ -18,6 +18,7 @@ class CardItem extends Component {
     const { item } = this.props;
     console.log('This is the props', this.props);
     console.log('This is the second one', item);
+
     return (
       <Link className={classes.card} to="/profile">
         <Card className={classes.mainCard}>
@@ -50,7 +51,6 @@ class CardItem extends Component {
               </div>
             </div>
           </div>
-
           <CardContent>
             <Typography
               component="h2"
@@ -62,11 +62,11 @@ class CardItem extends Component {
             <Typography
               component="p"
               color="textSecondary"
-              gutterBottom
               className={classes.tagName}
             >
               {item.tags[0].title}
             </Typography>
+
             <Typography component="h3" className={classes.descriptionName}>
               {item.description}
             </Typography>
@@ -84,4 +84,3 @@ class CardItem extends Component {
   }
 }
 export default withStyles(styles)(CardItem);
-// item.tags[0].title - need to concat if more than one tags
