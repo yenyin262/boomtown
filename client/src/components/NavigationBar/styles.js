@@ -12,7 +12,8 @@ const styles = theme => ({
 
   shareBtn: {
     borderRadius: '32px',
-    padding: 0
+    padding: 0,
+    marginRight: '30px'
   },
   navContainer: {
     display: 'flex'
@@ -22,6 +23,9 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     flex: 1,
     display: 'flex'
+  },
+  bmtownImg: {
+    width: '40px'
   }
 });
 
