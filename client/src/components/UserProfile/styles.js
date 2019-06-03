@@ -5,7 +5,8 @@ const styles = {
   },
 
   title: {
-    fontSize: '45px'
+    fontSize: '45px',
+    color: 'grey'
   },
   avatarPic: {
     width: '55px',
@@ -30,7 +31,8 @@ const styles = {
   },
 
   biography: {
-    fontSize: '21px'
+    fontSize: '16px',
+    fontWeight: 400
   }
 };
 
