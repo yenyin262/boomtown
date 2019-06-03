@@ -100,11 +100,11 @@ module.exports = app => {
     Mutation: {
       ...authMutations(app),
 
-      async addItem(parent, { item }, context, info) {
+      async addItem(parent, args, context, info) {
         try {
           const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
           const newItem = await context.pgResource.saveNewItem({
-            item: item,
+            item: args.item,
             user
           });
           return newItem;
@@ -115,3 +115,22 @@ module.exports = app => {
     }
   };
 };
+
+// Mutation: {
+//   ...authMutations(app),
+
+//   async addItem(parent, args, context, info) {
+//     try {
+//       const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+//       const newItem = await context.pgResource.saveNewItem({
+//         item: args.item,
+//         user
+//       });
+//       return newItem;
+//     } catch (e) {
+//       throw new ApolloError(e);
+//     }
+//   }
+// }
+// };
+// };
