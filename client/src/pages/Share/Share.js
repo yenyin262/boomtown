@@ -15,12 +15,12 @@ import NavigationBar from '../../components/NavigationBar';
 
 */
 
-const Share = ({ classes }) => {
+const Share = ({ classes, shareItemPreview, item }) => {
   return (
     <div>
       <NavigationBar pageType={null} />
-
-      {/* <ShareItemPreview /> */}
+      {/* 
+      <ShareItemPreview shareItemPreview={shareItemPreview} item={item} /> */}
       <ShareItemForm />
     </div>
     /* <CardItem= /> */
