@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import NavigationBar from '../../components/NavigationBar/NavigationBar';
 import CardGrid from '../../components/CardGrid';
-// import CardItem from '../../components/CardItem';
 
 const Items = ({ classes, items }) => {
   console.log('card_grid_stuff', items);
@@ -11,7 +10,6 @@ const Items = ({ classes, items }) => {
     <div className={classes.ItemContainer}>
       <NavigationBar pageType={true} />
       <CardGrid items={items} />
-      {/* <div>{showAllItems}</div> */}
     </div>
   );
 };
