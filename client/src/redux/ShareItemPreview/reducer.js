@@ -35,6 +35,7 @@ const reducer = (state = INITIAL_STATE, action) => {
     }
     case RESET_ITEM: {
       return { ...INITIAL_STATE };
+      // return INITIAL_STATE;
     }
 
     default:
