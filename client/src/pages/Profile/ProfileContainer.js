@@ -6,14 +6,17 @@ import { Query } from 'react-apollo';
 import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 import FullScreenLoader from '../../components/FullScreenLoader';
 import { ViewerContext } from '../../context/ViewerProvider';
+import PropTypes from 'prop-types';
 
 class ProfileContainer extends Component {
   render() {
     const { classes, match } = this.props;
+
     const id = match.params.userid;
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => {
+          console.log('this is viewer', viewer);
           return (
             <Query
               query={ALL_USER_ITEMS_QUERY}
@@ -21,9 +24,16 @@ class ProfileContainer extends Component {
             >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
-                // if (loading) return <p>Loading...</p>;
+
+                console.log('data ', data);
                 if (error) return <p>{`Error! ${error.message}`}</p>;
-                return <Profile classes={classes} user={data.user} />;
+                return (
+                  <Profile
+                    classes={classes}
+                    itemsofUser={data.user}
+                    viewer={viewer}
+                  />
+                );
               }}
             </Query>
           );
@@ -32,5 +42,7 @@ class ProfileContainer extends Component {
     );
   }
 }
-
+ProfileContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 export default withStyles(styles)(ProfileContainer);
