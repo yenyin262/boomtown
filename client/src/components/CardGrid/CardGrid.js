@@ -10,19 +10,6 @@ class CardGrid extends Component {
     spacing: '16'
   };
 
-  // handleChange = key => (event, value) => {
-  //   this.setState({
-  //     [key]: value
-  //   });
-  // };
-
-  // handleChange = event => {
-  //   const { value, name } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-
   render() {
     const { items } = this.props;
 
@@ -32,9 +19,6 @@ class CardGrid extends Component {
         <Grid item xs={12}>
           <Grid container>
             {items.map(item => <CardItem item={item} key={item.id} />)}
-            {/* {items.map(item => (
-              <CardItem item={item} key={item.index * Math.random()} />
-            ))} */}
           </Grid>
         </Grid>
       </Grid>
