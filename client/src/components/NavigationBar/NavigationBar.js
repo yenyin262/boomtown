@@ -10,6 +10,7 @@ import bmtwnLogo from '../../images/boomtown.svg';
 import styles from './styles';
 import MenuOptions from '../MenuOptions/MenuOptions';
 import { Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 class NavigationBar extends Component {
   render() {
@@ -48,5 +49,10 @@ class NavigationBar extends Component {
     );
   }
 }
+
+NavigationBar.propTypes = {
+  classes: PropTypes.object.isRequired,
+  pageType: PropTypes.bool
+};
 
 export default withStyles(styles)(NavigationBar);
