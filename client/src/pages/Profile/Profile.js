@@ -3,24 +3,23 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import NavigationBar from '../../components/NavigationBar';
-import CardItem from '../../components/CardItem';
-import { ViewerContext } from '../../context/ViewerProvider';
+import CardGrid from '../../components/CardGrid';
 
-const Profile = ({ classes, user }) => {
+const Profile = ({ classes, itemsofUser, viewer }) => {
+  console.log('print users id', itemsofUser);
+  console.log(viewer, 'view me ');
   return (
-    <ViewerContext.Consumer>
-      {({ viewer }) => {
-        return (
-          <div>
-            <NavigationBar pageType={true} />
-            <div className={classes.profileContainer}>
-              <UserProfile user={user} />
-              {/* <CardItem items={items} /> */}
-            </div>
-          </div>
-        );
-      }}
-    </ViewerContext.Consumer>
+    <div>
+      <NavigationBar pageType={true} />
+      <div className={classes.profileContainer}>
+        <UserProfile
+          key={viewer.index}
+          itemsofUser={itemsofUser}
+          viewer={viewer}
+        />
+        {/* <CardGrid key={viewer.index} itemShared={itemsofUser} /> */}
+      </div>
+    </div>
   );
 };
 
