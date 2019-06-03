@@ -1,33 +1,37 @@
 const styles = {
   card: {
-    width: 650,
-    height: 250,
-    marginLeft: '40px'
+    width: '87vw',
+    height: 250
   },
 
   title: {
-    fontSize: '45px',
-    alignSelf: 'flex-end',
-    paddingTop: '40px',
-    paddingLeft: '20px'
+    fontSize: '45px'
   },
   avatarPic: {
     width: '55px',
     height: '55px',
-    borderRadius: 29,
-    marginTop: '20px',
-    marginLeft: '50px'
+    borderRadius: 29
+  },
+  picAndUser: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '22%'
+  },
+
+  userInfo: {
+    fontSize: '21px'
+  },
+
+  itemNo: {
+    fontWeight: 600
   },
   userProfileContainer: {
-    display: 'flex',
-    justify: 'center',
-    alignItems: 'center'
+    padding: '32px'
+  },
+
+  biography: {
+    fontSize: '21px'
   }
-  // avatarPic: {
-  //   width: '50px',
-  //   height: '50px',
-  //   borderRadius: 29
-  // }
 };
 
 export default styles;
