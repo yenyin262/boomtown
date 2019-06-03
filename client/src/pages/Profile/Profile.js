@@ -3,21 +3,25 @@ import UserProfile from '../../components/UserProfile/UserProfile';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import NavigationBar from '../../components/NavigationBar';
+import CardItem from '../../components/CardItem';
+import { ViewerContext } from '../../context/ViewerProvider';
 
 const Profile = ({ classes, user }) => {
   return (
-    <div>
-      <NavigationBar pageType={true} />
-      <div className={classes.profileContainer}>
-        {/* <p>
-        This is the profile page located at <code>/profile/:userId</code>.
-      </p> */}
-
-        <UserProfile user={user} />
-      </div>
-    </div>
+    <ViewerContext.Consumer>
+      {({ viewer }) => {
+        return (
+          <div>
+            <NavigationBar pageType={true} />
+            <div className={classes.profileContainer}>
+              <UserProfile user={user} />
+              {/* <CardItem items={items} /> */}
+            </div>
+          </div>
+        );
+      }}
+    </ViewerContext.Consumer>
   );
 };
 
-// export default Profile;
 export default withStyles(styles)(Profile);
