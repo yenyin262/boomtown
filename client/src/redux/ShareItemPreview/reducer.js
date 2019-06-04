@@ -1,5 +1,9 @@
 //action types
 
+//1 step = initial state needs to access item object
+//2step = item owner needs id
+//3step = item needs id
+
 const UPDATE_ITEM = 'UPDATE_ITEM';
 const RESET_ITEM = 'RESET_ITEM';
 
@@ -9,6 +13,13 @@ const INITIAL_STATE = {
   description: '',
   tags: [],
   user: {},
+  itemowner: {
+    id: '',
+    fullname: '',
+    email: '',
+    bio: ''
+  },
+  title: '',
   createdAt: new Date()
 };
 
