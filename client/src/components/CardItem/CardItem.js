@@ -15,12 +15,22 @@ import Gravatar from 'react-gravatar';
 class CardItem extends Component {
   render() {
     const { classes } = this.props;
-
     const { item } = this.props;
     console.log('This is the props', this.props);
     console.log('This is the second one', item);
+
+    let getTheTags;
+    let a = item;
+    let b = item.tags;
+    let c = item.tags[0];
+
+    if (a != null && b != null && c != null) {
+      getTheTags = item.tags[0].title;
+    } else {
+      getTheTags = '';
+    }
     return (
-      <Link className={classes.card} to="/profile/">
+      <Link className={classes.card} to={`/profile/${item.itemowner.id}`}>
         <Card className={classes.mainCard}>
           <CardMedia
             className={classes.media}
@@ -64,7 +74,7 @@ class CardItem extends Component {
               color="textSecondary"
               className={classes.tagName}
             >
-              {item.tags[0].title}
+              {getTheTags}
             </Typography>
 
             <Typography component="h3" className={classes.descriptionName}>
