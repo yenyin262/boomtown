@@ -24,7 +24,6 @@ class ProfileContainer extends Component {
             >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
-
                 console.log('data ', data);
                 if (error) return <p>{`Error! ${error.message}`}</p>;
                 return (
