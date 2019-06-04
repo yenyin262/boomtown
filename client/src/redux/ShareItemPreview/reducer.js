@@ -1,11 +1,7 @@
-//action types
-
-//1 step = initial state needs to access item object
-//2step = item owner needs id
-//3step = item needs id
-
+// import moment from 'moment';
 const UPDATE_ITEM = 'UPDATE_ITEM';
 const RESET_ITEM = 'RESET_ITEM';
+const RESET_ITEM_IMAGE = 'RESET_IMAGE_IMAGE';
 
 const INITIAL_STATE = {
   imageUrl: 'http://via.placeholder.com/350x250?text=Please+select+an+image',
@@ -21,6 +17,9 @@ const INITIAL_STATE = {
   },
   title: '',
   createdAt: new Date()
+  // createdAt: moment()
+  //   .startOf('day')
+  //   .fromNow()
 };
 
 //action creators
@@ -38,6 +37,13 @@ export const resetItem = () => {
   };
 };
 
+export const resetNewItemImage = () => {
+  return {
+    type: RESET_ITEM_IMAGE
+    // payload: {}
+  };
+};
+
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_ITEM: {
@@ -45,8 +51,15 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, ...newItem };
     }
     case RESET_ITEM: {
-      return { ...INITIAL_STATE };
-      // return INITIAL_STATE;
+      // return { ...INITIAL_STATE };
+      return INITIAL_STATE;
+    }
+
+    case RESET_ITEM_IMAGE: {
+      return {
+        ...state,
+        imageurl: INITIAL_STATE.imageUrl
+      };
     }
 
     default:
