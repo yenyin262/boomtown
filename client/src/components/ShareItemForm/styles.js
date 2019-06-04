@@ -25,18 +25,18 @@ const styles = theme => ({
   selectImgBtn: {
     margin: '0',
     backgroundColor: '#f9a825',
-    width: '29%',
+    width: '80%',
     '&:hover': {
       backgroundColor: '#f9a825'
-    }
+    },
+    fontWeight: 400
   },
 
   bmtwnHeader: {
-    fontSize: '20px',
     color: '#000',
-    fontWeight: '700',
-    marginBottom: '80px',
-    width: '23%'
+
+    marginBottom: '92px',
+    width: '97%'
   },
   descriptionName: {
     fontSize: '16px',
@@ -45,8 +45,17 @@ const styles = theme => ({
   button: {
     fontSize: '16px',
     padding: '8px 24px',
-    width: '200px',
-    marginTop: '30px'
+    width: '121px',
+    marginTop: '30px',
+    color: 'grey',
+    boxShadow: 'none',
+    backgroundColor: 'light grey'
+  },
+  headerOne: {
+    marginTop: 0,
+    fontSize: '45px',
+    fontFamily: 'sans-serif',
+    fontWeight: 700
   }
 });
 
