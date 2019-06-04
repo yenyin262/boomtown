@@ -17,7 +17,7 @@ const Profile = ({ classes, itemsofUser, viewer }) => {
           itemsofUser={itemsofUser}
           viewer={viewer}
         />
-        {/* <CardGrid key={viewer.index} itemShared={itemsofUser} /> */}
+        <CardGrid itemsofUser={itemsofUser} />
       </div>
     </div>
   );
