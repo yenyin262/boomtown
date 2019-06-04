@@ -1,6 +1,6 @@
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
-// import ShareItemPreview from '../../components/ShareItemPreview';
+import ShareItemPreview from '../../components/ShareItemPreview';
 import NavigationBar from '../../components/NavigationBar';
 
 /* 
@@ -18,12 +18,15 @@ import NavigationBar from '../../components/NavigationBar';
 const Share = ({ classes, tags }) => {
   return (
     <div>
-      <NavigationBar pageType={null} />
+      <div>
+        <NavigationBar pageType={null} />
+      </div>
 
-      {/* <ShareItemPreview /> */}
-      <ShareItemForm tags={tags} />
+      <div>
+        <ShareItemPreview />
+        <ShareItemForm tags={tags} />
+      </div>
     </div>
-    /* <CardItem= /> */
   );
 };
 
