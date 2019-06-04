@@ -7,6 +7,7 @@ const styles = {
   title: {
     fontSize: '45px',
     color: 'grey'
+    // marginLeft: 20px
   },
   avatarPic: {
     width: '55px',
@@ -15,8 +16,7 @@ const styles = {
   },
   picAndUser: {
     display: 'flex',
-    justifyContent: 'space-between',
-    width: '22%'
+    justifyContent: 'start'
   },
 
   userInfo: {
