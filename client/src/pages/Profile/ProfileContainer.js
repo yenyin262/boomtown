@@ -21,15 +21,19 @@ class ProfileContainer extends Component {
             <Query
               query={ALL_USER_ITEMS_QUERY}
               variables={{ id: id || viewer.id }}
+              fetchPolicy="network-only"
             >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
                 console.log('data ', data);
+                console.log(data.user, 'datauser');
+                console.log(data.user.items, 'datauseritems');
                 if (error) return <p>{`Error! ${error.message}`}</p>;
                 return (
                   <Profile
                     classes={classes}
-                    itemsofUser={data.user}
+                    itemsofUser={data.user.items}
+                    user={data.user}
                     viewer={viewer}
                   />
                 );
