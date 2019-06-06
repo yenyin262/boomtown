@@ -1,13 +1,22 @@
 const styles = theme => ({
   container: {
+    padding: '160px',
+    paddingTop: '80px'
+  },
+  subContainer: {
     display: 'flex',
     justifyContent: 'space-around',
-    padding: '160px',
-    paddingTop: '60px'
+
+    width: 'calc(100% + 24px)',
+
+    boxSizing: 'border-box'
   },
   previewCard: {
-    width: '27vw',
-    display: 'block'
+    padding: '12px'
+  },
+
+  shareForm: {
+    padding: '12px'
   }
 });
 
