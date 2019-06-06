@@ -54,8 +54,9 @@ class ShareItemForm extends Component {
   componentDidMount() {
     let randomItem = {
       title: 'Name Your Item',
-      description: 'Describe Your Item',
-      tags: ''
+      tags: '',
+      description: 'Describe Your Item'
+      // itemowner: itemowner
     };
     this.props.updateNewItem(randomItem);
   }
@@ -69,7 +70,7 @@ class ShareItemForm extends Component {
     this.setState({ fileSelected: theFile });
   }
 
-  dispatchUpdate(values, tags, itemowner) {
+  dispatchUpdate(values, tags, itemowner, item) {
     console.log('boo', tags);
     const { updateNewItem } = this.props;
     if (!values.imageurl && this.state.fileSelected) {
@@ -84,7 +85,9 @@ class ShareItemForm extends Component {
       ...values,
       tags: this.applyTags(tags),
       itemowner: itemowner,
-      title: ''
+      item: {
+        tags: []
+      }
     });
   }
   // inisde card item = if itemowner is null use current viewer
@@ -109,10 +112,11 @@ class ShareItemForm extends Component {
   // };
 
   applyTags(tags) {
-    console.log('st', tags);
+    console.log('what is tags', tags);
     return (
       tags &&
       tags
+
         .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
         .map(t => ({ title: t.title, id: t.id }))
     );
@@ -131,10 +135,15 @@ class ShareItemForm extends Component {
     this.props.resetNewItemImage();
     this.setState({ fileSelected: false });
   }
+  // insertTags(selected) {
+  //   return selected.map(t =>
+  //     (selected.indexOf(t.id) > -1 ? t.title : false).filter(e => e).join(',')
+  //   );
+  // }
+
   insertTags(selected) {
-    return selected.map(t =>
-      (selected.indexOf(t.id) > -1 ? t.title : false).filter(e => e).join(',')
-    );
+    console.log(selected, 'de');
+    return selected.join(',');
   }
   // insertTags(tags) {
   //   return tags.map(t =>
@@ -148,6 +157,7 @@ class ShareItemForm extends Component {
     const { submitting, classes, updateNewItem } = this.props;
 
     console.log('dfdfd', this.props);
+    // console.log('tags form', tags);
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => {
@@ -192,7 +202,7 @@ class ShareItemForm extends Component {
                               <Button
                                 variant="contained"
                                 component="span"
-                                className={classes.selectImgBtn}
+                                className={classes.selectImgBtnReset}
                                 onClick={() => {
                                   this.resetFileInput();
                                 }}
@@ -255,7 +265,7 @@ class ShareItemForm extends Component {
                               onChange={this.handleChangeTag}
                               renderValue={selected => {
                                 console.log(selected, 'boo');
-                                // return this.insertTags(selected);
+                                return this.insertTags(selected);
                               }}
                               // renderValue={selected => selected.join(', ')}
                               MenuProps={MenuProps}
@@ -287,7 +297,8 @@ class ShareItemForm extends Component {
                             <Button
                               variant="outlined"
                               className={classes.button}
-                              disabled={submitting}
+                              // disabled={submitting}
+                              disabled={submitting || pristine || invalid}
                             >
                               <Typography
                                 component="h3"
