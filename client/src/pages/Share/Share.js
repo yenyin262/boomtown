@@ -8,16 +8,16 @@ import styles from './styles';
 const Share = ({ classes, tags }) => {
   return (
     <div>
-      <div>
-        <NavigationBar pageType={null} />
-      </div>
+      <NavigationBar pageType={null} />
 
       <div className={classes.container}>
-        <div className={classes.previewCard}>
-          <ShareItemPreview />
-        </div>
-        <div>
-          <ShareItemForm tags={tags} />
+        <div className={classes.subContainer}>
+          <div className={classes.previewCard}>
+            <ShareItemPreview />
+          </div>
+          <div className={classes.shareForm}>
+            <ShareItemForm tags={tags} />
+          </div>
         </div>
       </div>
     </div>
