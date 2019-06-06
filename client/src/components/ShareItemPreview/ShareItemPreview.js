@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ViewerContext } from '../../context/ViewerProvider';
 
 const ShareItemPreview = ({ shareItemPreview }) => {
-  console.log(shareItemPreview);
+  console.log('this is ahre item preview', shareItemPreview);
   return (
     <ViewerContext.Consumer>
       {({ viewer }) => {
