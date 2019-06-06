@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import styles from './styles';
 import Gravatar from 'react-gravatar';
 
-const CardItem = ({ classes, item }) => {
+const CardItem = ({ classes, item, viewer }) => {
   let getTheTags;
   let a = item;
   let b = item.tags;
@@ -24,6 +24,14 @@ const CardItem = ({ classes, item }) => {
   } else {
     getTheTags = '';
   }
+
+  // d = getItemOwner;
+  // if (a != null && d != null) {
+  //   getItemOwner = item.itemowner.id;
+  // } else {
+  //   getItemOwner = { viewer };
+  // }
+
   return (
     <Link className={classes.card} to={`/profile/${item.itemowner.id}`}>
       <Card className={classes.mainCard}>
@@ -39,7 +47,7 @@ const CardItem = ({ classes, item }) => {
           <div className={classes.containerProfile}>
             <Gravatar
               className={classes.avatarPic}
-              email={item.itemowner.email}
+              email={item.itemowner.email || viewer.email}
             />
             <div>
               <Typography component="p">{item.itemowner.fullname}</Typography>
@@ -57,7 +65,7 @@ const CardItem = ({ classes, item }) => {
           </div>
         </div>
         <CardContent>
-          <Typography component="h2" gutterBottom className={classes.titleName}>
+          <Typography component="h2" className={classes.titleName}>
             {item.title}
           </Typography>
           <Typography
@@ -74,7 +82,7 @@ const CardItem = ({ classes, item }) => {
         </CardContent>
         <CardActions>
           <Button variant="outlined" className={classes.button}>
-            <Typography component="h3" className={classes.descriptionName}>
+            <Typography component="h3" className={classes.buttonText}>
               Borrow
             </Typography>
           </Button>
