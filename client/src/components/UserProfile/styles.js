@@ -6,8 +6,8 @@ const styles = {
 
   title: {
     fontSize: '45px',
-    color: 'grey'
-    // marginLeft: 20px
+    color: 'grey',
+    marginLeft: '20px'
   },
   avatarPic: {
     width: '55px',
