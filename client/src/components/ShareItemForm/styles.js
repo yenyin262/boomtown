@@ -5,10 +5,12 @@ const styles = theme => ({
     width: '418px'
   },
   NameTextField: {
-    marginTop: '45px'
+    marginTop: '45px',
+    marginBottom: '16px'
   },
   DescribeItemTextField: {
-    mariginTop: '19px'
+    mariginTop: '19px',
+    marginBottom: '16px'
   },
   SelectTextField: {
     marginTop: '100px'
@@ -31,7 +33,17 @@ const styles = theme => ({
     },
     fontWeight: 400
   },
-
+  selectImgBtnReset: {
+    margin: '0',
+    backgroundColor: '#fafafa',
+    border: '1px solid grey',
+    width: '80%',
+    '&:hover': {
+      backgroundColor: 'E2E2E2'
+    },
+    fontWeight: 400,
+    boxShadow: 'none'
+  },
   bmtwnHeader: {
     color: '#000',
 
@@ -49,7 +61,7 @@ const styles = theme => ({
     marginTop: '30px',
     color: 'grey',
     boxShadow: 'none',
-    backgroundColor: 'light grey'
+    backgroundColor: 'dark grey'
   },
   headerOne: {
     marginTop: 0,
