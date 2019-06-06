@@ -1,4 +1,5 @@
 // import moment from 'moment';
+
 const UPDATE_ITEM = 'UPDATE_ITEM';
 const RESET_ITEM = 'RESET_ITEM';
 const RESET_ITEM_IMAGE = 'RESET_IMAGE_IMAGE';
@@ -16,6 +17,9 @@ const INITIAL_STATE = {
     bio: ''
   },
   title: '',
+  item: {
+    tags: []
+  },
   createdAt: new Date()
   // createdAt: moment()
   //   .startOf('day')
