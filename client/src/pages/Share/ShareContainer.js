@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 class ShareContainer extends Component {
   render() {
     return (
+      // <Query query={ALL_TAGS_QUERY}  fetchPolicy="network-only">
       <Query query={ALL_TAGS_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return <FullScreenLoader inverted />;
