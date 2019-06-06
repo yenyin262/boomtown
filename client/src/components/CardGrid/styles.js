@@ -8,6 +8,9 @@ const styles = theme => ({
   },
   control: {
     padding: theme.spacing.unit * 2
+  },
+  containerGrid: {
+    padding: '50px'
   }
 });
 
