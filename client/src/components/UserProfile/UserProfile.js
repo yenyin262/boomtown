@@ -7,15 +7,17 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-function UserProfile({ classes, viewer, itemsofUser }) {
-  console.log('show user props', itemsofUser);
-  console.log(itemsofUser, 'this is items ofuser');
+function UserProfile({ classes, viewer, user, itemsofUser }) {
+  console.log(user, 'this is the user');
+  // console.log('show itemsofuser', itemsofUser);
+  // console.log(itemsofUser, 'this is items ofuser');
   console.log(viewer, 'viewer this is me');
+
   let userBio;
-  if (viewer.bio === null) {
-    userBio = '"no bio provided."';
+  if (user.bio != null) {
+    userBio = user.bio;
   } else {
-    userBio = viewer.bio;
+    userBio = '"no bio provided."';
   }
 
   return (
@@ -23,21 +25,19 @@ function UserProfile({ classes, viewer, itemsofUser }) {
       <CardContent>
         <div className={classes.userProfileContainer}>
           <div className={classes.picAndUser}>
-            <Gravatar className={classes.avatarPic} email={viewer.email} />
+            <Gravatar
+              className={classes.avatarPic}
+              email={user.email || viewer.email}
+            />
             <Typography className={classes.title} component="h1" gutterBottom>
-              {itemsofUser.fullname}
+              {user.fullname}
             </Typography>
           </div>
           <div>
             <Typography component="h2" className={classes.userInfo}>
-              <span className={classes.itemNo}>
-                {' '}
-                {itemsofUser.items.length}
-              </span>{' '}
-              Item shared{' '}
-              <span className={classes.itemNo}>
-                {itemsofUser.borrowed.length}{' '}
-              </span>{' '}
+              <span className={classes.itemNo}> {itemsofUser.length}</span> Item
+              shared{' '}
+              <span className={classes.itemNo}>{user.borrowed.length} </span>{' '}
               Item borrowed
               {/* {user.items.length <= 1 ? '1 Item Shared' : {user.items.length `Items Shared`}} */}
             </Typography>
@@ -53,7 +53,7 @@ function UserProfile({ classes, viewer, itemsofUser }) {
 
 UserProfile.propTypes = {
   classes: PropTypes.object.isRequired,
-  viewer: PropTypes.object,
-  itemsofUser: PropTypes.object
+  viewer: PropTypes.object
+  // itemsofUser: PropTypes.object
 };
 export default withStyles(styles)(UserProfile);
