@@ -5,7 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import CardItem from '../CardItem';
 import styles from './styles';
 
-const CardGrid = ({ items }) => {
+const CardGrid = ({ classes, items }) => {
+  console.log('This is an item', items);
+
   let getItems;
 
   let a = items;
@@ -23,7 +25,7 @@ const CardGrid = ({ items }) => {
   return (
     <Grid container alignContent="center" spacing={16}>
       <Grid item xs={12}>
-        <Grid container>
+        <Grid container className={classes.containerGrid}>
           {/* {items.map(item => <CardItem item={item} key={item.id} />)} */}
           {getItems}
         </Grid>
