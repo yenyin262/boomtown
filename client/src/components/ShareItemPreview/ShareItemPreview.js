@@ -3,8 +3,10 @@ import CardItem from '../CardItem';
 import { connect } from 'react-redux';
 import { ViewerContext } from '../../context/ViewerProvider';
 
-const ShareItemPreview = ({ shareItemPreview }) => {
-  console.log('this is ahre item preview', shareItemPreview);
+const ShareItemPreview = ({ shareItemPreview, tags }) => {
+  console.log('this is sahre item preview', shareItemPreview);
+  console.log('share item render', tags);
+
   return (
     <ViewerContext.Consumer>
       {({ viewer }) => {
