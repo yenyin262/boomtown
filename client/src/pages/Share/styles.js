@@ -6,9 +6,7 @@ const styles = theme => ({
   subContainer: {
     display: 'flex',
     justifyContent: 'space-around',
-
     width: 'calc(100% + 24px)',
-
     boxSizing: 'border-box'
   },
   previewCard: {
