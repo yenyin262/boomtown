@@ -10,12 +10,14 @@ import { ViewerContext } from '../../context/ViewerProvider';
 
 class ItemsContainer extends Component {
   render() {
+    const { match } = this.props;
+    const id = match.params.userid;
     return (
       // <Query query={ALL_ITEMS_QUERY} fetchPolicy="network-only">
       <ViewerContext.Consumer>
         {({ viewer }) => {
           return (
-            <Query query={ALL_ITEMS_QUERY}>
+            <Query query={ALL_ITEMS_QUERY} variables={{ id: id || viewer.id }}>
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
                 if (error) return <p>{`Error! ${error.message}`}</p>;
