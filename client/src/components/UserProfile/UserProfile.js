@@ -35,11 +35,13 @@ function UserProfile({ classes, viewer, user, itemsofUser }) {
           </div>
           <div>
             <Typography component="h2" className={classes.userInfo}>
-              <span className={classes.itemNo}> {itemsofUser.length}</span> Item
+              <span className={classes.itemNo}> {itemsofUser.length} </span>
+              {itemsofUser.length >= 2 ? 'Items ' : 'Item '}
               shared{' '}
-              <span className={classes.itemNo}>{user.borrowed.length} </span>{' '}
-              Item borrowed
-              {/* {user.items.length <= 1 ? '1 Item Shared' : {user.items.length `Items Shared`}} */}
+              <span className={classes.itemNo}>
+                {user.borrowed.length}{' '}
+              </span>{' '}
+              {user.borrowed.length >= 2 ? 'Items ' : 'Item '}borrowed
             </Typography>
             <Typography component="p" className={classes.biography}>
               {userBio}
