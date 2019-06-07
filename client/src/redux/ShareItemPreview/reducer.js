@@ -17,9 +17,9 @@ const INITIAL_STATE = {
     bio: ''
   },
   title: '',
-  item: {
-    tags: []
-  },
+  // item: {
+  //   tags: []
+  // },
   createdAt: new Date()
   // createdAt: moment()
   //   .startOf('day')
