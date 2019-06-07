@@ -1,7 +1,8 @@
 const styles = theme => ({
   menuIcon: {
     margin: theme.spacing.unit * 2,
-    ':focus': {
+    a: {
+      '&:focus': 'none',
       outline: 'none'
     }
   },
