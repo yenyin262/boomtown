@@ -13,7 +13,7 @@ const Share = ({ classes, tags }) => {
       <div className={classes.container}>
         <div className={classes.subContainer}>
           <div className={classes.previewCard}>
-            <ShareItemPreview />
+            <ShareItemPreview tags={tags} />
           </div>
           <div className={classes.shareForm}>
             <ShareItemForm tags={tags} />
