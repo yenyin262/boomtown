@@ -6,19 +6,11 @@ import NavigationBar from '../../components/NavigationBar';
 import CardGrid from '../../components/CardGrid';
 
 const Profile = ({ classes, itemsofUser, user }) => {
-  console.log('print users item', itemsofUser);
-  console.log(user, 'no');
-  // console.log(viewer, 'view me ');
   return (
     <div>
       <NavigationBar pageType={true} />
       <div className={classes.profileContainer}>
-        <UserProfile
-          // key={viewer.index}
-          itemsofUser={itemsofUser}
-          // viewer={viewer}
-          user={user}
-        />
+        <UserProfile itemsofUser={itemsofUser} user={user} />
 
         <div>
           <h1 className={classes.sharedHeader}>Shared Items</h1>
