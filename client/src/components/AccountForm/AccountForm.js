@@ -21,7 +21,8 @@ class AccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true
+      formToggle: true,
+      error: null
     };
   }
 
@@ -38,19 +39,8 @@ class AccountForm extends Component {
             signupMutation(user).catch(error => this.setState({ error })); // NEED TO PRINT MSG
           }
         }}
-        validate={values => {
-          return validate(values);
-        }}
-        render={({
-          handleSubmit,
-          pristine,
-          invalid,
-          form,
-          hasSubmitErrors,
-          submitError,
-          submitting
-          // values
-        }) => (
+        validate={validate}
+        render={({ handleSubmit, pristine, invalid, form, submitting }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>
@@ -142,11 +132,14 @@ class AccountForm extends Component {
                 </Typography>
               </Grid>
             </FormControl>
-            {hasSubmitErrors && (
-              <Typography className={classes.errorMessage}>
-                {submitError}
-              </Typography>
-            )}
+            <Typography>
+              {(this.state.error &&
+                this.state.formToggle &&
+                this.state.error.graphQLErrors[0].message) ||
+                (this.state.error &&
+                  !this.state.formToggle &&
+                  this.state.error.graphQLErrors[0].message)}
+            </Typography>
           </form>
         )}
       />
