@@ -11,3 +11,5 @@ body, html {
 a {
   text-decoration: none;
 }
+
+a, a:hover, a:focus { outline: none; }
