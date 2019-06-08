@@ -16,7 +16,6 @@ class ProfileContainer extends Component {
     return (
       <ViewerContext.Consumer>
         {({ viewer }) => {
-          console.log('this is viewer', viewer);
           return (
             <Query
               query={ALL_USER_ITEMS_QUERY}
@@ -25,9 +24,6 @@ class ProfileContainer extends Component {
             >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
-                console.log('data ', data);
-                console.log(data.user, 'datauser');
-                console.log(data.user.items, 'datauseritems');
                 if (error) return <p>{`Error! ${error.message}`}</p>;
                 return (
                   <Profile
