@@ -8,11 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 function UserProfile({ classes, viewer, user, itemsofUser }) {
-  console.log(user, 'this is the user');
-  // console.log('show itemsofuser', itemsofUser);
-  // console.log(itemsofUser, 'this is items ofuser');
-  console.log(viewer, 'viewer this is me');
-
   let userBio;
   if (user.bio != null) {
     userBio = user.bio;
