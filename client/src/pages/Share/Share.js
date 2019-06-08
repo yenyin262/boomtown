@@ -5,7 +5,7 @@ import NavigationBar from '../../components/NavigationBar';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-const Share = ({ classes, tags }) => {
+const Share = ({ classes, tags, viewer }) => {
   return (
     <div>
       <NavigationBar pageType={null} />
@@ -13,10 +13,10 @@ const Share = ({ classes, tags }) => {
       <div className={classes.container}>
         <div className={classes.subContainer}>
           <div className={classes.previewCard}>
-            <ShareItemPreview tags={tags} />
+            <ShareItemPreview viewer={viewer} />
           </div>
           <div className={classes.shareForm}>
-            <ShareItemForm tags={tags} />
+            <ShareItemForm tags={tags} viewer={viewer} />
           </div>
         </div>
       </div>
@@ -24,5 +24,4 @@ const Share = ({ classes, tags }) => {
   );
 };
 
-// export default Share;
 export default withStyles(styles)(Share);
