@@ -1,16 +1,18 @@
 export default function validate(values) {
   const errors = {};
 
-  if (!values.title) {
+  if (!values.imageurl) {
     errors.imageurl = 'Required';
   }
-  if (!values.description) {
+  if (!values.title) {
     errors.title = 'Required';
   }
-  if (values.tags && !values.tags) {
+  if (values.description) {
     errors.description = 'Required';
   }
-
+  if (!values.tags) {
+    errors.tags = 'One tag required';
+  }
   /**
    * @TODO: Write the validation rules for the share form.
    *
