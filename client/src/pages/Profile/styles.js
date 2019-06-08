@@ -13,7 +13,7 @@ const styles = theme => ({
   },
 
   profileGrid: {
-    width: '30%'
+    display: 'flex'
   },
 
   body: {
