@@ -22,7 +22,20 @@ const styles = theme => ({
   },
   errorMessage: {
     color: 'firebrick'
+  },
+  errorField: {
+    color: 'firebrick'
+  },
+
+  inputStyle: {
+    marginTop: '20px'
   }
+
+  // MuiInput: {
+  //   underline: {
+  //     width: '400px'
+  //   }
+  // }
 });
 
 export default styles;
