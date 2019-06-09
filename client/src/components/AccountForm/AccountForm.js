@@ -133,12 +133,12 @@ class AccountForm extends Component {
               </Grid>
             </FormControl>
             <Typography>
-              {(this.state.error &&
+              {/* {(this.state.error &&
                 this.state.formToggle &&
                 this.state.error.graphQLErrors[0].message) ||
                 (this.state.error &&
                   !this.state.formToggle &&
-                  this.state.error.graphQLErrors[0].message)}
+                  this.state.error.graphQLErrors[0].message)} */}
             </Typography>
           </form>
         )}
