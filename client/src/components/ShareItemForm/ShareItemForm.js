@@ -142,7 +142,7 @@ class ShareItemForm extends Component {
                 <div className={classes.formContainer}>
                   <Form
                     validate={validate.bind(this)}
-                    onSubmit={values => {
+                    onSubmit={(values, form) => {
                       console.log('values', values);
                       const item = {
                         title: values.title,
@@ -163,13 +163,12 @@ class ShareItemForm extends Component {
                           item: item
                         }
                       })
-                        .then(d => console.log(d, 'submitted'))
-                        .catch(e => console.log(e));
+                        .then(() => {
+                          alert('New Item Added');
+                          form.reset();
+                        })
+                        .catch(() => alert('Item not added sucessfully'));
                     }}
-                    // {
-                    //   e => console.log('Share form was submitted')
-                    //   // e.preventDefault();
-                    // }
                     render={({ handleSubmit, pristine, invalid, form }) => (
                       <form onSubmit={handleSubmit}>
                         <FormSpy
