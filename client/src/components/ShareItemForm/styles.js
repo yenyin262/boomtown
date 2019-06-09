@@ -46,13 +46,15 @@ const styles = theme => ({
   },
   bmtwnHeader: {
     color: '#000',
-
     marginBottom: '92px',
     width: '97%'
   },
   descriptionName: {
     fontSize: '16px',
-    fontWeight: 400
+    fontWeight: 400,
+    '&:valid': {
+      backgroundColor: '#f9a825'
+    }
   },
   button: {
     fontSize: '16px',
