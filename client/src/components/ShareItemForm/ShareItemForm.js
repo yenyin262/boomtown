@@ -20,8 +20,9 @@ import {
 import { connect } from 'react-redux';
 import { ViewerContext } from '../../context/ViewerProvider';
 import validate from './helpers/validation';
-import Mutation from 'react-apollo';
-import { ADD_ITEM_MUTATION, ALL_ITEMS_QUERY } from '../../apollo/queries';
+
+import { Mutation } from 'react-apollo';
+import { ADD_ITEM_MUTATION } from '../../apollo/queries';
 
 const addTags = [
   'Sporting Goods',
@@ -49,18 +50,14 @@ class ShareItemForm extends Component {
     this.state = {
       fileSelected: null,
       selectedTags: [],
-      title: '',
-      item: ''
-      // imageurl: ''
+      title: ''
     };
   }
 
   componentDidMount() {
     let randomItem = {
       title: 'Name Your Item',
-      tags: '',
       description: 'Describe Your Item'
-      // imageurl: '',
     };
     this.props.updateNewItem(randomItem);
   }
@@ -129,47 +126,40 @@ class ShareItemForm extends Component {
   }
 
   render() {
-    const { submitting, classes, tags } = this.props;
-    console.log(ADD_ITEM_MUTATION);
+    const { classes, tags } = this.props;
+    console.log(this.props, 'propsitems');
+    console.log(this.state, 'this.state');
+    console.log(this.props.title, 'props title');
+
     return (
-      <div className={classes.formContainer}>
-        <ViewerContext.Consumer>
-          {({ loading, viewer }) => {
-            return (
-              //calling mutation - which takes in a variable
-              <Mutation
-                refetchQueries={() => [
-                  { query: ALL_ITEMS_QUERY, variables: viewer.id }
-                ]}
-                mutation={ADD_ITEM_MUTATION}
-              >
-                {(addItem, { data }) => (
-                  // <div className={classes.formContainer}>
+      // <div className={classes.formContainer}>
+      <ViewerContext.Consumer>
+        {({ loading, viewer }) => {
+          return (
+            <Mutation mutation={ADD_ITEM_MUTATION}>
+              {(addItem, data) => (
+                <div className={classes.formContainer}>
                   <Form
-                    validate={validate}
-                    onSubmit={async submitted => {
-                      try {
-                        const newItem = {
+                    validate={validate.bind(this)}
+                    onSubmit={() => {
+                      addItem({
+                        variables: {
                           item: {
-                            ...submitted,
-                            tags: this.applyTags(tags)
+                            title: this.props.title,
+                            description: this.props.description,
+                            tags: this.props.tags
                           }
-                        };
-                        // invokes mutation
-                        await addItem({
-                          variable: newItem
-                        });
-                      } catch (e) {
-                        console.log(e);
-                      }
+                        }
+                      })
+                        .then(d => console.log(d, 'submitted'))
+                        .catch(e => console.log(e));
                     }}
+                    // {
+                    //   e => console.log('Share form was submitted')
+                    //   // e.preventDefault();
+                    // }
                     render={({ handleSubmit, pristine, invalid, form }) => (
-                      <form
-                        onSubmit={event => {
-                          this.resetTags();
-                          this.handleSubmit(event);
-                        }}
-                      >
+                      <form onSubmit={handleSubmit}>
                         <FormSpy
                           subscription={{ values: true }}
                           component={({ values }) => {
@@ -250,7 +240,6 @@ class ShareItemForm extends Component {
                                   placeholder="Describe Your Item"
                                   multiline
                                   rows="4"
-                                  value={this.state.item}
                                   inputProps={{ ...input }}
                                 />
                               )}
@@ -298,8 +287,8 @@ class ShareItemForm extends Component {
                                 <Button
                                   variant="outlined"
                                   className={classes.button}
-                                  disabled={submitting || pristine || invalid}
-                                  // disabled={submitting}
+                                  disabled={invalid}
+                                  type="submit"
                                 >
                                   <Typography
                                     component="h3"
@@ -315,19 +304,26 @@ class ShareItemForm extends Component {
                       </form>
                     )}
                   />
-                  // </div>
-                )}
-              </Mutation>
-            );
-          }}
-        </ViewerContext.Consumer>
-      </div>
+                </div>
+              )}
+            </Mutation>
+          );
+        }}
+      </ViewerContext.Consumer>
     );
   }
 }
-// similar getState
-const mapStatetoProps = null;
 
+// similar getState
+// const mapStatetoProps = null;
+
+function mapStatetoProps(state, ownProps) {
+  return {
+    title: state.shareItemPreview.title,
+    description: state.shareItemPreview.description,
+    tags: ownProps.tags
+  };
+}
 // similar to Dispatch
 const mapDispatchToProps = dispatch => ({
   updateNewItem(item) {
