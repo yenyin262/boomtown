@@ -10,7 +10,6 @@ module.exports = app => {
     Query: {
       viewer(parent, args, context, info) {
         if (context.token) {
-          console.log('Token:');
           console.log(jwt.decode(context.token, app.get('JWT_SECRET')));
           return jwt.decode(context.token, app.get('JWT_SECRET'));
         } else {
@@ -100,11 +99,12 @@ module.exports = app => {
     Mutation: {
       ...authMutations(app),
 
-      async addItem(parent, args, context, info) {
+      async addItem(parent, { item }, context, info) {
         try {
           const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+          console.log('userid', user);
           const newItem = await context.pgResource.saveNewItem({
-            item: args.newItem,
+            item,
             user
           });
           return newItem;
