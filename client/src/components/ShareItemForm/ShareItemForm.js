@@ -293,25 +293,19 @@ class ShareItemForm extends Component {
                             />
                           </FormControl>
 
-                          <FormControl>
-                            <Field
-                              render={({ input, meta }) => (
-                                <Button
-                                  variant="outlined"
-                                  className={classes.button}
-                                  disabled={invalid}
-                                  type="submit"
-                                >
-                                  <Typography
-                                    component="h3"
-                                    className={classes.descriptionName}
-                                  >
-                                    SHARE
-                                  </Typography>
-                                </Button>
-                              )}
-                            />
-                          </FormControl>
+                          <Button
+                            variant="outlined"
+                            className={classes.button}
+                            disabled={invalid}
+                            type="submit"
+                          >
+                            <Typography
+                              component="h3"
+                              className={classes.descriptionName}
+                            >
+                              SHARE
+                            </Typography>
+                          </Button>
                         </div>
                       </form>
                     )}
