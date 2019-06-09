@@ -122,16 +122,32 @@ module.exports = postgres => {
               const newItem = await postgres.query(itemQuery);
               console.log('chceese', newItem);
               // insert matching tag with the new item
-              const insertTags = {
-                text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tagsQueryString(
-                  [...tags], // spreading tags to exclude existing tags
-                  newItem.rows[0].id,
-                  ''
-                )}`,
-                values: tags.map(tag => tag.id)
-              };
-              // make async
-              await postgres.query(insertTags);
+
+              /*
+              tags = [ { id: 0, title: 'soething' }, { id: 1, title: 'soething' }]
+              tags.map => [ "($1, 1)", "($2, 1)"]
+              tags.map.join => "($1, 1), ($2, 1)"
+              */
+              if (tags && tags.length) {
+                const insertTags = {
+                  text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tags
+                    .map((tag, idx) => {
+                      return `($${idx + 1}, ${newItem.rows[0].id})`;
+                    })
+                    .join(',')}`,
+                  // INSERT INTO itemtags (tagid, itemid) VALUES (24, 1), (25,1)
+                  // text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tagsQueryString(
+                  //   [...tags], // spreading tags to exclude existing tags
+                  //   newItem.rows[0].id,
+                  //   ''
+                  // )}`,
+                  values: tags.map(tag => tag.id)
+                };
+                console.log({ insertTags });
+
+                // make async
+                await postgres.query(insertTags);
+              }
               client.query('COMMIT', err => {
                 if (err) {
                   throw err;

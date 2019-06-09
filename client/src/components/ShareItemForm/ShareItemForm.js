@@ -92,14 +92,14 @@ class ShareItemForm extends Component {
     });
   }
 
-  applyTags(tags) {
-    return (
-      tags &&
-      tags
-        .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
-        .map(t => ({ title: t.title, id: t.id }))
-    );
-  }
+  // applyTags(tags) {
+  //   return (
+  //     tags &&
+  //     tags
+  //       .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
+  //       .map(t => ({ title: t.title, id: t.id }))
+  //   );
+  // }
 
   handleChangeTag(event) {
     this.setState({ selectedTags: event.target.value });
@@ -130,6 +130,7 @@ class ShareItemForm extends Component {
     console.log(this.props, 'propsitems');
     console.log(this.state, 'this.state');
     console.log(this.props.title, 'props title');
+    console.log(this.props.tags, 'tags props');
 
     return (
       // <div className={classes.formContainer}>
@@ -137,18 +138,29 @@ class ShareItemForm extends Component {
         {({ loading, viewer }) => {
           return (
             <Mutation mutation={ADD_ITEM_MUTATION}>
-              {(addItem, data) => (
+              {addItem => (
                 <div className={classes.formContainer}>
                   <Form
                     validate={validate.bind(this)}
-                    onSubmit={() => {
+                    onSubmit={values => {
+                      console.log('values', values);
+                      const item = {
+                        title: values.title,
+                        description: values.description,
+                        tags: values.tags.map(newtag => {
+                          const foundTag = tags.find(tag => {
+                            return tag.title === newtag;
+                          });
+                          return {
+                            id: foundTag.id,
+                            title: newtag
+                          };
+                        })
+                      };
+                      console.log('item', item);
                       addItem({
                         variables: {
-                          item: {
-                            title: this.props.title,
-                            description: this.props.description,
-                            tags: this.props.tags
-                          }
+                          item: item
                         }
                       })
                         .then(d => console.log(d, 'submitted'))
@@ -166,7 +178,7 @@ class ShareItemForm extends Component {
                             if (Object.keys(values).length > 0) {
                               this.dispatchUpdate(
                                 values,
-                                this.state.selectedTags,
+                                // this.state.selectedTags,
                                 viewer
                               );
                             }
@@ -249,35 +261,36 @@ class ShareItemForm extends Component {
                             <InputLabel>Add some tags</InputLabel>
                             <Field
                               name="tags"
-                              render={({ input, meta }) => (
-                                <Select
-                                  multiple
-                                  placeholder="Add some tags"
-                                  value={this.state.selectedTags}
-                                  onChange={this.handleChangeTag.bind(this)}
-                                  renderValue={selected => {
-                                    return this.insertTags(selected);
-                                  }}
-                                  MenuProps={MenuProps}
-                                >
-                                  {addTags.map(selectedTags => (
-                                    <MenuItem
-                                      key={selectedTags}
-                                      value={selectedTags}
-                                    >
-                                      <Checkbox
-                                        checked={
-                                          this.state.selectedTags.indexOf(
-                                            selectedTags
-                                          ) > -1
-                                        }
-                                      />
+                              render={({ input, meta }) => {
+                                return (
+                                  <Select
+                                    multiple
+                                    placeholder="Add some tags"
+                                    value={input.value || []}
+                                    onChange={input.onChange}
+                                    renderValue={selected => {
+                                      return this.insertTags(selected);
+                                    }}
+                                    MenuProps={MenuProps}
+                                  >
+                                    {addTags.map(selectedTags => (
+                                      <MenuItem
+                                        key={selectedTags}
+                                        value={selectedTags}
+                                      >
+                                        <Checkbox
+                                          checked={
+                                            input.value.indexOf(selectedTags) >
+                                            -1
+                                          }
+                                        />
 
-                                      <ListItemText primary={selectedTags} />
-                                    </MenuItem>
-                                  ))}
-                                </Select>
-                              )}
+                                        <ListItemText primary={selectedTags} />
+                                      </MenuItem>
+                                    ))}
+                                  </Select>
+                                );
+                              }}
                             />
                           </FormControl>
 
