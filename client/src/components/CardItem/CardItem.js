@@ -13,16 +13,16 @@ import styles from './styles';
 import Gravatar from 'react-gravatar';
 
 const CardItem = ({ classes, item, viewer }) => {
-  let getTheTags;
-  let a = item;
-  let b = item.tags;
-  let c = item.tags[0];
-  let tags = item.tags.length > 0 ? item.tags.join(', ') : item.tags;
-
-  if (a != null && b != null && c != null) {
-    getTheTags = item.tags[0].title;
-  } else {
-    getTheTags = '';
+  let tagString = '';
+  if (item && item.tags && item.tags.length) {
+    tagString = item.tags
+      .map(tag => {
+        if (tag.title) {
+          return tag.title;
+        }
+        return tag;
+      })
+      .join(', ');
   }
 
   return (
@@ -68,7 +68,7 @@ const CardItem = ({ classes, item, viewer }) => {
             color="textSecondary"
             className={classes.tagName}
           >
-            {getTheTags ? getTheTags : tags}
+            {tagString}
           </Typography>
 
           <Typography component="h3" className={classes.descriptionName}>
