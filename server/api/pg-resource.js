@@ -107,23 +107,25 @@ module.exports = postgres => {
         postgres.connect((err, client, done) => {
           try {
             client.query('BEGIN', async err => {
+              console.log('pgresource itme', item);
+              console.log('pgresource', user);
               const { title, description, tags } = item;
 
-              client.query('SELECT * From items RETURNING *');
+              client.query('SELECT * FROM items');
               // insert new item mutation
               const itemQuery = {
                 text:
                   'INSERT INTO items (title,  description, itemowner ) VALUES ($1, $2, $3) RETURNING *',
-                values: [title, description, user]
+                values: [title, description, user.id]
               };
               // async the new item mutation
               const newItem = await postgres.query(itemQuery);
-
+              console.log('chceese', newItem);
               // insert matching tag with the new item
               const insertTags = {
                 text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tagsQueryString(
                   [...tags], // spreading tags to exclude existing tags
-                  newItem.row[0].id,
+                  newItem.rows[0].id,
                   ''
                 )}`,
                 values: tags.map(tag => tag.id)
