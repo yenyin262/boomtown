@@ -43,19 +43,15 @@ module.exports = app => {
 
     async login(parent, args, context) {
       try {
-        console.log('hello');
         const user = await context.pgResource.getUserAndPasswordForVerification(
           args.user.email
         );
-        // if (!user) throw 'You have not made an account, please sign-up!';
+
         const valid = await bcrypt.compare(args.user.password, user.password);
 
         if (!valid || !user) throw 'Incorrect Password. Please try again.';
-        // const valid = await bcrypt.compare(args.user.password, user.password);
-        console.log('Valid:', valid);
+
         if (!valid || !user) throw 'User was not found.';
-        console.log('user that will be set');
-        console.log(user);
 
         setCookie({
           tokenName: app.get('JWT_COOKIE_NAME'),
