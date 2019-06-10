@@ -36,6 +36,11 @@ The following technologies were applied in building and delivering Boomtown's ba
 
 ![screencapture-localhost-3000-items-2019-06-09-23_36_56](https://user-images.githubusercontent.com/43800526/59177019-9a3d7500-8b0f-11e9-994c-f73dd6e63f0d.png)
 
+
+## Profile Page 
+
+![screencapture-localhost-3000-profile-26-2019-06-09-23_42_26](https://user-images.githubusercontent.com/43800526/59177237-4d0dd300-8b10-11e9-92aa-306aecee8cb8.png)
+
 ## Share Page 
 
 <img width="1437" alt="Screen Shot 2019-06-09 at 10 48 09 PM" src="https://user-images.githubusercontent.com/43800526/59177065-be00bb00-8b0f-11e9-82a6-dcd971493490.png">
