@@ -21,7 +21,7 @@ const CardGrid = ({ classes, items, viewer }) => {
   return (
     <Grid container alignContent="center" spacing={16}>
       <Grid item xs={12}>
-        <Grid container className={classes.containerGrid} viewer={viewer}>
+        <Grid container viewer={viewer}>
           {getItems}
         </Grid>
       </Grid>
