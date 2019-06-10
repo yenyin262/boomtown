@@ -51,11 +51,9 @@ const styles = theme => ({
   },
   descriptionName: {
     fontSize: '16px',
-    fontWeight: 400,
-    '&:valid': {
-      backgroundColor: '#f9a825'
-    }
+    fontWeight: 400
   },
+
   button: {
     fontSize: '16px',
     padding: '8px 24px',
@@ -64,6 +62,12 @@ const styles = theme => ({
     color: 'grey',
     boxShadow: 'none',
     backgroundColor: 'dark grey'
+  },
+  validButton: {
+    backgroundColor: '#f9a825',
+    '&:hover': {
+      backgroundColor: 'rgb(174, 117, 25)'
+    }
   },
   headerOne: {
     marginTop: 0,

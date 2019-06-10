@@ -20,7 +20,7 @@ import {
 import { connect } from 'react-redux';
 import { ViewerContext } from '../../context/ViewerProvider';
 import validate from './helpers/validation';
-
+import classnames from 'classnames';
 import { Mutation } from 'react-apollo';
 import { ADD_ITEM_MUTATION } from '../../apollo/queries';
 
@@ -295,7 +295,11 @@ class ShareItemForm extends Component {
 
                           <Button
                             variant="outlined"
-                            className={classes.button}
+                            // className={`${classes.button} ${!invalid ? classes.validButton : ''}`}
+                            className={classnames({
+                              [classes.button]: true,
+                              [classes.validButton]: !invalid
+                            })}
                             disabled={invalid}
                             type="submit"
                           >
