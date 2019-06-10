@@ -14,10 +14,6 @@ import Layout from './routes/Layout';
 import store from './redux';
 import { ViewerProvider } from './context/ViewerProvider';
 
-// @TODO: Remove this import once you have your router working below
-// import Home from './pages/Items';
-// -------------------------------
-
 import './index.css';
 
 const App = () => {
