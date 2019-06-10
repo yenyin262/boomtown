@@ -5,7 +5,6 @@ const config = require('./config/application');
 
 const app = express();
 const PORT = config(app);
-
 const initDB = require('./config/postgres');
 const postgres = initDB(app);
 
