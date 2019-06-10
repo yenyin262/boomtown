@@ -1,12 +1,8 @@
 const styles = {
   card: {
-    // minWidth: '200px',
-    // width: '400px',
     margin: '10px 10px'
-    // margin: '16px 16px'
   },
   media: {
-    // height: 300
     height: '0',
     paddingTop: '56.25%'
   },
@@ -21,7 +17,7 @@ const styles = {
     width: '52%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    // marginTop: '10px'
+
     paddingLeft: '24px',
     paddingRight: '24px',
     paddingTop: '16px',
