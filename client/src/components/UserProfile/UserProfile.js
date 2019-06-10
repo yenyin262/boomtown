@@ -50,7 +50,7 @@ function UserProfile({ classes, viewer, user, itemsofUser }) {
 
 UserProfile.propTypes = {
   classes: PropTypes.object.isRequired,
-  viewer: PropTypes.object
-  // itemsofUser: PropTypes.object
+  viewer: PropTypes.object,
+  itemsofUser: PropTypes.array
 };
 export default withStyles(styles)(UserProfile);
