@@ -107,27 +107,18 @@ module.exports = postgres => {
         postgres.connect((err, client, done) => {
           try {
             client.query('BEGIN', async err => {
-              console.log('pgresource itme', item);
-              console.log('pgresource', user);
               const { title, description, tags } = item;
 
               client.query('SELECT * FROM items');
-              // insert new item mutation
+
               const itemQuery = {
                 text:
                   'INSERT INTO items (title,  description, itemowner ) VALUES ($1, $2, $3) RETURNING *',
                 values: [title, description, user.id]
               };
-              // async the new item mutation
-              const newItem = await postgres.query(itemQuery);
-              console.log('chceese', newItem);
-              // insert matching tag with the new item
 
-              /*
-              tags = [ { id: 0, title: 'soething' }, { id: 1, title: 'soething' }]
-              tags.map => [ "($1, 1)", "($2, 1)"]
-              tags.map.join => "($1, 1), ($2, 1)"
-              */
+              const newItem = await postgres.query(itemQuery);
+
               if (tags && tags.length) {
                 const insertTags = {
                   text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tags
@@ -135,17 +126,11 @@ module.exports = postgres => {
                       return `($${idx + 1}, ${newItem.rows[0].id})`;
                     })
                     .join(',')}`,
-                  // INSERT INTO itemtags (tagid, itemid) VALUES (24, 1), (25,1)
-                  // text: `INSERT INTO itemtags (tagid ,itemid ) VALUES ${tagsQueryString(
-                  //   [...tags], // spreading tags to exclude existing tags
-                  //   newItem.rows[0].id,
-                  //   ''
-                  // )}`,
+
                   values: tags.map(tag => tag.id)
                 };
                 console.log({ insertTags });
 
-                // make async
                 await postgres.query(insertTags);
               }
               client.query('COMMIT', err => {
@@ -153,7 +138,7 @@ module.exports = postgres => {
                   throw err;
                 }
 
-                done(); // use commit transaction to resolve newItem.rows[0]
+                done();
                 resolve(newItem.rows[0]);
               });
             });
