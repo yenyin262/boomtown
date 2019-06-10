@@ -13,11 +13,14 @@ class ItemsContainer extends Component {
     const { match } = this.props;
     const id = match.params.userid;
     return (
-      // <Query query={ALL_ITEMS_QUERY} fetchPolicy="network-only">
       <ViewerContext.Consumer>
         {({ viewer }) => {
           return (
-            <Query query={ALL_ITEMS_QUERY} variables={{ id: id || viewer.id }}>
+            <Query
+              query={ALL_ITEMS_QUERY}
+              variables={{ id: id || viewer.id }}
+              fetchPolicy="network-only"
+            >
               {({ loading, error, data }) => {
                 if (loading) return <FullScreenLoader inverted />;
                 if (error) return <p>{`Error! ${error.message}`}</p>;
