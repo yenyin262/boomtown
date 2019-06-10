@@ -18,7 +18,6 @@ const INITIAL_STATE = {
   createdAt: new Date()
 };
 
-//action creators
 export const updateNewItem = item => {
   return {
     type: UPDATE_ITEM,
@@ -29,14 +28,12 @@ export const updateNewItem = item => {
 export const resetItem = () => {
   return {
     type: RESET_ITEM
-    // payload: {}
   };
 };
 
 export const resetNewItemImage = () => {
   return {
     type: RESET_ITEM_IMAGE
-    // payload: {}
   };
 };
 
@@ -47,8 +44,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, ...newItem };
     }
     case RESET_ITEM: {
-      // return { ...INITIAL_STATE };
-      return INITIAL_STATE;
+      return { ...INITIAL_STATE };
     }
 
     case RESET_ITEM_IMAGE: {
