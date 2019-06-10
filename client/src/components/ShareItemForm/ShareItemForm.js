@@ -92,15 +92,6 @@ class ShareItemForm extends Component {
     });
   }
 
-  // applyTags(tags) {
-  //   return (
-  //     tags &&
-  //     tags
-  //       .filter(t => this.state.selectedTags.indexOf(t.id) > -1)
-  //       .map(t => ({ title: t.title, id: t.id }))
-  //   );
-  // }
-
   handleChangeTag(event) {
     this.setState({ selectedTags: event.target.value });
     const { updateNewItem } = this.props;
@@ -127,13 +118,8 @@ class ShareItemForm extends Component {
 
   render() {
     const { classes, tags } = this.props;
-    console.log(this.props, 'propsitems');
-    console.log(this.state, 'this.state');
-    console.log(this.props.title, 'props title');
-    console.log(this.props.tags, 'tags props');
 
     return (
-      // <div className={classes.formContainer}>
       <ViewerContext.Consumer>
         {({ loading, viewer }) => {
           return (
@@ -143,7 +129,6 @@ class ShareItemForm extends Component {
                   <Form
                     validate={validate.bind(this)}
                     onSubmit={(values, form) => {
-                      console.log('values', values);
                       const item = {
                         title: values.title,
                         description: values.description,
@@ -157,7 +142,7 @@ class ShareItemForm extends Component {
                           };
                         })
                       };
-                      console.log('item', item);
+
                       addItem({
                         variables: {
                           item: item
@@ -175,11 +160,7 @@ class ShareItemForm extends Component {
                           subscription={{ values: true }}
                           component={({ values }) => {
                             if (Object.keys(values).length > 0) {
-                              this.dispatchUpdate(
-                                values,
-                                // this.state.selectedTags,
-                                viewer
-                              );
+                              this.dispatchUpdate(values, viewer);
                             }
                             return '';
                           }}
@@ -295,7 +276,6 @@ class ShareItemForm extends Component {
 
                           <Button
                             variant="outlined"
-                            // className={`${classes.button} ${!invalid ? classes.validButton : ''}`}
                             className={classnames({
                               [classes.button]: true,
                               [classes.validButton]: !invalid
@@ -324,9 +304,6 @@ class ShareItemForm extends Component {
   }
 }
 
-// similar getState
-// const mapStatetoProps = null;
-
 function mapStatetoProps(state, ownProps) {
   return {
     title: state.shareItemPreview.title,
@@ -334,7 +311,7 @@ function mapStatetoProps(state, ownProps) {
     tags: ownProps.tags
   };
 }
-// similar to Dispatch
+
 const mapDispatchToProps = dispatch => ({
   updateNewItem(item) {
     dispatch(updateNewItem(item));
