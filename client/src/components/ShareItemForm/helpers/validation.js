@@ -10,7 +10,7 @@ export default function validate(values) {
   if (!values.description) {
     errors.description = 'Required';
   }
-  // check if tags is defined
+
   if (!values.tags || !values.tags.length) {
     errors.tags = 'One tag required';
   }
