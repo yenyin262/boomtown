@@ -1,15 +1,3 @@
-function tagsQueryString(tags, itemid, result) {
-  const length = tags.length;
-  return length === 0
-    ? `${result};`
-    : tags.shift() &&
-        tagsQueryString(
-          tags,
-          itemid,
-          `${result}($${tags.length + 1}, ${itemid})${length === 1 ? '' : ','}`
-        );
-}
-
 module.exports = postgres => {
   return {
     async createUser({ fullname, email, password }) {
