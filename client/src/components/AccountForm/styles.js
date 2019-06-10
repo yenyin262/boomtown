@@ -30,12 +30,6 @@ const styles = theme => ({
   inputStyle: {
     marginTop: '20px'
   }
-
-  // MuiInput: {
-  //   underline: {
-  //     width: '400px'
-  //   }
-  // }
 });
 
 export default styles;
