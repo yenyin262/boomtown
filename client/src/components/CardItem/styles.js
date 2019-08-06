@@ -1,7 +1,4 @@
 const styles = {
-  card: {
-    margin: '10px 10px'
-  },
   media: {
     height: '0',
     paddingTop: '56.25%'
@@ -9,7 +6,8 @@ const styles = {
 
   mainCard: {
     height: '522px',
-    width: '421px'
+    width: '421px',
+    margin: '10px 10px'
   },
 
   containerProfile: {
@@ -38,10 +36,11 @@ const styles = {
     fontWeight: 400,
     marginBottom: '5px'
   },
-  button: {
+  borrowButton: {
     fontSize: '16px',
     padding: '8px 24px',
-    minHeight: '40px'
+    minHeight: '40px',
+    disabled: true
   },
   buttonText: {
     fontSize: '16px',

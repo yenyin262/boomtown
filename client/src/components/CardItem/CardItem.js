@@ -26,8 +26,8 @@ const CardItem = ({ classes, item, viewer }) => {
   }
 
   return (
-    <Link className={classes.card} to={`/profile/${item.itemowner.id}`}>
-      <Card className={classes.mainCard}>
+    <Card className={classes.mainCard}>
+      <Link to={`/profile/${item.itemowner.id}`}>
         <CardMedia
           className={classes.media}
           image={
@@ -36,54 +36,55 @@ const CardItem = ({ classes, item, viewer }) => {
               : 'http://via.placeholder.com/350x250?text=Please+select+an+image'
           }
         />
-        <div>
-          <div className={classes.containerProfile}>
-            <Gravatar
-              className={classes.avatarPic}
-              email={item.itemowner.email || viewer.email}
-            />
-            <div>
-              <Typography component="p">
-                {item.itemowner.fullname || viewer.fullname}
-              </Typography>
-              <Typography
-                component="p"
-                color="textSecondary"
-                gutterBottom
-                className={classes.itemCreated}
-              >
-                {moment(item.created)
-                  .startOf('day')
-                  .fromNow()}
-              </Typography>
-            </div>
+      </Link>
+
+      <div>
+        <div className={classes.containerProfile}>
+          <Gravatar
+            className={classes.avatarPic}
+            email={item.itemowner.email || viewer.email}
+          />
+          <div>
+            <Typography component="p">
+              {item.itemowner.fullname || viewer.fullname}
+            </Typography>
+            <Typography
+              component="p"
+              color="textSecondary"
+              gutterBottom
+              className={classes.itemCreated}
+            >
+              {moment(item.created)
+                .startOf('day')
+                .fromNow()}
+            </Typography>
           </div>
         </div>
-        <CardContent>
-          <Typography component="h2" className={classes.titleName}>
-            {item.title}
-          </Typography>
-          <Typography
-            component="p"
-            color="textSecondary"
-            className={classes.tagName}
-          >
-            {tagString}
-          </Typography>
+      </div>
+      <CardContent>
+        <Typography component="h2" className={classes.titleName}>
+          {item.title}
+        </Typography>
+        <Typography
+          component="p"
+          color="textSecondary"
+          className={classes.tagName}
+        >
+          {tagString}
+        </Typography>
 
-          <Typography component="h3" className={classes.descriptionName}>
-            {item.description}
+        <Typography component="h3" className={classes.descriptionName}>
+          {item.description}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button variant="outlined" className={classes.borrowButton}>
+          <Typography component="h3" className={classes.buttonText}>
+            Borrow
           </Typography>
-        </CardContent>
-        <CardActions>
-          <Button variant="outlined" className={classes.button}>
-            <Typography component="h3" className={classes.buttonText}>
-              Borrow
-            </Typography>
-          </Button>
-        </CardActions>
-      </Card>
-    </Link>
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 
