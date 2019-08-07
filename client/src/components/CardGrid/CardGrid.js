@@ -5,15 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import CardItem from '../CardItem';
 import styles from './styles';
 
-const CardGrid = ({ classes, items, viewer }) => {
+const CardGrid = ({ classes, items }) => {
   let getItems;
 
-  let a = items;
+  let item = items;
 
-  if (a != null) {
-    getItems = items.map(item => (
-      <CardItem item={item} key={item.id} viewer={viewer} />
-    ));
+  if (item != null) {
+    getItems = items.map(item => <CardItem item={item} key={item.id} />);
   } else {
     getItems = '';
   }
@@ -21,9 +19,7 @@ const CardGrid = ({ classes, items, viewer }) => {
   return (
     <Grid container alignContent="center" spacing={16}>
       <Grid item xs={12}>
-        <Grid container viewer={viewer}>
-          {getItems}
-        </Grid>
+        <Grid container>{getItems}</Grid>
       </Grid>
     </Grid>
   );
