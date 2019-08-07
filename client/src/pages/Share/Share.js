@@ -8,7 +8,7 @@ import styles from './styles';
 const Share = ({ classes, tags }) => {
   return (
     <div>
-      <NavigationBar pageType={null} />
+      <NavigationBar showShareIcon={null} />
 
       <div className={classes.container}>
         <div className={classes.subContainer}>
