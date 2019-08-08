@@ -6,8 +6,9 @@ export default function validate(values) {
   if (!values.password) {
     errors.password = 'Required';
   }
-  if (values.fullname && !values.fullname) {
-    errors.password = 'Required';
+
+  if (!values.fullname && document.getElementById('fullname') != null) {
+    errors.fullname = 'Required';
   }
   return errors;
 }
