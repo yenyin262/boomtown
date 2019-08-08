@@ -36,7 +36,7 @@ class AccountForm extends Component {
           if (this.state.formToggle) {
             loginMutation(user).catch(error => this.setState({ error }));
           } else {
-            signupMutation(user).catch(error => this.setState({ error })); // NEED TO PRINT MSG
+            signupMutation(user).catch(error => this.setState({ error }));
           }
         }}
         validate={validate}
@@ -49,15 +49,23 @@ class AccountForm extends Component {
                 <Field
                   name="fullname"
                   render={({ input, meta }) => (
-                    <Input
-                      id="fullname"
-                      type="text"
-                      inputProps={{
-                        ...input,
-                        autoComplete: 'off'
-                      }}
-                      value={input.value}
-                    />
+                    <>
+                      <Input
+                        id="fullname"
+                        type="text"
+                        inputProps={{
+                          ...input,
+                          autoComplete: 'off'
+                        }}
+                        value={input.value}
+                      />
+                      {meta.error &&
+                        meta.touched && (
+                          <span className={classes.errorField}>
+                            {meta.error}
+                          </span>
+                        )}
+                    </>
                   )}
                 />
               </FormControl>
@@ -67,15 +75,21 @@ class AccountForm extends Component {
               <Field
                 name="email"
                 render={({ input, meta }) => (
-                  <Input
-                    id="email"
-                    type="text"
-                    inputProps={{
-                      ...input,
-                      autoComplete: 'off'
-                    }}
-                    value={input.value}
-                  />
+                  <>
+                    <Input
+                      id="email"
+                      type="text"
+                      inputProps={{
+                        ...input,
+                        autoComplete: 'off'
+                      }}
+                      value={input.value}
+                    />
+                    {meta.error &&
+                      meta.touched && (
+                        <span className={classes.errorField}>{meta.error}</span>
+                      )}
+                  </>
                 )}
               />
             </FormControl>
@@ -84,15 +98,21 @@ class AccountForm extends Component {
               <Field
                 name="password"
                 render={({ input, meta }) => (
-                  <Input
-                    id="password"
-                    type="password"
-                    inputProps={{
-                      ...input,
-                      autoComplete: 'off'
-                    }}
-                    value={input.value}
-                  />
+                  <>
+                    <Input
+                      id="password"
+                      type="password"
+                      inputProps={{
+                        ...input,
+                        autoComplete: 'off'
+                      }}
+                      value={input.value}
+                    />
+                    {meta.error &&
+                      meta.touched && (
+                        <span className={classes.errorField}>{meta.error}</span>
+                      )}
+                  </>
                 )}
               />
             </FormControl>
@@ -132,7 +152,7 @@ class AccountForm extends Component {
                 </Typography>
               </Grid>
             </FormControl>
-            <Typography>
+            <Typography className={classes.errorMessage}>
               {(this.state.error &&
                 this.state.formToggle &&
                 this.state.error.graphQLErrors[0].message) ||
