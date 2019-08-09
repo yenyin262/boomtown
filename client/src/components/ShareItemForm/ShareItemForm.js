@@ -23,7 +23,12 @@ import validate from './helpers/validation';
 import classnames from 'classnames';
 import { Mutation } from 'react-apollo';
 import { ADD_ITEM_MUTATION } from '../../apollo/queries';
-import { withRouter } from 'react-router';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { Link } from 'react-router-dom';
 
 const addTags = [
   'Sporting Goods',
@@ -51,17 +56,25 @@ class ShareItemForm extends Component {
     this.state = {
       fileSelected: null,
       selectedTags: [],
-      title: ''
+      title: '',
+      dialogOpen: false
     };
   }
 
-  // componentDidMount() {
-  //   let randomItem = {
-  //     title: 'Name Your Item',
-  //     description: 'Describe Your Item'
-  //   };
-  //   this.props.updateNewItem(randomItem);
-  // }
+  componentDidMount() {
+    let randomItem = {
+      title: 'Name Your Item',
+      description: 'Describe Your Item'
+    };
+    this.props.updateNewItem(randomItem);
+  }
+  handleClick = () => {
+    this.setState({ dialogOpen: true });
+  };
+
+  handleClose = () => {
+    this.setState({ dialogOpen: false });
+  };
 
   handleSelectedFile() {
     const theFile = this.fileInput.current.files[0];
@@ -131,7 +144,6 @@ class ShareItemForm extends Component {
         };
       })
     };
-
     addItem({
       variables: {
         item: item
@@ -140,11 +152,10 @@ class ShareItemForm extends Component {
       .then(() => {
         form.reset();
         this.props.resetItem();
-        this.props.history.push('/items');
+        this.resetFileInput();
       })
       .catch(() => alert('Item not added sucessfully'));
   }
-
   render() {
     const { classes, tags } = this.props;
     return (
@@ -286,6 +297,7 @@ class ShareItemForm extends Component {
                             })}
                             disabled={invalid}
                             type="submit"
+                            onClick={this.handleClick}
                           >
                             <Typography
                               component="h3"
@@ -294,6 +306,40 @@ class ShareItemForm extends Component {
                               SHARE
                             </Typography>
                           </Button>
+                          <Dialog
+                            open={this.state.dialogOpen}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <DialogTitle id="alert-dialog-title">
+                              {'Your item was added!'}
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                You may add another item if you like. To add
+                                another item click 'Add another item'. To view
+                                your item, click 'Back to items page'.
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button
+                                onClick={this.handleClose}
+                                color="primary"
+                              >
+                                ADD ANOTHER ITEM
+                              </Button>
+
+                              <Link to="/items">
+                                <Button
+                                  onClick={this.handleClose}
+                                  color="primary"
+                                  autoFocus
+                                >
+                                  BACK TO ITEMS PAGE
+                                </Button>
+                              </Link>
+                            </DialogActions>
+                          </Dialog>
                         </div>
                       </form>
                     )}
@@ -335,13 +381,7 @@ ShareItemForm.propTypes = {
   handleSubmit: PropTypes.func
 };
 
-// export default connect(
-//   mapStatetoProps,
-//   mapDispatchToProps
-// )(withStyles(styles)(ShareItemForm));
-export default withRouter(
-  connect(
-    mapStatetoProps,
-    mapDispatchToProps
-  )(withStyles(styles)(ShareItemForm))
-);
+export default connect(
+  mapStatetoProps,
+  mapDispatchToProps
+)(withStyles(styles)(ShareItemForm));
