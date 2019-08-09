@@ -6,7 +6,7 @@ const styles = {
 
   mainCard: {
     height: '522px',
-    width: '421px',
+    width: '400px',
     margin: '10px 10px'
   },
 
