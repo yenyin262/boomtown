@@ -23,6 +23,7 @@ import validate from './helpers/validation';
 import classnames from 'classnames';
 import { Mutation } from 'react-apollo';
 import { ADD_ITEM_MUTATION } from '../../apollo/queries';
+import { withRouter } from 'react-router';
 
 const addTags = [
   'Sporting Goods',
@@ -54,13 +55,13 @@ class ShareItemForm extends Component {
     };
   }
 
-  componentDidMount() {
-    let randomItem = {
-      title: 'Name Your Item',
-      description: 'Describe Your Item'
-    };
-    this.props.updateNewItem(randomItem);
-  }
+  // componentDidMount() {
+  //   let randomItem = {
+  //     title: 'Name Your Item',
+  //     description: 'Describe Your Item'
+  //   };
+  //   this.props.updateNewItem(randomItem);
+  // }
 
   handleSelectedFile() {
     const theFile = this.fileInput.current.files[0];
@@ -116,9 +117,36 @@ class ShareItemForm extends Component {
     this.setState({ selectedTags: [] });
   }
 
+  formValues(values, form, addItem, tags) {
+    const item = {
+      title: values.title,
+      description: values.description,
+      tags: values.tags.map(newtag => {
+        const foundTag = tags.find(tag => {
+          return tag.title === newtag;
+        });
+        return {
+          id: foundTag.id,
+          title: newtag
+        };
+      })
+    };
+
+    addItem({
+      variables: {
+        item: item
+      }
+    })
+      .then(() => {
+        form.reset();
+        this.props.resetItem();
+        this.props.history.push('/items');
+      })
+      .catch(() => alert('Item not added sucessfully'));
+  }
+
   render() {
     const { classes, tags } = this.props;
-
     return (
       <ViewerContext.Consumer>
         {({ loading, viewer }) => {
@@ -129,30 +157,7 @@ class ShareItemForm extends Component {
                   <Form
                     validate={validate.bind(this)}
                     onSubmit={(values, form) => {
-                      const item = {
-                        title: values.title,
-                        description: values.description,
-                        tags: values.tags.map(newtag => {
-                          const foundTag = tags.find(tag => {
-                            return tag.title === newtag;
-                          });
-                          return {
-                            id: foundTag.id,
-                            title: newtag
-                          };
-                        })
-                      };
-
-                      addItem({
-                        variables: {
-                          item: item
-                        }
-                      })
-                        .then(() => {
-                          alert('New Item Added');
-                          form.reset();
-                        })
-                        .catch(() => alert('Item not added sucessfully'));
+                      this.formValues(values, form, addItem, tags);
                     }}
                     render={({ handleSubmit, pristine, invalid, form }) => (
                       <form onSubmit={handleSubmit}>
@@ -165,7 +170,6 @@ class ShareItemForm extends Component {
                             return '';
                           }}
                         />
-
                         <div className={classes.bmtwnHeader}>
                           <h1 className={classes.headerOne}>
                             Share. Borrow. Prosper.
@@ -331,7 +335,13 @@ ShareItemForm.propTypes = {
   handleSubmit: PropTypes.func
 };
 
-export default connect(
-  mapStatetoProps,
-  mapDispatchToProps
-)(withStyles(styles)(ShareItemForm));
+// export default connect(
+//   mapStatetoProps,
+//   mapDispatchToProps
+// )(withStyles(styles)(ShareItemForm));
+export default withRouter(
+  connect(
+    mapStatetoProps,
+    mapDispatchToProps
+  )(withStyles(styles)(ShareItemForm))
+);
