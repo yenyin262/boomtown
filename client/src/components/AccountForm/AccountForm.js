@@ -13,7 +13,7 @@ import {
   VIEWER_QUERY
 } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
-import validate from './helpers/validation';
+import { validateSignUp, validateLogin } from './helpers/validation';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
@@ -39,7 +39,7 @@ class AccountForm extends Component {
             signupMutation(user).catch(error => this.setState({ error }));
           }
         }}
-        validate={validate}
+        validate={this.state.formToggle ? validateLogin : validateSignUp}
         render={({ handleSubmit, pristine, invalid, form, submitting }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (

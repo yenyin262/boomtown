@@ -1,4 +1,4 @@
-export default function validate(values) {
+export function validateSignUp(values) {
   const errors = {};
   if (!values.email) {
     errors.email = 'Required';
@@ -7,8 +7,20 @@ export default function validate(values) {
     errors.password = 'Required';
   }
 
-  if (!values.fullname && document.getElementById('fullname') != null) {
+  if (!values.fullname) {
     errors.fullname = 'Required';
   }
+  return errors;
+}
+
+export function validateLogin(values) {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Required';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+
   return errors;
 }
