@@ -74,6 +74,9 @@ const styles = theme => ({
     fontSize: '45px',
     fontFamily: 'sans-serif',
     fontWeight: 700
+  },
+  icon: {
+    paddingTop: '5px'
   }
 });
 
