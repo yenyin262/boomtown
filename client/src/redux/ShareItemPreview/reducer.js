@@ -5,7 +5,7 @@ const RESET_ITEM_IMAGE = 'RESET_IMAGE_IMAGE';
 const INITIAL_STATE = {
   imageUrl: 'http://via.placeholder.com/350x250?text=Please+select+an+image',
   name: '',
-  description: '',
+  description: 'Describe Your Item',
   tags: [],
   user: {},
   itemowner: {
@@ -14,7 +14,7 @@ const INITIAL_STATE = {
     email: '',
     bio: ''
   },
-  title: '',
+  title: 'Name Your Item',
   createdAt: new Date()
 };
 
