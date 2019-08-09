@@ -29,6 +29,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
+import Icon from '@material-ui/core/Icon';
 
 const addTags = [
   'Sporting Goods',
@@ -312,8 +313,10 @@ class ShareItemForm extends Component {
                             aria-describedby="alert-dialog-description"
                           >
                             <DialogTitle id="alert-dialog-title">
+                              <Icon className={classes.icon}>cloud_done</Icon>{' '}
                               {'Your item was added!'}
                             </DialogTitle>
+
                             <DialogContent>
                               <DialogContentText id="alert-dialog-description">
                                 You may add another item if you like. To add
