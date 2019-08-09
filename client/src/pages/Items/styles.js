@@ -3,7 +3,7 @@ const styles = theme => ({
     backgroundColor: 'black'
   },
   cardGridItemsubContainer: {
-    padding: '40px',
+    padding: '80px',
     paddingTop: '80px'
   }
 });
