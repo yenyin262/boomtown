@@ -228,17 +228,16 @@ class ShareItemForm extends Component {
                         />
                         <div className={classes.Container}>
                           <FormControl>
-                            <Field
-                              name="title"
-                              render={({ input, meta }) => (
+                            <Field name="title">
+                              {({ input, meta }) => (
                                 <TextField
                                   inputProps={{ ...input }}
                                   margin="normal"
-                                  placeholder="Name Your Item"
-                                  className={classes.NameTextField}
+                                  label="Name your item"
+                                  value={input.value}
                                 />
                               )}
-                            />
+                            </Field>
                           </FormControl>
                           <FormControl>
                             <Field name="description">

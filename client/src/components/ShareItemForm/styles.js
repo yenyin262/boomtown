@@ -4,10 +4,6 @@ const styles = theme => ({
     flexDirection: 'column',
     width: '418px'
   },
-  NameTextField: {
-    marginTop: '45px',
-    marginBottom: '16px'
-  },
   DescribeItemTextField: {
     mariginTop: '19px',
     marginBottom: '16px'
