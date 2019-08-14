@@ -299,12 +299,7 @@ class ShareItemForm extends Component {
                             type="submit"
                             onClick={this.handleClick}
                           >
-                            <Typography
-                              component="h3"
-                              className={classes.descriptionName}
-                            >
-                              SHARE
-                            </Typography>
+                            SHARE
                           </Button>
                           <Dialog
                             open={this.state.dialogOpen}

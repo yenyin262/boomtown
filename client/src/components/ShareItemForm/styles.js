@@ -45,19 +45,16 @@ const styles = theme => ({
     marginBottom: '92px',
     width: '97%'
   },
-  descriptionName: {
-    fontSize: '16px',
-    fontWeight: 400
-  },
 
   button: {
     fontSize: '16px',
     padding: '8px 24px',
     width: '121px',
     marginTop: '30px',
-    color: 'grey',
+    border: 'none',
     boxShadow: 'none',
-    backgroundColor: 'dark grey'
+    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    fontWeight: 400
   },
   validButton: {
     backgroundColor: '#f9a825',
@@ -65,6 +62,7 @@ const styles = theme => ({
       backgroundColor: 'rgb(174, 117, 25)'
     }
   },
+
   headerOne: {
     marginTop: 0,
     fontSize: '45px',
