@@ -8,11 +8,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styles from './styles';
 import Gravatar from 'react-gravatar';
 
-const CardItem = ({ classes, item, viewer }) => {
+const CardItem = ({ classes, item, viewer, match }) => {
   let tagString = '';
   if (item && item.tags && item.tags.length) {
     tagString = item.tags
@@ -78,11 +78,13 @@ const CardItem = ({ classes, item, viewer }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" className={classes.borrowButton}>
-          <Typography component="h3" className={classes.buttonText}>
-            Borrow
-          </Typography>
-        </Button>
+        {match.path !== '/profile' && (
+          <Button variant="outlined" className={classes.borrowButton}>
+            <Typography component="h3" className={classes.buttonText}>
+              Borrow
+            </Typography>
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -92,4 +94,5 @@ CardItem.propTypes = {
   classes: PropTypes.object.isRequired,
   item: PropTypes.object
 };
-export default withStyles(styles)(CardItem);
+
+export default withRouter(withStyles(styles)(CardItem));
