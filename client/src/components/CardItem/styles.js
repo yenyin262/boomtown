@@ -12,12 +12,9 @@ const styles = {
 
   containerProfile: {
     display: 'flex',
-    width: '52%',
+    width: '50%',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-
-    paddingLeft: '24px',
-    paddingRight: '24px',
     paddingTop: '16px',
     paddingBottom: '16px'
   },
