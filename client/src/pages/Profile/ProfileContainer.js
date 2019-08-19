@@ -7,9 +7,22 @@ import { ALL_USER_ITEMS_QUERY } from '../../apollo/queries';
 import FullScreenLoader from '../../components/FullScreenLoader';
 import { ViewerContext } from '../../context/ViewerProvider';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const NoMatchPage = ({ classes }) => {
-  return <h3 className={classes.error}>404 - Page Not found</h3>;
+  return (
+    <div>
+      <div>
+        <h1 className={classes.error}>404 - Page Not found</h1>{' '}
+        <Link to="/items">
+          <h5 className={classes.text}>
+            {' '}
+            Click here to go back to items Page{' '}
+          </h5>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 const ProfileContainer = ({ classes, match }) => {

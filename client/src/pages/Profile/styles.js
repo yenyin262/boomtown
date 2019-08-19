@@ -18,8 +18,17 @@ const styles = theme => ({
     backgroundColor: 'black'
   },
   error: {
-    marginLeft: '20px',
-    fontSize: '20px'
+    fontSize: '60px',
+    textAlign: 'center',
+    marginTop: '100px'
+  },
+  text: {
+    fontSize: '20px',
+    textAlign: 'center',
+    color: 'black',
+    '&:hover': {
+      color: 'blue'
+    }
   }
 });
 
