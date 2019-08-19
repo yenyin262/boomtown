@@ -48,7 +48,6 @@ const ProfileContainer = ({ classes, match }) => {
                     classes={classes}
                     itemsofUser={data.user.items}
                     user={data.user}
-                    viewer={viewer}
                   />
                 );
               }
