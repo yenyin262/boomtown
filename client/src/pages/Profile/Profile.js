@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfile from '../../components/UserProfile/UserProfile';
+import UserProfileCard from '../../components/UserProfileCard/UserProfileCard';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 import NavigationBar from '../../components/NavigationBar';
@@ -11,7 +11,7 @@ const Profile = ({ classes, itemsofUser, user }) => {
     <div>
       <NavigationBar showShareIcon={true} />
       <div className={classes.profileContainer}>
-        <UserProfile itemsofUser={itemsofUser} user={user} />
+        <UserProfileCard itemsofUser={itemsofUser} user={user} />
         <div>
           <h1 className={classes.sharedHeader}>Shared Items</h1>
         </div>
