@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
-function UserProfile({ classes, viewer, user, itemsofUser }) {
+function UserProfileCard({ classes, user, itemsofUser }) {
   let userBio;
   if (user.bio != null) {
     userBio = user.bio;
@@ -20,10 +20,7 @@ function UserProfile({ classes, viewer, user, itemsofUser }) {
       <CardContent>
         <div className={classes.userProfileContainer}>
           <div className={classes.picAndUser}>
-            <Gravatar
-              className={classes.avatarPic}
-              email={user.email || viewer.email}
-            />
+            <Gravatar className={classes.avatarPic} email={user.email} />
             <Typography className={classes.title} component="h1" gutterBottom>
               {user.fullname}
             </Typography>
@@ -48,10 +45,9 @@ function UserProfile({ classes, viewer, user, itemsofUser }) {
   );
 }
 
-UserProfile.propTypes = {
+UserProfileCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  viewer: PropTypes.object,
   itemsofUser: PropTypes.array,
   user: PropTypes.object
 };
-export default withStyles(styles)(UserProfile);
+export default withStyles(styles)(UserProfileCard);
